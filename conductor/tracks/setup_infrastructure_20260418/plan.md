@@ -22,7 +22,7 @@
 - [x] Task: Implement `rooms.create` and `players.join` Convex mutations e043c71
   - [x] Write Tests
   - [x] Implement Feature
-- [ ] Task: Wire Landing Page to Room Route (`/room/:slug`)
-  - [ ] Write Tests
-  - [ ] Implement Feature
+- [x] Task: Wire Landing Page to Room Route (`/room/:slug`) e3ff9a1
+  - [x] Write Tests
+  - [x] Implement Feature
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Landing Page & Anonymous Entry Flow' (Protocol in workflow.md)
