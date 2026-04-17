@@ -4,5 +4,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Setup Project Infrastructure and Anonymous Room Creation**
+- [~] **Track: Setup Project Infrastructure and Anonymous Room Creation**
   *Link: [./tracks/setup_infrastructure_20260418/](./tracks/setup_infrastructure_20260418/)*
