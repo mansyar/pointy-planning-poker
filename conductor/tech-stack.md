@@ -1,0 +1,19 @@
+# Technology Stack: Pointy Planning Poker
+
+## Core Technologies
+* **Language:** TypeScript (100% end-to-end type safety from DB to UI components).
+* **Framework:** TanStack Start (Beta/Latest) - Provides SSR, type-safe routing, and Vite-based bundling.
+* **Backend & Database:** Convex - Managed real-time document store, mutations, scheduled functions, and cron jobs.
+
+## Frontend UI & Styling
+* **Styling:** Tailwind CSS v4 - Utility-first styling with great DX for glassmorphism and modern aesthetics.
+* **Animation:** Framer Motion - Powers 3D card transforms, spring physics, and layout animations.
+* **State Management:**
+  * **UI State:** TanStack Search Params (URL-shareable state).
+  * **Session Identity:** `localStorage` for maintaining persistent player status without a backend login.
+
+## Infrastructure & Deployment
+* **Hosting (Frontend):** Private VPS managed by Coolify (Dockerized Node.js server).
+* **Hosting (Backend):** Convex Cloud (managed service).
+* **PWA Support:** Web Manifest and Service Workers to enable a standalone mobile "controller" experience.
+* **Package Manager:** pnpm.
