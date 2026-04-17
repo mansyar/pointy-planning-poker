@@ -1,10 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useState } from 'react'
+import { useIdentity } from '../hooks/useIdentity'
 
 export const Route = createFileRoute('/')({ component: App })
 
 export function App() {
-  const [nickname, setNickname] = useState('')
+  const { nickname, setNickname } = useIdentity()
 
   const handleCreateRoom = () => {
     // This will be implemented in a later task with Convex
