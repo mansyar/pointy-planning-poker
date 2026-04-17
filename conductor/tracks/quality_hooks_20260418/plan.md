@@ -19,7 +19,7 @@
     - [ ] Run `eslint`, `prettier`, `typecheck`, and `vitest related --run` on staged files.
     - [ ] Run `scripts/check-file-length.ts` on staged files.
 - [ ] Task: Create `.husky/pre-commit` hook to run `lint-staged`.
-- [ ] Task: Create `.husky/pre-push` hook to run `npm run test:coverage`.
+- [ ] Task: Create `.husky/pre-push` hook to run `pnpm run test:coverage`.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Configure Git Hooks' (Protocol in workflow.md)
 
 ## Phase 3: Final Validation
