@@ -19,7 +19,7 @@ export function App() {
 
     const slug = generateSlug()
     try {
-      await createRoom({ slug, facilitatorId: identityId })
+      await createRoom({ slug, facilitatorId: identityId! })
       navigate({ to: '/room/$slug', params: { slug } })
     } catch (error) {
       console.error('Failed to create room:', error)

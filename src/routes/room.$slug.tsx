@@ -3,7 +3,7 @@ import { useQuery, useMutation } from 'convex/react'
 import { api } from '../../convex/_generated/api'
 import { useIdentity } from '../hooks/useIdentity'
 import JoinModal from '../components/JoinModal'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 export const Route = createFileRoute('/room/$slug')({
   component: RoomComponent,
@@ -23,7 +23,7 @@ function RoomComponent() {
     try {
       await joinRoom({
         roomId: room._id,
-        identityId,
+        identityId: identityId!,
         name: nickname,
       })
       setHasJoined(true)

@@ -9,10 +9,10 @@ import * as serverModule from "./_generated/server";
 
 test("rooms.create and players.join", async () => {
   const t = convexTest(schema, { 
-    "rooms": () => rooms, 
-    "players": () => players,
-    "_generated/api": () => apiModule,
-    "_generated/server": () => serverModule
+    "rooms": async () => rooms, 
+    "players": async () => players,
+    "_generated/api": async () => apiModule,
+    "_generated/server": async () => serverModule
   });
 
   // 1. Create a room

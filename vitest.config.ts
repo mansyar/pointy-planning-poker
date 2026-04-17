@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { defineConfig } from 'vitest/config'
 import tailwindcss from '@tailwindcss/vite'
 import viteReact from '@vitejs/plugin-react'

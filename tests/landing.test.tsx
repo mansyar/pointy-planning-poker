@@ -1,6 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import { App } from '../src/routes/index';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+
+vi.mock('@tanstack/react-router', () => ({
+  useNavigate: vi.fn(),
+  createFileRoute: vi.fn(() => vi.fn()),
+}));
+
+vi.mock('convex/react', () => ({
+  useMutation: vi.fn(),
+}));
 
 describe('Landing Page', () => {
   it('should render a "Create Room" button', () => {
