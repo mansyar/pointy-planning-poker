@@ -19,9 +19,9 @@
 - [x] Task: Build Room join modal to capture Nickname and manage `localStorage` identity 5a3f5f5
   - [ ] Write Tests
   - [ ] Implement Feature
-- [ ] Task: Implement `rooms.create` and `players.join` Convex mutations
-  - [ ] Write Tests
-  - [ ] Implement Feature
+- [x] Task: Implement `rooms.create` and `players.join` Convex mutations e043c71
+  - [x] Write Tests
+  - [x] Implement Feature
 - [ ] Task: Wire Landing Page to Room Route (`/room/:slug`)
   - [ ] Write Tests
   - [ ] Implement Feature
