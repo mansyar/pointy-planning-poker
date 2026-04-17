@@ -1,6 +1,6 @@
 # Implementation Plan: Setup Project Infrastructure and Anonymous Room Creation
 
-## Phase 1: Project Scaffolding
+## Phase 1: Project Scaffolding [checkpoint: c9a4bcf]
 - [x] Task: Initialize TanStack Start project 354843e
   - [ ] Write Tests (verify basic render)
   - [ ] Implement Feature
