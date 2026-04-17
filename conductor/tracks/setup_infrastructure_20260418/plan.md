@@ -7,7 +7,7 @@
 - [x] Task: Configure Tailwind CSS v4 and styling fundamentals b52e5b8
   - [ ] Write Tests (verify utility classes applied)
   - [ ] Implement Feature
-- [ ] Task: Setup Convex integration and core schema
+- [x] Task: Setup Convex integration and core schema cc219f2
   - [ ] Write Tests (unit tests for convex queries/mutations)
   - [ ] Implement Feature
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Project Scaffolding' (Protocol in workflow.md)
