@@ -283,3 +283,35 @@ test('topics:reorder edge cases', async () => {
     })
   ).rejects.toThrow('Invalid order');
 });
+
+test('topics:setFinalEstimate', async () => {
+  const t = convexTest(schema, {
+    rooms: async () => rooms,
+    topics: async () => topics,
+    '_generated/api': async () => apiModule,
+    '_generated/server': async () => serverModule,
+  });
+
+  const roomId = await t.mutation(api.rooms.create, {
+    slug: 'test-room',
+    facilitatorId: 'user1',
+  });
+
+  await t.mutation(api.topics.add, {
+    roomId,
+    identityId: 'user1',
+    title: 'Topic',
+  });
+
+  const roomTopics = await t.query(api.topics.listByRoom, { roomId });
+  const topicId = roomTopics[0]._id;
+
+  await t.mutation(api.topics.setFinalEstimate, {
+    topicId,
+    identityId: 'user1',
+    estimate: '8',
+  });
+
+  const updatedTopic = await t.run(async (ctx) => await ctx.db.get(topicId));
+  expect(updatedTopic?.finalEstimate).toBe('8');
+});

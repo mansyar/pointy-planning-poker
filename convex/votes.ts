@@ -36,13 +36,17 @@ export const cast = mutation({
   args: {
     roomId: v.id('rooms'),
     identityId: v.string(),
+    topicId: v.optional(v.id('topics')),
     value: v.union(v.string(), v.number(), v.null()),
   },
   handler: async (ctx, args) => {
     const existing = await ctx.db
       .query('votes')
       .withIndex('by_voter', (q) =>
-        q.eq('roomId', args.roomId).eq('identityId', args.identityId)
+        q
+          .eq('roomId', args.roomId)
+          .eq('identityId', args.identityId)
+          .eq('topicId', args.topicId)
       )
       .unique();
 
@@ -56,6 +60,7 @@ export const cast = mutation({
     const voteId = await ctx.db.insert('votes', {
       roomId: args.roomId,
       identityId: args.identityId,
+      topicId: args.topicId,
       value: args.value,
     });
 

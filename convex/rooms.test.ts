@@ -5,6 +5,7 @@ import schema from './schema';
 import * as rooms from './rooms';
 import * as players from './players';
 import * as votes from './votes';
+import * as topics from './topics';
 import * as apiModule from './_generated/api';
 import * as serverModule from './_generated/server';
 
@@ -97,6 +98,82 @@ test('rooms:reset clears votes and is facilitator-only', async () => {
   const room = await t.run(async (ctx) => await ctx.db.get(roomId));
   expect(room?.status).toBe('voting');
 
+  const roomVotes = await t.run(async (ctx) => {
+    return await ctx.db
+      .query('votes')
+      .withIndex('by_room', (q) => q.eq('roomId', roomId))
+      .collect();
+  });
+  expect(roomVotes.length).toBe(0);
+});
+
+test('rooms:nextTopic flow', async () => {
+  const t = convexTest(schema, {
+    rooms: async () => rooms,
+    topics: async () => topics,
+    votes: async () => votes,
+    '_generated/api': async () => apiModule,
+    '_generated/server': async () => serverModule,
+  });
+
+  const roomId = await t.mutation(api.rooms.create, {
+    slug: 'test-room',
+    facilitatorId: 'user1',
+  });
+
+  await t.mutation(api.topics.addBatch, {
+    roomId,
+    identityId: 'user1',
+    titlesString: 'T1\nT2',
+  });
+
+  const roomTopics = await t.query(api.topics.listByRoom, { roomId });
+  const t1Id = roomTopics[0]._id;
+  const t2Id = roomTopics[1]._id;
+
+  // Cast a vote for T1 (automatically the active topic if we implement it so)
+  // Wait, rooms.create doesn't set first topic as active.
+  // Actually, let's assume rooms.create or topics.add doesn't auto-activate.
+  // We need to implement how a topic becomes active.
+  // Schema says: rooms.currentTopicId is optional.
+
+  // For now, let's just manually set it for the test or implement the auto-activation.
+  // Specification says: "Next Topic: ... the next pending topic becomes active."
+  // So maybe rooms:nextTopic finds the first pending one if none is active?
+
+  // Let's test rooms:nextTopic
+  await t.mutation(api.rooms.nextTopic, { roomId, identityId: 'user1' });
+
+  let room = await t.run(async (ctx) => await ctx.db.get(roomId));
+  expect(room?.currentTopicId).toBe(t1Id);
+  expect(room?.status).toBe('voting');
+
+  let t1 = await t.run(async (ctx) => await ctx.db.get(t1Id));
+  expect(t1?.status).toBe('active');
+
+  // Reveal and cast vote
+  await t.mutation(api.rooms.reveal, { roomId, identityId: 'user1' });
+  await t.mutation(api.votes.cast, {
+    roomId,
+    identityId: 'user1',
+    topicId: t1Id,
+    value: '5',
+  });
+
+  // Next topic
+  await t.mutation(api.rooms.nextTopic, { roomId, identityId: 'user1' });
+
+  room = await t.run(async (ctx) => await ctx.db.get(roomId));
+  expect(room?.currentTopicId).toBe(t2Id);
+  expect(room?.status).toBe('voting');
+
+  t1 = await t.run(async (ctx) => await ctx.db.get(t1Id));
+  expect(t1?.status).toBe('completed');
+
+  const t2 = await t.run(async (ctx) => await ctx.db.get(t2Id));
+  expect(t2?.status).toBe('active');
+
+  // Verify votes are cleared for the new round
   const roomVotes = await t.run(async (ctx) => {
     return await ctx.db
       .query('votes')
