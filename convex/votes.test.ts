@@ -5,6 +5,7 @@ import schema from './schema';
 import * as rooms from './rooms';
 import * as players from './players';
 import * as votes from './votes';
+import * as topics from './topics';
 import * as apiModule from './_generated/api';
 import * as serverModule from './_generated/server';
 
@@ -65,4 +66,72 @@ test('votes:cast and masked votes:listByRoom', async () => {
     (v) => v.identityId === 'user1'
   );
   expect(user1VoteAfterReveal?.value).toBe('5');
+});
+
+test('votes:cast with topicId', async () => {
+  const t = convexTest(schema, {
+    rooms: async () => rooms,
+    votes: async () => votes,
+    topics: async () => topics,
+    '_generated/api': async () => apiModule,
+    '_generated/server': async () => serverModule,
+  });
+
+  const roomId = await t.mutation(api.rooms.create, {
+    slug: 'test',
+    facilitatorId: 'user1',
+  });
+
+  const topicId = await t.run(async (ctx) => {
+    return await ctx.db.insert('topics', {
+      roomId,
+      title: 'Test',
+      order: 1,
+      status: 'pending',
+    });
+  });
+
+  // Cast vote for specific topic
+  await t.mutation(api.votes.cast, {
+    roomId,
+    identityId: 'user1',
+    topicId,
+    value: '8',
+  });
+
+  const vote = await t.run(async (ctx) => {
+    return await ctx.db
+      .query('votes')
+      .withIndex('by_topic', (q) => q.eq('topicId', topicId))
+      .unique();
+  });
+  expect(vote?.value).toBe('8');
+  expect(vote?.topicId).toBe(topicId);
+
+  // Cast vote for same user but DIFFERENT topic
+  const topic2Id = await t.run(async (ctx) => {
+    return await ctx.db.insert('topics', {
+      roomId,
+      title: 'Test 2',
+      order: 2,
+      status: 'pending',
+    });
+  });
+
+  await t.mutation(api.votes.cast, {
+    roomId,
+    identityId: 'user1',
+    topicId: topic2Id,
+    value: '13',
+  });
+
+  const votesForUser = await t.run(async (ctx) => {
+    return await ctx.db
+      .query('votes')
+      .withIndex('by_room', (q) => q.eq('roomId', roomId))
+      .collect();
+  });
+  expect(votesForUser.length).toBe(2);
+  expect(votesForUser.find((v) => v.topicId === topicId)?.value).toBe('8');
+  expect(votesForUser.find((v) => v.topicId === topic2Id)?.value).toBe('13');
 });
