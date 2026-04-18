@@ -2,10 +2,10 @@
 
 ## Phase 1: Database & Backend Logic
 
-- [ ] Task: Implement `reactions` Schema and Mutations
-  - [ ] Write unit tests for `reactions:send` and `reactions:listRecent`
-  - [ ] Update `convex/schema.ts` with `reactions` table and index by `roomId`
-  - [ ] Implement `convex/reactions.ts` with `send` mutation and `listRecent` query
+- [x] Task: Implement reactions Schema and Mutations (de7f803)
+  - [x] Write unit tests for `reactions:send` and `reactions:listRecent`
+  - [x] Update `convex/schema.ts` with `reactions` table and index by `roomId`
+  - [x] Implement `convex/reactions.ts` with `send` mutation and `listRecent` query
 - [ ] Task: Implement Stale Room Cleanup Cron Job
   - [ ] Write tests for `cleanup.staleRooms`
   - [ ] Implement `cleanup.staleRooms` in `convex/crons.ts` to delete rooms and cascading data where `updatedAt` is older than 24h
