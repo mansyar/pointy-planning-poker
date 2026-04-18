@@ -5,19 +5,36 @@ import JoinModal from './JoinModal';
 import { PresenceSidebar } from './PresenceSidebar';
 import { ClaimBanner } from './ClaimBanner';
 import { usePresence } from '../hooks/usePresence';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface RoomPageProps {
   slug: string;
 }
 
 export function RoomPage({ slug }: RoomPageProps) {
-  const { identityId } = useIdentity();
+  const { identityId, nickname } = useIdentity();
   const room = useQuery(api.rooms.getBySlug, { slug });
   const joinRoom = useMutation(api.players.join);
 
   // Local state to track if we've joined this session
   const [hasJoined, setHasJoined] = useState(false);
+
+  // Auto-join if we have a nickname and haven't joined yet
+  useEffect(() => {
+    if (room && identityId && nickname && !hasJoined) {
+      joinRoom({
+        roomId: room._id,
+        identityId: identityId,
+        name: nickname,
+      })
+        .then(() => {
+          setHasJoined(true);
+        })
+        .catch((error) => {
+          console.error('Failed to auto-join room:', error);
+        });
+    }
+  }, [room, identityId, nickname, hasJoined, joinRoom]);
 
   // Presence hook
   usePresence(room?._id, identityId!, hasJoined);
