@@ -51,6 +51,16 @@ export function PokerCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={() => !disabled && onSelect(value)}
+      onKeyDown={(e) => {
+        if (!disabled && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          onSelect(value);
+        }
+      }}
+      tabIndex={disabled ? -1 : 0}
+      role="button"
+      aria-pressed={selected}
+      aria-label={`Vote ${value}`}
       {...props}
       style={{
         rotateX,
@@ -66,7 +76,8 @@ export function PokerCard({
       className={`
         relative w-20 h-28 sm:w-24 sm:h-36 rounded-xl cursor-pointer
         flex items-center justify-center text-2xl sm:text-3xl font-bold
-        transition-colors duration-200
+        transition-all duration-200 outline-none
+        focus-visible:ring-4 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2
         ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
         ${
           selected
