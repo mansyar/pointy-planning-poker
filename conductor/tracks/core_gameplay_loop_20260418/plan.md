@@ -5,7 +5,7 @@
 - [x] Task: Implement Presence Heartbeat and Timeout in Convex (f51ee0d)
   - [ ] Write tests for `players:heartbeat` and cron-based offline marking
   - [ ] Implement `players:heartbeat` mutation and `cleanup:offlinePlayers` cron
-- [ ] Task: Implement Facilitator Handoff and Claiming
+- [x] Task: Implement Facilitator Handoff and Claiming (824d6d0)
   - [ ] Write tests for facilitator logic (auto-assign on join, claim if current is offline)
   - [ ] Implement `players:claimFacilitator` mutation
 - [ ] Task: Build Presence Sidebar and Claim Banner
