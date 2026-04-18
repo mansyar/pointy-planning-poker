@@ -6,7 +6,7 @@
   - [ ] Write unit tests for service worker registration behavior
   - [ ] Configure `manifest.json` for standalone PWA installation
   - [ ] Implement service worker registration for offline caching
-- [ ] Task: Implement Reconnecting Banner
+- [x] Task: Implement Reconnecting Banner (ebf4283)
   - [ ] Write tests for `OfflineBanner` component rendering based on network state
   - [ ] Implement a subtle banner overlay to indicate disconnected status
 - [ ] Task: Dynamic Theme Color Integration
