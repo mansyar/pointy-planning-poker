@@ -1,0 +1,8 @@
+{
+  "track_id": "emoji_reactions_and_cleanup_20260418",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-04-18T16:00:00Z",
+  "updated_at": "2026-04-18T16:00:00Z",
+  "description": "This track finalizes the application's real-time engagement and ephemeral data lifecycle by introducing the final layers of interactive 'juice' alongside automated backend cleanup. It implements real-time, auto-expiring floating emoji reactions that stream across the screen to boost participant engagement, supported by a new Convex reactions schema, broadcast mutations, and live subscription queries. Concurrently, it enforces the platform's 'zero-storage' philosophy by deploying a robust background cron job (cleanup.staleRooms) that automatically purges inactive rooms, players, votes, and topics after 24 hours, ensuring optimal database hygiene and privacy without any manual intervention."
+}
