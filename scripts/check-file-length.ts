@@ -5,14 +5,14 @@ const MAX_LINES = 500;
 const TARGET_DIRS = ['src', 'convex'];
 const EXCLUDE_PATTERN = /_generated/;
 
-async function checkFileLength(filePath: string) {
+export async function checkFileLength(filePath: string) {
   if (EXCLUDE_PATTERN.test(filePath)) {
     return;
   }
 
   const relativePath = path.relative(process.cwd(), filePath);
-  const isInTargetDir = TARGET_DIRS.some((dir) =>
-    relativePath.startsWith(dir + path.sep) || relativePath === dir
+  const isInTargetDir = TARGET_DIRS.some(
+    (dir) => relativePath.startsWith(dir + path.sep) || relativePath === dir
   );
 
   if (!isInTargetDir) {
@@ -37,14 +37,21 @@ async function checkFileLength(filePath: string) {
   }
 }
 
-const files = process.argv.slice(2);
+import { fileURLToPath } from 'url';
 
-if (files.length === 0) {
-  // If no files provided as args, we could scan the whole project, 
-  // but for git hooks, we expect files to be passed.
-  console.log('No files provided to check-file-length.');
-} else {
-  for (const file of files) {
-    checkFileLength(path.resolve(file));
+if (
+  process.argv[1] &&
+  fileURLToPath(import.meta.url) === path.resolve(process.argv[1])
+) {
+  const files = process.argv.slice(2);
+
+  if (files.length === 0) {
+    // If no files provided as args, we could scan the whole project,
+    // but for git hooks, we expect files to be passed.
+    console.log('No files provided to check-file-length.');
+  } else {
+    for (const file of files) {
+      await checkFileLength(path.resolve(file));
+    }
   }
 }

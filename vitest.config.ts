@@ -8,6 +8,17 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     coverage: {
+      exclude: [
+        '**/_generated/**',
+        'src/routeTree.gen.ts',
+        'tests/**',
+        '**/*.test.ts',
+        '**/*.test.tsx',
+        'eslint.config.js',
+        'vite.config.ts',
+        'vitest.config.ts',
+        '.output/**',
+      ],
       thresholds: {
         lines: 80,
         functions: 80,
