@@ -1,6 +1,13 @@
-import { useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export function useJuice() {
+interface JuiceContextType {
+  enabled: boolean;
+  toggle: () => void;
+}
+
+const JuiceContext = createContext<JuiceContextType | undefined>(undefined);
+
+export function JuiceProvider({ children }: { children: React.ReactNode }) {
   const [enabled, setEnabled] = useState(true);
 
   useEffect(() => {
@@ -16,7 +23,19 @@ export function useJuice() {
     localStorage.setItem('sensory-juice', String(next));
   };
 
-  return { enabled, toggle };
+  return (
+    <JuiceContext.Provider value={{ enabled, toggle }}>
+      {children}
+    </JuiceContext.Provider>
+  );
+}
+
+export function useJuice() {
+  const context = useContext(JuiceContext);
+  if (context === undefined) {
+    throw new Error('useJuice must be used within a JuiceProvider');
+  }
+  return context;
 }
 
 export default function JuiceToggle() {
@@ -40,7 +59,7 @@ export default function JuiceToggle() {
           : 'bg-[var(--bg-secondary)] text-[var(--text-tertiary)] opacity-60'
       }`}
     >
-      {enabled ? '≡ƒìä Juice On' : '≡ƒìä Juice Off'}
+      {enabled ? 'Juice On' : 'Juice Off'}
     </button>
   );
 }

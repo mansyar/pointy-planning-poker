@@ -5,9 +5,11 @@ import Header from '../src/components/Header';
 import ThemeToggle from '../src/components/ThemeToggle';
 import { RoomPage } from '../src/components/RoomPage';
 import { Route as RootLayout } from '../src/routes/__root';
+import { JuiceProvider } from '../src/components/JuiceToggle';
 import { ReactNode } from 'react';
 import * as convex from 'convex/react';
 import type { Id } from '../convex/_generated/dataModel';
+import React from 'react';
 
 // Mock TanStack Router
 vi.mock('@tanstack/react-router', async (importOriginal) => {
@@ -92,6 +94,11 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
+// Helper for rendering with JuiceProvider
+const renderWithJuice = (ui: React.ReactElement) => {
+  return render(<JuiceProvider>{ui}</JuiceProvider>);
+};
+
 describe('Footer Component', () => {
   it('renders footer with copyright', () => {
     render(<Footer />);
@@ -104,7 +111,7 @@ describe('Footer Component', () => {
 
 describe('Header Component', () => {
   it('renders header with logo and navigation', () => {
-    render(<Header />);
+    renderWithJuice(<Header />);
     expect(screen.getByText('Pointy')).toBeDefined();
     expect(screen.getByRole('link', { name: /Pointy/ })).toBeDefined();
   });
@@ -138,7 +145,7 @@ vi.mock('../src/components/JoinModal', () => ({
 describe('RoomPage Component', () => {
   it('renders room loading state', () => {
     vi.mocked(convex.useQuery).mockReturnValue(undefined); // Loading
-    render(<RoomPage slug="test-room" />);
+    renderWithJuice(<RoomPage slug="test-room" />);
     expect(screen.getByText(/Loading room/)).toBeDefined();
   });
 
@@ -178,7 +185,7 @@ describe('RoomPage Component', () => {
       }
     );
 
-    render(<RoomPage slug="test-room" />);
+    renderWithJuice(<RoomPage slug="test-room" />);
 
     const joinBtn = screen.getByText('Mock Join');
     await act(async () => {
@@ -213,7 +220,7 @@ describe('RoomPage Component', () => {
       return Promise.reject(new Error('Join failed'));
     });
 
-    render(<RoomPage slug="test-room" />);
+    renderWithJuice(<RoomPage slug="test-room" />);
     const joinBtn = screen.getByText('Mock Join');
     await act(async () => {
       fireEvent.click(joinBtn);
@@ -224,7 +231,7 @@ describe('RoomPage Component', () => {
 
   it('renders 404 if room not found', () => {
     vi.mocked(convex.useQuery).mockReturnValue(null); // Not found
-    render(<RoomPage slug="test-room" />);
+    renderWithJuice(<RoomPage slug="test-room" />);
     expect(screen.getByText(/Room not found/)).toBeDefined();
   });
 
@@ -270,7 +277,7 @@ describe('RoomPage Component', () => {
       }
     );
 
-    render(<RoomPage slug="test-room" />);
+    renderWithJuice(<RoomPage slug="test-room" />);
 
     // Wait for render
     await screen.findAllByText('Test Topic');
@@ -331,7 +338,7 @@ describe('RootLayout', () => {
       options: { shellComponent: React.ComponentType<{ children: ReactNode }> };
     };
     const Shell = route.options.shellComponent;
-    render(<Shell>Test Content</Shell>);
+    renderWithJuice(<Shell>Test Content</Shell>);
     expect(screen.getByText('Test Content')).toBeDefined();
   });
 });
@@ -390,7 +397,7 @@ describe('RoomRoute', () => {
       options: { component: React.ComponentType };
     };
     const Component = route.options.component;
-    render(<Component />);
+    renderWithJuice(<Component />);
 
     const joinBtn = screen.getByText('Mock Join');
     await act(async () => {

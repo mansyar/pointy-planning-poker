@@ -10,6 +10,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { OfflineBanner } from '../components/OfflineBanner';
 import { AriaLiveAnnouncer } from '../components/AriaLiveAnnouncer';
+import { JuiceProvider } from '../components/JuiceToggle';
 import { ConvexProvider, ConvexReactClient } from 'convex/react';
 import { useState, useEffect } from 'react';
 
@@ -25,17 +26,16 @@ export const Route = createRootRoute({
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
+        content: 'width=device-width, initial-scale=1, maximum-scale=1',
       },
       {
         title: 'Pointy - Planning Poker',
       },
     ],
     links: [
-      {
-        rel: 'stylesheet',
-        href: appCss,
-      },
+      { rel: 'stylesheet', href: appCss },
+      { rel: 'icon', href: '/favicon.ico' },
+      { rel: 'apple-touch-icon', href: '/logo192.png' },
     ],
   }),
   shellComponent: RootDocument,
@@ -53,17 +53,26 @@ function RootComponent() {
       'serviceWorker' in navigator &&
       !import.meta.env.SSR
     ) {
-      window.addEventListener('load', () => {
+      const register = () => {
         navigator.serviceWorker.register('/sw.js').catch((error) => {
           console.error('Service Worker registration failed:', error);
         });
-      });
+      };
+
+      if (document.readyState === 'complete') {
+        register();
+      } else {
+        window.addEventListener('load', register);
+        return () => window.removeEventListener('load', register);
+      }
     }
   }, []);
 
   return (
     <ConvexProvider client={convex}>
-      <Outlet />
+      <JuiceProvider>
+        <Outlet />
+      </JuiceProvider>
     </ConvexProvider>
   );
 }
@@ -82,17 +91,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <Header />
         {children}
         <Footer />
-        <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
+        <TanStackDevtools />
+        <TanStackRouterDevtoolsPanel />
         <Scripts />
       </body>
     </html>

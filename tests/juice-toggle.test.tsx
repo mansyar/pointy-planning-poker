@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import JuiceToggle from '../src/components/JuiceToggle';
+import JuiceToggle, { JuiceProvider } from '../src/components/JuiceToggle';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import React from 'react';
 
@@ -10,7 +10,11 @@ describe('JuiceToggle Component', () => {
   });
 
   it('should toggle sensory juice state on click', () => {
-    render(<JuiceToggle />);
+    render(
+      <JuiceProvider>
+        <JuiceToggle />
+      </JuiceProvider>
+    );
     const button = screen.getByRole('button');
 
     // Initial state (default true)

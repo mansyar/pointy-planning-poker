@@ -11,6 +11,20 @@ const HAPTIC_PATTERNS = {
   reveal: [30, 50, 30],
 };
 
+// Lazy initialization of audio objects to avoid issues with SSR and tests
+let soundFiles: Record<SoundType, HTMLAudioElement | null> | null = null;
+
+function getSoundFiles() {
+  if (!soundFiles && typeof Audio !== 'undefined') {
+    soundFiles = {
+      pop: new Audio('/sounds/pop.wav'),
+      whoosh: new Audio('/sounds/whoosh.wav'),
+      confetti: new Audio('/sounds/confetti.wav'),
+    };
+  }
+  return soundFiles;
+}
+
 export function useSound() {
   const { enabled } = useJuice();
 
@@ -33,14 +47,19 @@ export function useSound() {
     (type: SoundType) => {
       if (!enabled) return;
 
-      // Audio feedback
-      const audio = new Audio(`/sounds/${type}.wav`);
-      audio.play().catch((e) => {
-        // Only warn if not a user-gesture error which is common in PWAs
-        if (e.name !== 'NotAllowedError') {
-          console.warn('Sound playback failed:', e);
-        }
-      });
+      const files = getSoundFiles();
+      const audio = files ? files[type] : null;
+
+      if (audio) {
+        // Reset and play
+        audio.currentTime = 0;
+        audio.play().catch((e) => {
+          // Only warn if not a user-gesture error
+          if (e.name !== 'NotAllowedError') {
+            console.warn('Sound playback failed:', e);
+          }
+        });
+      }
 
       // Simultaneous Haptic feedback
       vibrate(HAPTIC_PATTERNS[type]);

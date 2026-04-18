@@ -1,7 +1,6 @@
 const CACHE_NAME = 'pointy-cache-v1';
 const ASSETS_TO_CACHE = [
   '/',
-  '/index.html',
   '/manifest.json',
   '/favicon.ico',
   '/logo192.png',
