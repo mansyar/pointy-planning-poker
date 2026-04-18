@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { calculateStats, identifyOutliers } from '../src/utils/stats';
+import {
+  calculateStats,
+  identifyOutliers,
+  isUnanimous,
+} from '../src/utils/stats';
 
 describe('calculateStats', () => {
   it('calculates stats for a simple numeric array', () => {
@@ -37,5 +41,24 @@ describe('identifyOutliers', () => {
     const outliers = identifyOutliers(votes);
     expect(outliers.min).toEqual([]);
     expect(outliers.max).toEqual([]);
+  });
+});
+
+describe('isUnanimous', () => {
+  it('returns true if all votes are the same', () => {
+    expect(isUnanimous([5, 5, 5])).toBe(true);
+  });
+
+  it('returns false if votes differ', () => {
+    expect(isUnanimous([3, 5, 5])).toBe(false);
+  });
+
+  it('returns false for empty or single vote', () => {
+    expect(isUnanimous([])).toBe(false);
+    expect(isUnanimous([5])).toBe(false); // Unanimous requires at least 2 people
+  });
+
+  it('handles non-numeric values', () => {
+    expect(isUnanimous(['?', '?'])).toBe(true);
   });
 });

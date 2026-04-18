@@ -75,3 +75,12 @@ export function identifyOutliers(rawVotes: (string | number | null)[]): {
     max: [max],
   };
 }
+
+export function isUnanimous(rawVotes: (string | number | null)[]): boolean {
+  const votes = rawVotes.filter((v) => v !== null);
+
+  if (votes.length < 2) return false;
+
+  const first = votes[0];
+  return votes.every((v) => v === first);
+}
