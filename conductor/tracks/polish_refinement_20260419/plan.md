@@ -20,7 +20,7 @@
   - [x] Implement tooltips (using accessible titles or a simple hover state) in the stats component
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Result Insights & Outlier Discussion' (Protocol in workflow.md) dd3b385
 
-## Phase 3: Hero Experience & Landing Page [checkpoint: ]
+## Phase 3: Hero Experience & Landing Page [checkpoint: edf4ea7]
 
 - [x] Task: Update Landing Page with Feature Highlight Cards 1461be8
   - [x] Write tests for landing page rendering and card interactions
@@ -28,7 +28,7 @@
 - [x] Task: Implement Dynamic Tab Title Synchronization 49728a1
   - [x] Write tests for document title changes based on room state
   - [x] Implement a custom hook or effect in `RoomPage.tsx` to manage `document.title`
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Hero Experience & Landing Page' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Hero Experience & Landing Page' (Protocol in workflow.md) edf4ea7
 
 ## Phase 4: UX Polish & Final Audit [checkpoint: ]
 
