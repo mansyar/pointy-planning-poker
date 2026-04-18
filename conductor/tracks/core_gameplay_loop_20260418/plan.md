@@ -44,7 +44,7 @@
 - [x] Task: Generate and Integrate UI Sound Assets (d2c3f07)
   - [x] Create Python script to generate pop/whoosh/confetti audio files
   - [x] Implement `useSound` hook and integrate into voting/reveal actions
-- [ ] Task: Implement Celebration Effects (Confetti)
-  - [ ] Write tests for unanimous consensus trigger
-  - [ ] Integrate `canvas-confetti` and trigger on unanimous results
+- [x] Task: Implement Celebration Effects (Confetti) (b0981f1)
+  - [x] Write tests for unanimous consensus trigger
+  - [x] Integrate `canvas-confetti` and trigger on unanimous results
 - [ ] Task: Conductor - User Manual Verification 'Results & Sensory Polish' (Protocol in workflow.md)
