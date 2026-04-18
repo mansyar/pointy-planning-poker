@@ -70,9 +70,7 @@ function RootComponent() {
 
   return (
     <ConvexProvider client={convex}>
-      <JuiceProvider>
-        <Outlet />
-      </JuiceProvider>
+      <Outlet />
     </ConvexProvider>
   );
 }
@@ -86,11 +84,13 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
-        <AriaLiveAnnouncer />
-        <OfflineBanner />
-        <Header />
-        {children}
-        <Footer />
+        <JuiceProvider>
+          <AriaLiveAnnouncer />
+          <OfflineBanner />
+          <Header />
+          {children}
+          <Footer />
+        </JuiceProvider>
         <TanStackDevtools />
         <TanStackRouterDevtoolsPanel />
         <Scripts />
