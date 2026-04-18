@@ -24,7 +24,7 @@
   - [ ] Update `JuiceToggle` component to manage the unified global state
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Sensory "Juice" & Haptics' (Protocol in workflow.md) (357e44a)
 
-## Phase 3: Accessibility Announcements
+## Phase 3: Accessibility Announcements [checkpoint: 3362f3a]
 
 - [x] Task: Implement ARIA Live Announcer (e3148cf)
   - [ ] Write tests for `AriaLiveAnnouncer` component
@@ -32,7 +32,7 @@
 - [x] Task: Announce Game State Changes (257bd07)
   - [ ] Write tests for dispatching announcement messages
   - [ ] Integrate announcements for "Votes Revealed", "New Topic Active", and "Consensus Reached"
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Accessibility Announcements' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Accessibility Announcements' (Protocol in workflow.md) (3362f3a)
 
 ## Phase 4: Deployment Architecture
 
