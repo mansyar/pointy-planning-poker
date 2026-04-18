@@ -20,9 +20,9 @@
 - [x] Task: Implement Optimistic Batching Logic (9644610)
   - [x] Write tests for local throttling/batching utility function
   - [x] Wire up the UI action bar to trigger immediate local state and delayed/batched Convex mutations
-- [ ] Task: Integrate `reactions.listRecent` Subscription
-  - [ ] Write tests for real-time subscription hook consuming recent reactions
-  - [ ] Implement UI state subscription to merge local optimistic reactions with remote incoming reactions
+- [x] Task: Integrate `reactions.listRecent` Subscription (b642615)
+  - [x] Write tests for real-time subscription hook consuming recent reactions
+  - [x] Implement UI state subscription to merge local optimistic reactions with remote incoming reactions
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Reaction UI & Real-Time Sync' (Protocol in workflow.md)
 
 ## Phase 3: The "Juice" (Animations & A11y Fallbacks)
