@@ -32,7 +32,7 @@
 
 ## Phase 4: UX Polish & Final Audit [checkpoint: ]
 
-- [ ] Task: Refine Topic State Visibility in History
-  - [ ] Write tests for visual distinction between topic states
-  - [ ] Update CSS/Styles in `TopicSidebar` for better state clarity
+- [x] Task: Refine Topic State Visibility in History fe8b22a
+  - [x] Write tests for visual distinction between topic states
+  - [x] Update CSS/Styles in `TopicSidebar` for better state clarity
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: UX Polish & Final Audit' (Protocol in workflow.md)
