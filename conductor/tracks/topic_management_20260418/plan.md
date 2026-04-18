@@ -16,7 +16,7 @@
   - [x] Implement `rooms:nextTopic` to handle status transitions and vote resets
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Database & Backend Logic' (Protocol in workflow.md)
 
-## Phase 2: Topic Management UI (Facilitator) [checkpoint: ]
+## Phase 2: Topic Management UI (Facilitator) [checkpoint: 1669530]
 
 - [x] Task: Build Topic Sidebar Shell and List 568d7f6
   - [x] Write tests for `TopicSidebar` component (read-only vs facilitator views)
