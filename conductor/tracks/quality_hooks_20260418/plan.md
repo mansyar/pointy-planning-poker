@@ -26,7 +26,7 @@
 
 ## Phase 3: Final Validation
 
-- [ ] Task: Verify pre-commit fails on linting error.
-- [ ] Task: Verify pre-commit fails on file length > 500 lines.
-- [ ] Task: Verify pre-push fails on low test coverage (< 80%).
+- [x] Task: Verify pre-commit fails on linting error.
+- [x] Task: Verify pre-commit fails on file length > 500 lines.
+- [x] Task: Verify pre-push fails on low test coverage (< 80%). 1938124
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Final Validation' (Protocol in workflow.md)
