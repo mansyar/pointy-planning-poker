@@ -14,7 +14,7 @@
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Setup Tooling' (Protocol in workflow.md) 358bf9f
 
 ## Phase 2: Configure Git Hooks
-- [ ] Task: Initialize `husky` in the project.
+- [x] Task: Initialize `husky` in the project. 3b5fb2e
 - [ ] Task: Configure `lint-staged` in `package.json` or `.lintstagedrc`.
     - [ ] Run `eslint`, `prettier`, `typecheck`, and `vitest related --run` on staged files.
     - [ ] Run `scripts/check-file-length.ts` on staged files.
