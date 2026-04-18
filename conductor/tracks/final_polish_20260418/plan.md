@@ -29,7 +29,7 @@
 - [x] Task: Implement ARIA Live Announcer (e3148cf)
   - [ ] Write tests for `AriaLiveAnnouncer` component
   - [ ] Implement an invisible, polite `aria-live` region for screen readers
-- [ ] Task: Announce Game State Changes
+- [x] Task: Announce Game State Changes (257bd07)
   - [ ] Write tests for dispatching announcement messages
   - [ ] Integrate announcements for "Votes Revealed", "New Topic Active", and "Consensus Reached"
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Accessibility Announcements' (Protocol in workflow.md)
