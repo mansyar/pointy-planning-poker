@@ -1,17 +1,17 @@
 # Implementation Plan: Setup pre-commit and pre-push checks
 
-## Phase 1: Setup Tooling
+## Phase 1: Setup Tooling [checkpoint: 358bf9f]
 - [x] Task: Install `husky` and `lint-staged` as dev dependencies using pnpm. 071bee1
 - [x] Task: Add quality check scripts to `package.json`. cf3ec9a
-    - [ ] `lint`: `eslint .`
-    - [ ] `format`: `prettier --check .`
-    - [ ] `typecheck`: `tsc --noEmit`
-    - [ ] `test:coverage`: `vitest run --coverage`
+    - [x] `lint`: `eslint .`
+    - [x] `format`: `prettier --check .`
+    - [x] `typecheck`: `tsc --noEmit`
+    - [x] `test:coverage`: `vitest run --coverage`
 - [x] Task: Create `scripts/check-file-length.ts` to verify file line counts. 35ecf88
-    - [ ] Implement logic to scan `src/` and `convex/` (excluding `_generated/`).
-    - [ ] Add check for > 500 lines.
-    - [ ] Add refactor suggestion message on failure.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Setup Tooling' (Protocol in workflow.md)
+    - [x] Implement logic to scan `src/` and `convex/` (excluding `_generated/`).
+    - [x] Add check for > 500 lines.
+    - [x] Add refactor suggestion message on failure.
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Setup Tooling' (Protocol in workflow.md) 358bf9f
 
 ## Phase 2: Configure Git Hooks
 - [ ] Task: Initialize `husky` in the project.
