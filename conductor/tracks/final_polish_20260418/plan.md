@@ -44,3 +44,4 @@
 ## Phase: Review Fixes
 
 - [x] Task: Apply review suggestions (b0e076c)
+- [x] Task: Fix global state sync and SW registration (96c732a)
