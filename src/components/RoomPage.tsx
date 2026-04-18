@@ -5,6 +5,7 @@ import JoinModal from './JoinModal';
 import { PresenceSidebar } from './PresenceSidebar';
 import { TopicSidebar } from './TopicSidebar';
 import { BatchAddModal } from './BatchAddModal';
+import { ConfirmEstimateModal } from './ConfirmEstimateModal';
 import { ActiveTopicHeader } from './ActiveTopicHeader';
 import { ClaimBanner } from './ClaimBanner';
 import { CardGrid } from './CardGrid';
@@ -45,10 +46,13 @@ export function RoomPage({ slug }: RoomPageProps) {
   const nextTopic = useMutation(api.rooms.nextTopic);
   const setFinalEstimate = useMutation(api.topics.setFinalEstimate);
 
-  // Synchronously determine if we *should* already be considered "joined"
-  // based on whether we have a nickname. This prevents flicker.
+  // Local state to track if we've joined this session
   const [hasJoined, setHasJoined] = useState(() => !!nickname);
   const [isBatchAddOpen, setIsBatchAddOpen] = useState(false);
+  const [confirmEstimateState, setConfirmEstimateState] = useState<{
+    isOpen: boolean;
+    suggested: string;
+  }>({ isOpen: false, suggested: '' });
 
   // Auto-join background sync if we have a nickname
   useEffect(() => {
@@ -144,33 +148,33 @@ export function RoomPage({ slug }: RoomPageProps) {
     }
   };
 
-  const handleConfirmNext = async () => {
+  const handleConfirmNext = () => {
     if (!room || !votes) return;
     const stats = calculateStats(votes.map((v) => v.value));
-    const consensus = stats.average;
+    setConfirmEstimateState({
+      isOpen: true,
+      suggested: stats.average,
+    });
+  };
 
-    const confirmedEstimate = window.prompt(
-      'Confirm final estimate for this topic:',
-      consensus
-    );
-
-    if (confirmedEstimate !== null) {
-      try {
-        play('whoosh');
-        if (room.currentTopicId) {
-          await setFinalEstimate({
-            topicId: room.currentTopicId,
-            identityId: identityId!,
-            estimate: confirmedEstimate,
-          });
-        }
-        await nextTopic({
-          roomId: room._id,
+  const handleConfirmFinal = async (estimate: string) => {
+    if (!room) return;
+    try {
+      play('whoosh');
+      if (room.currentTopicId) {
+        await setFinalEstimate({
+          topicId: room.currentTopicId,
           identityId: identityId!,
+          estimate,
         });
-      } catch (error) {
-        console.error('Failed to advance topic:', error);
       }
+      await nextTopic({
+        roomId: room._id,
+        identityId: identityId!,
+      });
+      setConfirmEstimateState({ isOpen: false, suggested: '' });
+    } catch (error) {
+      console.error('Failed to advance topic:', error);
     }
   };
 
@@ -342,12 +346,26 @@ export function RoomPage({ slug }: RoomPageProps) {
       <CardDeck onSelect={handleVote} selectedVote={myVote} />
 
       {isFacilitator && (
-        <BatchAddModal
-          roomId={room._id}
-          isOpen={isBatchAddOpen}
-          onClose={() => setIsBatchAddOpen(false)}
-          onSubmit={handleBatchAdd}
-        />
+        <>
+          <BatchAddModal
+            roomId={room._id}
+            isOpen={isBatchAddOpen}
+            onClose={() => setIsBatchAddOpen(false)}
+            onSubmit={handleBatchAdd}
+          />
+          <ConfirmEstimateModal
+            isOpen={confirmEstimateState.isOpen}
+            onClose={() =>
+              setConfirmEstimateState({
+                ...confirmEstimateState,
+                isOpen: false,
+              })
+            }
+            onConfirm={handleConfirmFinal}
+            suggestedEstimate={confirmEstimateState.suggested}
+            topicTitle={activeTopic?.title || ''}
+          />
+        </>
       )}
     </div>
   );
