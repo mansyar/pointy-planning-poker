@@ -155,3 +155,131 @@ test('topics:remove and reorder', async () => {
   expect(updatedTopics[1].title).toBe('Topic 3');
   expect(updatedTopics[1].order).toBe(2);
 });
+
+test('topics:addBatch', async () => {
+  const t = convexTest(schema, {
+    rooms: async () => rooms,
+    topics: async () => topics,
+    '_generated/api': async () => apiModule,
+    '_generated/server': async () => serverModule,
+  });
+
+  const roomId = await t.mutation(api.rooms.create, {
+    slug: 'test-room',
+    facilitatorId: 'user1',
+  });
+
+  const titlesString = 'Topic A\nTopic B\nTopic C';
+  await t.mutation(api.topics.addBatch, {
+    roomId,
+    identityId: 'user1',
+    titlesString,
+  });
+
+  const roomTopics = await t.query(api.topics.listByRoom, { roomId });
+  expect(roomTopics.length).toBe(3);
+  expect(roomTopics[0].title).toBe('Topic A');
+  expect(roomTopics[0].order).toBe(1);
+  expect(roomTopics[1].title).toBe('Topic B');
+  expect(roomTopics[1].order).toBe(2);
+  expect(roomTopics[2].title).toBe('Topic C');
+  expect(roomTopics[2].order).toBe(3);
+});
+
+test('topics:reorder', async () => {
+  const t = convexTest(schema, {
+    rooms: async () => rooms,
+    topics: async () => topics,
+    '_generated/api': async () => apiModule,
+    '_generated/server': async () => serverModule,
+  });
+
+  const roomId = await t.mutation(api.rooms.create, {
+    slug: 'test-room',
+    facilitatorId: 'user1',
+  });
+
+  await t.mutation(api.topics.addBatch, {
+    roomId,
+    identityId: 'user1',
+    titlesString: 'T1\nT2\nT3',
+  });
+
+  const roomTopics = await t.query(api.topics.listByRoom, { roomId });
+  const t1Id = roomTopics[0]._id;
+  const t2Id = roomTopics[1]._id;
+  const t3Id = roomTopics[2]._id;
+
+  // Swap T1 and T2 (move T1 down)
+  await t.mutation(api.topics.reorder, {
+    topicId: t1Id,
+    identityId: 'user1',
+    newOrder: 2,
+  });
+
+  const updatedTopics = await t.query(api.topics.listByRoom, { roomId });
+  // Should be T2, T1, T3
+  expect(updatedTopics.find((t) => t._id === t2Id)?.order).toBe(1);
+  expect(updatedTopics.find((t) => t._id === t1Id)?.order).toBe(2);
+  expect(updatedTopics.find((t) => t._id === t3Id)?.order).toBe(3);
+
+  // Move T3 to top
+  await t.mutation(api.topics.reorder, {
+    topicId: t3Id,
+    identityId: 'user1',
+    newOrder: 1,
+  });
+
+  const finalTopics = await t.query(api.topics.listByRoom, { roomId });
+  // Should be T3, T2, T1
+  expect(finalTopics.find((t) => t._id === t3Id)?.order).toBe(1);
+  expect(finalTopics.find((t) => t._id === t2Id)?.order).toBe(2);
+  expect(finalTopics.find((t) => t._id === t1Id)?.order).toBe(3);
+});
+
+test('topics:reorder edge cases', async () => {
+  const t = convexTest(schema, {
+    rooms: async () => rooms,
+    topics: async () => topics,
+    '_generated/api': async () => apiModule,
+    '_generated/server': async () => serverModule,
+  });
+
+  const roomId = await t.mutation(api.rooms.create, {
+    slug: 'test-room',
+    facilitatorId: 'user1',
+  });
+
+  await t.mutation(api.topics.add, {
+    roomId,
+    identityId: 'user1',
+    title: 'T1',
+  });
+
+  const roomTopics = await t.query(api.topics.listByRoom, { roomId });
+  const t1Id = roomTopics[0]._id;
+
+  // Same order (should return early)
+  await t.mutation(api.topics.reorder, {
+    topicId: t1Id,
+    identityId: 'user1',
+    newOrder: 1,
+  });
+
+  // Invalid order
+  await expect(
+    t.mutation(api.topics.reorder, {
+      topicId: t1Id,
+      identityId: 'user1',
+      newOrder: 0,
+    })
+  ).rejects.toThrow('Invalid order');
+
+  await expect(
+    t.mutation(api.topics.reorder, {
+      topicId: t1Id,
+      identityId: 'user1',
+      newOrder: 2,
+    })
+  ).rejects.toThrow('Invalid order');
+});

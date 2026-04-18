@@ -73,3 +73,89 @@ export const remove = mutation({
     }
   },
 });
+
+export const addBatch = mutation({
+  args: {
+    roomId: v.id('rooms'),
+    identityId: v.string(),
+    titlesString: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const room = await ctx.db.get(args.roomId);
+    if (!room) throw new Error('Room not found');
+
+    if (room.facilitatorId !== args.identityId) {
+      throw new Error('Only the facilitator can manage topics');
+    }
+
+    const titles = args.titlesString
+      .split('\n')
+      .map((t) => t.trim())
+      .filter((t) => t.length > 0);
+
+    const existingTopics = await ctx.db
+      .query('topics')
+      .withIndex('by_room', (q) => q.eq('roomId', args.roomId))
+      .collect();
+
+    let nextOrder = existingTopics.length + 1;
+
+    for (const title of titles) {
+      await ctx.db.insert('topics', {
+        roomId: args.roomId,
+        title,
+        order: nextOrder++,
+        status: 'pending',
+      });
+    }
+  },
+});
+
+export const reorder = mutation({
+  args: {
+    topicId: v.id('topics'),
+    identityId: v.string(),
+    newOrder: v.number(),
+  },
+  handler: async (ctx, args) => {
+    const topic = await ctx.db.get(args.topicId);
+    if (!topic) throw new Error('Topic not found');
+
+    const room = await ctx.db.get(topic.roomId);
+    if (!room) throw new Error('Room not found');
+
+    if (room.facilitatorId !== args.identityId) {
+      throw new Error('Only the facilitator can manage topics');
+    }
+
+    const oldOrder = topic.order;
+    const newOrder = args.newOrder;
+
+    if (oldOrder === newOrder) return;
+
+    const allTopics = await ctx.db
+      .query('topics')
+      .withIndex('by_room', (q) => q.eq('roomId', topic.roomId))
+      .collect();
+
+    if (newOrder < 1 || newOrder > allTopics.length) {
+      throw new Error('Invalid order');
+    }
+
+    for (const t of allTopics) {
+      if (oldOrder < newOrder) {
+        // Moving down
+        if (t.order > oldOrder && t.order <= newOrder) {
+          await ctx.db.patch(t._id, { order: t.order - 1 });
+        }
+      } else {
+        // Moving up
+        if (t.order >= newOrder && t.order < oldOrder) {
+          await ctx.db.patch(t._id, { order: t.order + 1 });
+        }
+      }
+    }
+
+    await ctx.db.patch(args.topicId, { order: newOrder });
+  },
+});
