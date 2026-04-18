@@ -47,7 +47,11 @@ function RootComponent() {
   );
 
   useEffect(() => {
-    if ('serviceWorker' in navigator && !import.meta.env.SSR) {
+    if (
+      typeof window !== 'undefined' &&
+      'serviceWorker' in navigator &&
+      !import.meta.env.SSR
+    ) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').catch((error) => {
           console.error('Service Worker registration failed:', error);
