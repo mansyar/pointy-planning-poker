@@ -29,7 +29,7 @@
   - [x] Implement modal with multi-line textarea and bulk submission logic
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Topic Management UI' (Protocol in workflow.md)
 
-## Phase 3: Estimation Workflow & Session History [checkpoint: ]
+## Phase 3: Estimation Workflow & Session History [checkpoint: 1638e5f]
 
 - [x] Task: Implement Active Topic Header & Status Sync e468029
   - [x] Write tests for `ActiveTopicHeader` and room status synchronization
