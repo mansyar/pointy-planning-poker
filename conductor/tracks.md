@@ -4,5 +4,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Setup pre-commit check for code quality, and pre-push check for test coverage**
+- [~] **Track: Setup pre-commit check for code quality, and pre-push check for test coverage**
 *Link: [./tracks/quality_hooks_20260418/](./tracks/quality_hooks_20260418/)*
