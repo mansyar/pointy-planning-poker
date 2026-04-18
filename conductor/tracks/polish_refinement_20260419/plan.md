@@ -5,9 +5,9 @@
 - [x] Task: Implement `topics:update` mutation in Convex 03943ce
   - [x] Write unit tests for `topics:update` mutation
   - [x] Implement `update` function in `convex/topics.ts`
-- [ ] Task: Build Inline Editing UI in `TopicSidebar`
-  - [ ] Write tests for click-to-edit behavior, including blur and Enter key triggers
-  - [ ] Implement seamless input field replacement in `TopicSidebar.tsx`
+- [x] Task: Build Inline Editing UI in `TopicSidebar` ad3ce1e
+  - [x] Write tests for click-to-edit behavior, including blur and Enter key triggers
+  - [x] Implement seamless input field replacement in `TopicSidebar.tsx`
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Facilitator Queue Management' (Protocol in workflow.md)
 
 ## Phase 2: Result Insights & Outlier Discussion [checkpoint: ]
