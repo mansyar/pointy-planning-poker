@@ -26,7 +26,9 @@ describe('Room Flow', () => {
     const nicknameInput = screen.getByPlaceholderText(/your nickname/i);
     fireEvent.change(nicknameInput, { target: { value: 'Alice' } });
 
-    const createButton = screen.getByRole('button', { name: /create room/i });
+    const createButton = screen.getByRole('button', {
+      name: /create master room/i,
+    });
     fireEvent.click(createButton);
 
     expect(createRoom).toHaveBeenCalled();

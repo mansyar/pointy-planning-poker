@@ -14,7 +14,7 @@ vi.mock('convex/react', () => ({
 describe('Landing Page', () => {
   it('should render a "Create Room" button', () => {
     render(<App />);
-    const button = screen.getByRole('button', { name: /create room/i });
+    const button = screen.getByRole('button', { name: /create master room/i });
     expect(button).toBeDefined();
   });
 
