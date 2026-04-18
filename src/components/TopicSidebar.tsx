@@ -170,7 +170,7 @@ export function TopicSidebar({
                       {topic.order}
                     </span>
                     <span
-                      className={`text-sm flex-1 truncate ${
+                      className={`text-sm flex-1 break-words py-0.5 ${
                         topic.status === 'active'
                           ? 'text-[var(--text-primary)] font-medium'
                           : 'text-[var(--text-secondary)]'
@@ -180,7 +180,7 @@ export function TopicSidebar({
                     </span>
 
                     {isFacilitator && topic.status !== 'active' && (
-                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 self-start">
                         <button
                           onClick={() =>
                             handleReorder(topic._id, topic.order, 'up')
@@ -242,9 +242,10 @@ export function TopicSidebar({
                     className="p-3 rounded-md border border-transparent bg-[var(--bg-primary)] opacity-80 flex items-center gap-3"
                   >
                     <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0" />
-                    <span className="text-sm text-[var(--text-secondary)] flex-1 truncate">
+                    <span className="text-sm text-[var(--text-secondary)] flex-1 break-words py-0.5">
                       {topic.title}
                     </span>
+
                     {topic.finalEstimate && (
                       <span className="text-sm font-mono font-bold text-[var(--accent)]">
                         {topic.finalEstimate}

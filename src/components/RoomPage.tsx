@@ -207,8 +207,8 @@ export function RoomPage({ slug }: RoomPageProps) {
           </div>
         </header>
 
-        <div className="grid gap-12 lg:grid-cols-4">
-          <section className="lg:col-span-3">
+        <div className="grid gap-12 lg:grid-cols-3">
+          <section className="lg:col-span-2">
             {room.status === 'revealed' && votes && (
               <div className="mb-12 flex justify-center gap-8 sm:gap-12 animate-in fade-in slide-in-from-top-4 duration-500">
                 {(() => {
