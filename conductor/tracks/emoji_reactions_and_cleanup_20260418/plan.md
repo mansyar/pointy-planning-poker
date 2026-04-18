@@ -6,10 +6,10 @@
   - [x] Write unit tests for `reactions:send` and `reactions:listRecent`
   - [x] Update `convex/schema.ts` with `reactions` table and index by `roomId`
   - [x] Implement `convex/reactions.ts` with `send` mutation and `listRecent` query
-- [ ] Task: Implement Stale Room Cleanup Cron Job
-  - [ ] Write tests for `cleanup.staleRooms`
-  - [ ] Implement `cleanup.staleRooms` in `convex/crons.ts` to delete rooms and cascading data where `updatedAt` is older than 24h
-  - [ ] Register `cleanup.staleRooms` cron job to run every hour
+- [x] Task: Implement Stale Room Cleanup Cron Job (ee56efc)
+  - [x] Write tests for `cleanup.staleRooms`
+  - [x] Implement `cleanup.staleRooms` in `convex/crons.ts` to delete rooms and cascading data where `updatedAt` is older than 24h
+  - [x] Register `cleanup.staleRooms` cron job to run every hour
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Database & Backend Logic' (Protocol in workflow.md)
 
 ## Phase 2: Reaction UI & Real-Time Sync
