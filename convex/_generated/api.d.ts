@@ -8,8 +8,10 @@
  * @module
  */
 
+import type * as cleanup from "../cleanup.js";
 import type * as crons from "../crons.js";
 import type * as players from "../players.js";
+import type * as reactions from "../reactions.js";
 import type * as rooms from "../rooms.js";
 import type * as topics from "../topics.js";
 import type * as votes from "../votes.js";
@@ -21,8 +23,10 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  cleanup: typeof cleanup;
   crons: typeof crons;
   players: typeof players;
+  reactions: typeof reactions;
   rooms: typeof rooms;
   topics: typeof topics;
   votes: typeof votes;

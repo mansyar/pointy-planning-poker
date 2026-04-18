@@ -42,12 +42,13 @@ export const listRecent = query({
   },
   handler: async (ctx, args) => {
     const now = Date.now();
-    const tenSecondsAgo = now - 10000;
+    const fiveSecondsAgo = now - 5000;
 
     return await ctx.db
       .query('reactions')
-      .withIndex('by_room', (q) => q.eq('roomId', args.roomId))
-      .filter((q) => q.gt(q.field('createdAt'), tenSecondsAgo))
+      .withIndex('by_room_and_time', (q) =>
+        q.eq('roomId', args.roomId).gt('createdAt', fiveSecondsAgo)
+      )
       .collect();
   },
 });

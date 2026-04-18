@@ -52,5 +52,7 @@ export default defineSchema({
     identityId: v.string(),
     emoji: v.string(),
     createdAt: v.number(),
-  }).index('by_room', ['roomId']),
+  })
+    .index('by_room', ['roomId'])
+    .index('by_room_and_time', ['roomId', 'createdAt']),
 });
