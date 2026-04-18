@@ -180,7 +180,7 @@ export function TopicSidebar({
                     key={topic._id}
                     className={`p-3 rounded-md border flex items-center gap-3 group transition-all ${
                       topic.status === 'active'
-                        ? 'border-[var(--accent)] bg-[var(--bg-tertiary)] shadow-[var(--shadow-sm)]'
+                        ? 'border-[var(--accent)] bg-[var(--bg-primary)] ring-1 ring-[var(--accent)]/20 shadow-sm'
                         : 'border-[var(--border-subtle)] bg-[var(--bg-primary)]'
                     }`}
                   >
@@ -188,7 +188,7 @@ export function TopicSidebar({
                       className={`text-xs font-mono px-1.5 py-0.5 rounded shrink-0 ${
                         topic.status === 'active'
                           ? 'bg-[var(--accent)] text-white'
-                          : 'bg-[var(--bg-tertiary)] text-[var(--text-secondary)]'
+                          : 'bg-[var(--bg-tertiary)] text-[var(--text-secondary)] border border-[var(--border-subtle)]'
                       }`}
                     >
                       {topic.order}
@@ -299,14 +299,14 @@ export function TopicSidebar({
                 .map((topic) => (
                   <div
                     key={topic._id}
-                    className="p-3 rounded-md border border-transparent bg-[var(--bg-primary)] opacity-80 flex items-center gap-3"
+                    className="p-3 rounded-md border border-[var(--border-subtle)] bg-[var(--bg-tertiary)]/30 opacity-70 flex items-center gap-3 transition-opacity hover:opacity-100"
                   >
                     <CheckCircle2 className="w-4 h-4 text-[var(--success)] shrink-0" />
                     <span className="text-sm text-[var(--text-secondary)] flex-1 break-words py-0.5">
                       {topic.title}
                     </span>
                     {topic.finalEstimate && (
-                      <span className="text-sm font-mono font-bold text-[var(--accent)] shrink-0">
+                      <span className="text-sm font-mono font-bold text-[var(--accent)] shrink-0 bg-[var(--bg-primary)] px-1.5 py-0.5 rounded border border-[var(--border-subtle)]">
                         {topic.finalEstimate}
                       </span>
                     )}
