@@ -27,7 +27,7 @@ export function CardGrid({ players, votes, revealed }: CardGridProps) {
               <PokerCard
                 value={vote?.value ?? ''}
                 disabled={!hasVoted}
-                revealed={revealed}
+                revealed={revealed || (hasVoted && vote.value !== null)}
                 onSelect={() => {}}
               />
               <div className="flex flex-col items-center">
