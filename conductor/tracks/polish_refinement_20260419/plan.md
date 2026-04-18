@@ -10,7 +10,7 @@
   - [x] Implement seamless input field replacement in `TopicSidebar.tsx`
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Facilitator Queue Management' (Protocol in workflow.md) d4c138a
 
-## Phase 2: Result Insights & Outlier Discussion [checkpoint: ]
+## Phase 2: Result Insights & Outlier Discussion [checkpoint: dd3b385]
 
 - [x] Task: Implement "Needs Discussion" Badge for Outliers 98c24c5
   - [x] Write tests for `StatsPanel` outlier detection and badge rendering
@@ -18,7 +18,7 @@
 - [x] Task: Add Descriptive Tooltips to Stats 98c24c5
   - [x] Write tests for tooltip presence and content on Average/Median/Mode stats
   - [x] Implement tooltips (using accessible titles or a simple hover state) in the stats component
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Result Insights & Outlier Discussion' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Result Insights & Outlier Discussion' (Protocol in workflow.md) dd3b385
 
 ## Phase 3: Hero Experience & Landing Page [checkpoint: ]
 
