@@ -3,6 +3,7 @@ import { api } from '../../convex/_generated/api';
 import { useIdentity } from '../hooks/useIdentity';
 import JoinModal from './JoinModal';
 import { PresenceSidebar } from './PresenceSidebar';
+import { TopicSidebar } from './TopicSidebar';
 import { ClaimBanner } from './ClaimBanner';
 import { CardGrid } from './CardGrid';
 import { CardDeck } from './CardDeck';
@@ -99,6 +100,7 @@ export function RoomPage({ slug }: RoomPageProps) {
       await castVote({
         roomId: room._id,
         identityId: identityId!,
+        topicId: room.currentTopicId,
         value,
       });
     } catch (error) {
@@ -256,8 +258,15 @@ export function RoomPage({ slug }: RoomPageProps) {
             )}
           </section>
 
-          <aside>
-            <div className="island-shell p-6 rounded-2xl">
+          <aside className="space-y-8 flex flex-col h-full overflow-hidden min-h-[500px]">
+            <div className="island-shell rounded-2xl flex-1 flex flex-col overflow-hidden">
+              <TopicSidebar
+                roomId={room._id}
+                facilitatorId={room.facilitatorId}
+                identityId={identityId!}
+              />
+            </div>
+            <div className="island-shell p-6 rounded-2xl shrink-0">
               <PresenceSidebar
                 roomId={room._id}
                 facilitatorId={room.facilitatorId}
