@@ -4,6 +4,7 @@ export interface VotingStats {
   mode: number[];
   count: number;
   participationCount: number;
+  spread: number;
 }
 
 export function calculateStats(
@@ -19,7 +20,14 @@ export function calculateStats(
     .map((v) => Number(v));
 
   if (numericVotes.length === 0) {
-    return { average: 0, median: 0, mode: [], count: 0, participationCount };
+    return {
+      average: 0,
+      median: 0,
+      mode: [],
+      count: 0,
+      participationCount,
+      spread: 0,
+    };
   }
 
   // Average
@@ -46,12 +54,18 @@ export function calculateStats(
     .map(Number)
     .sort((a, b) => a - b);
 
+  // Spread
+  const min = Math.min(...numericVotes);
+  const max = Math.max(...numericVotes);
+  const spread = max - min;
+
   return {
     average,
     median,
     mode,
     count: numericVotes.length,
     participationCount,
+    spread,
   };
 }
 

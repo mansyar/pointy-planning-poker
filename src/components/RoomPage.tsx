@@ -20,6 +20,7 @@ import { useJuice } from './JuiceToggle';
 import { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { calculateStats, isUnanimous } from '../utils/stats';
+import { StatsPanel } from './StatsPanel';
 
 import type { Id } from '../../convex/_generated/dataModel';
 
@@ -308,39 +309,9 @@ export function RoomPage({ slug }: RoomPageProps) {
 
         <div className="grid gap-12 lg:grid-cols-3">
           <section className="lg:col-span-2">
-            {room.status === 'revealed' && votes && (
-              <div className="mb-12 flex justify-center gap-8 sm:gap-12 animate-in fade-in slide-in-from-top-4 duration-500">
-                {(() => {
-                  const stats = calculateStats(votes.map((v) => v.value));
-                  return (
-                    <>
-                      <div className="flex flex-col items-center">
-                        <span className="text-[var(--text-tertiary)] text-[10px] uppercase font-bold tracking-widest mb-1">
-                          Average
-                        </span>
-                        <span className="text-3xl font-black text-[var(--accent)]">
-                          {stats.average}
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center">
-                        <span className="text-[var(--text-tertiary)] text-[10px] uppercase font-bold tracking-widest mb-1">
-                          Median
-                        </span>
-                        <span className="text-3xl font-black text-[var(--text-primary)]">
-                          {stats.median}
-                        </span>
-                      </div>
-                      <div className="flex flex-col items-center">
-                        <span className="text-[var(--text-tertiary)] text-[10px] uppercase font-bold tracking-widest mb-1">
-                          Mode
-                        </span>
-                        <span className="text-3xl font-black text-[var(--text-primary)]">
-                          {stats.mode.join(', ') || '-'}
-                        </span>
-                      </div>
-                    </>
-                  );
-                })()}
+            {room.status === 'revealed' && votes && players && (
+              <div className="mb-12">
+                <StatsPanel players={players} votes={votes} />
               </div>
             )}
 
