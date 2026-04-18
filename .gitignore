@@ -12,5 +12,7 @@ dist-ssr
 __unconfig*
 todos.json
 coverage
-.husky
+.husky/_
+
+
 
