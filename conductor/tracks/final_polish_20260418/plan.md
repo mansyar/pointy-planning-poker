@@ -34,12 +34,12 @@
   - [ ] Integrate announcements for "Votes Revealed", "New Topic Active", and "Consensus Reached"
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Accessibility Announcements' (Protocol in workflow.md) (3362f3a)
 
-## Phase 4: Deployment Architecture
+## Phase 4: Deployment Architecture [checkpoint: 180dd5c]
 
 - [x] Task: Create Multi-stage Dockerfile (6d4ac6c)
   - [ ] Create a `Dockerfile` using `node:22-alpine` as build and runtime environments
   - [ ] Configure `pnpm` installation, build steps, and expose the correct port
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Deployment Architecture' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Deployment Architecture' (Protocol in workflow.md) (180dd5c)
 
 ## Phase: Review Fixes
 
