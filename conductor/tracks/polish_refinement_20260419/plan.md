@@ -8,11 +8,11 @@
 - [x] Task: Build Inline Editing UI in `TopicSidebar` ad3ce1e
   - [x] Write tests for click-to-edit behavior, including blur and Enter key triggers
   - [x] Implement seamless input field replacement in `TopicSidebar.tsx`
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Facilitator Queue Management' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Facilitator Queue Management' (Protocol in workflow.md) d4c138a
 
 ## Phase 2: Result Insights & Outlier Discussion [checkpoint: ]
 
-- [ ] Task: Implement "Needs Discussion" Badge for Outliers
+- [~] Task: Implement "Needs Discussion" Badge for Outliers
   - [ ] Write tests for `StatsPanel` outlier detection and badge rendering
   - [ ] Add the red text badge next to outlier names in `PresenceSidebar.tsx` or wherever outliers are listed in the results view
 - [ ] Task: Add Descriptive Tooltips to Stats
