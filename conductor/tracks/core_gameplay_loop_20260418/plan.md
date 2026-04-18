@@ -13,19 +13,19 @@
   - [x] Implement UI for real-time player list and "Claim Facilitator" notification
 - [x] Task: Conductor - User Manual Verification 'Presence & Facilitator Logic' (4f95697)
 
-## Phase 2: "The Mask" – Secure Voting Backend
+## Phase 2: "The Mask" – Secure Voting Backend [checkpoint: 7eeb454]
 
 - [x] Task: Implement Masked Voting Schema and Mutations (e8b7f9b)
-  - [ ] Write tests for `votes:cast` and masked `votes:listByRoom` query
-  - [ ] Implement `votes:cast` and `votes:listByRoom` with server-side masking
+  - [x] Write tests for `votes:cast` and masked `votes:listByRoom` query
+  - [x] Implement `votes:cast` and `votes:listByRoom` with server-side masking
 - [x] Task: Implement Room State Controls (Reveal/Reset) (8f05ba8)
-  - [ ] Write tests for `rooms:reveal` and `rooms:reset` (facilitator-only)
-  - [ ] Implement facilitator mutations for round management
-- [ ] Task: Conductor - User Manual Verification 'The Mask Backend' (Protocol in workflow.md)
+  - [x] Write tests for `rooms:reveal` and `rooms:reset` (facilitator-only)
+  - [x] Implement facilitator mutations for round management
+- [x] Task: Conductor - User Manual Verification 'The Mask Backend' (7eeb454)
 
 ## Phase 3: Gaming UI & 3D Animations
 
-- [ ] Task: Create 3D Tilt Poker Card Components
+- [x] Task: Create 3D Tilt Poker Card Components (d503da5)
   - [ ] Write tests for `PokerCard` tilt and selection states
   - [ ] Implement `PokerCard` using Framer Motion (perspective + tilt)
 - [ ] Task: Implement The Reveal Animation Sequence
