@@ -27,6 +27,7 @@ export function TopicSidebar({
   onOpenBatchAdd,
 }: TopicSidebarProps) {
   const [newTopicTitle, setNewTopicTitle] = useState('');
+  const [isExpanded, setIsExpanded] = useState(false);
   const topics = useQuery(api.topics.listByRoom, { roomId });
   const isFacilitator = facilitatorId === identityId;
 
@@ -35,9 +36,16 @@ export function TopicSidebar({
   const reorderTopic = useMutation(api.topics.reorder);
 
   const pendingTopics =
-    topics?.filter((t) => t.status === 'pending' || t.status === 'active') ||
-    [];
-  const completedTopics = topics?.filter((t) => t.status === 'completed') || [];
+    topics
+      ?.filter((t) => t.status === 'pending' || t.status === 'active')
+      .sort((a, b) => a.order - b.order) || [];
+  const completedTopics =
+    topics
+      ?.filter((t) => t.status === 'completed')
+      .sort((a, b) => b.order - a.order) || [];
+
+  const visiblePending = isExpanded ? pendingTopics : pendingTopics.slice(0, 3);
+  const hasMorePending = pendingTopics.length > 3;
 
   const handleAddTopic = async () => {
     if (!newTopicTitle.trim()) return;
@@ -135,9 +143,8 @@ export function TopicSidebar({
                 No topics in queue
               </p>
             ) : (
-              pendingTopics
-                .sort((a, b) => a.order - b.order)
-                .map((topic, _index) => (
+              <>
+                {visiblePending.map((topic, _index) => (
                   <div
                     key={topic._id}
                     className={`p-3 rounded-md border flex items-center gap-3 group transition-all ${
@@ -201,7 +208,26 @@ export function TopicSidebar({
                       <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse shrink-0" />
                     )}
                   </div>
-                ))
+                ))}
+
+                {hasMorePending && (
+                  <button
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="w-full py-2 text-xs font-bold text-[var(--text-tertiary)] hover:text-[var(--accent)] transition-colors flex items-center justify-center gap-1 border border-dashed border-[var(--border-subtle)] rounded-md mt-2"
+                  >
+                    {isExpanded ? (
+                      <>
+                        <ChevronUp className="w-3 h-3" /> Show Less
+                      </>
+                    ) : (
+                      <>
+                        <ChevronDown className="w-3 h-3" /> See all (
+                        {pendingTopics.length})
+                      </>
+                    )}
+                  </button>
+                )}
+              </>
             )}
           </div>
         </section>
