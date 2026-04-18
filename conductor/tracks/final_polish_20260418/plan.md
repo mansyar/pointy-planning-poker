@@ -1,0 +1,46 @@
+# Implementation Plan: Final Polish, Accessibility & Deployment
+
+## Phase 1: PWA & Offline Resilience
+
+- [ ] Task: Setup Web Manifest and Service Worker
+  - [ ] Write unit tests for service worker registration behavior
+  - [ ] Configure `manifest.json` for standalone PWA installation
+  - [ ] Implement service worker registration for offline caching
+- [ ] Task: Implement Reconnecting Banner
+  - [ ] Write tests for `OfflineBanner` component rendering based on network state
+  - [ ] Implement a subtle banner overlay to indicate disconnected status
+- [ ] Task: Dynamic Theme Color Integration
+  - [ ] Write tests for theme color `<meta>` tag synchronization
+  - [ ] Implement logic to sync `theme_color` with the Dark/Light mode toggle
+- [ ] Task: Conductor - User Manual Verification 'Phase 1: PWA & Offline Resilience' (Protocol in workflow.md)
+
+## Phase 2: Sensory "Juice" & Haptics
+
+- [ ] Task: Implement Haptic Triggers (`navigator.vibrate`)
+  - [ ] Write tests for safe vibration invocation (graceful fallback)
+  - [ ] Implement vibration logic for Card Selection, The Reveal, and Unanimous Consensus
+- [ ] Task: Update Juice/Settings Toggle
+  - [ ] Write tests to verify the unified toggle controls both audio and haptics
+  - [ ] Update `JuiceToggle` component to manage the unified global state
+- [ ] Task: Conductor - User Manual Verification 'Phase 2: Sensory "Juice" & Haptics' (Protocol in workflow.md)
+
+## Phase 3: Accessibility Announcements
+
+- [ ] Task: Implement ARIA Live Announcer
+  - [ ] Write tests for `AriaLiveAnnouncer` component
+  - [ ] Implement an invisible, polite `aria-live` region for screen readers
+- [ ] Task: Announce Game State Changes
+  - [ ] Write tests for dispatching announcement messages
+  - [ ] Integrate announcements for "Votes Revealed", "New Topic Active", and "Consensus Reached"
+- [ ] Task: Conductor - User Manual Verification 'Phase 3: Accessibility Announcements' (Protocol in workflow.md)
+
+## Phase 4: Deployment Architecture
+
+- [ ] Task: Create Multi-stage Dockerfile
+  - [ ] Create a `Dockerfile` using `node:22-alpine` as build and runtime environments
+  - [ ] Configure `pnpm` installation, build steps, and expose the correct port
+- [ ] Task: Conductor - User Manual Verification 'Phase 4: Deployment Architecture' (Protocol in workflow.md)
+
+## Phase: Review Fixes
+
+- [ ] Task: Apply review suggestions
