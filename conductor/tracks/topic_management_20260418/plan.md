@@ -6,10 +6,10 @@
   - [x] Write unit tests for `topics:add`, `topics:listByRoom`, and `topics:remove`
   - [x] Update `convex/schema.ts` with `topics` table and indexes
   - [x] Implement `topics.ts` with `add`, `listByRoom`, and `remove` functions
-- [ ] Task: Implement Batch Add and Reorder Mutations
-  - [ ] Write tests for `topics:addBatch` and `topics:reorder`
-  - [ ] Implement `addBatch` mutation for multi-line support
-  - [ ] Implement `reorder` mutation using `order` field increments
+- [x] Task: Implement Batch Add and Reorder Mutations 0790ac5
+  - [x] Write tests for `topics:addBatch` and `topics:reorder`
+  - [x] Implement `addBatch` mutation for multi-line support
+  - [x] Implement `reorder` mutation using `order` field increments
 - [ ] Task: Implement Session Workflow Mutations
   - [ ] Write tests for `rooms:nextTopic` and `topics:setFinalEstimate`
   - [ ] Implement `topics:setFinalEstimate` to update consensus
