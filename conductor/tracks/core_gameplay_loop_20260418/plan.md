@@ -31,9 +31,9 @@
 - [x] Task: Implement The Reveal Animation Sequence (67d291b)
   - [x] Write tests for staggered reveal logic
   - [x] Implement staggered Y-axis flip sequence on `revealed` state
-- [ ] Task: Build Responsive Mobile Card Deck
-  - [ ] Write tests for mobile card grid vs desktop row layouts
-  - [ ] Implement responsive `CardDeck` container
+- [x] Task: Build Responsive Mobile Card Deck (b7ea3e7)
+  - [x] Write tests for mobile card grid vs desktop row layouts
+  - [x] Implement responsive `CardDeck` container
 - [ ] Task: Conductor - User Manual Verification 'Gaming UI & Animations' (Protocol in workflow.md)
 
 ## Phase 4: Results, Statistics & Sensory Juice
