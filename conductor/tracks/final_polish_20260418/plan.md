@@ -2,7 +2,7 @@
 
 ## Phase 1: PWA & Offline Resilience
 
-- [ ] Task: Setup Web Manifest and Service Worker
+- [x] Task: Setup Web Manifest and Service Worker (b5cf271)
   - [ ] Write unit tests for service worker registration behavior
   - [ ] Configure `manifest.json` for standalone PWA installation
   - [ ] Implement service worker registration for offline caching
