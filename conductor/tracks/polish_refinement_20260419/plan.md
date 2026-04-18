@@ -2,9 +2,9 @@
 
 ## Phase 1: Facilitator Queue Management (Inline Editing) [checkpoint: ]
 
-- [ ] Task: Implement `topics:update` mutation in Convex
-  - [ ] Write unit tests for `topics:update` mutation
-  - [ ] Implement `update` function in `convex/topics.ts`
+- [x] Task: Implement `topics:update` mutation in Convex 03943ce
+  - [x] Write unit tests for `topics:update` mutation
+  - [x] Implement `update` function in `convex/topics.ts`
 - [ ] Task: Build Inline Editing UI in `TopicSidebar`
   - [ ] Write tests for click-to-edit behavior, including blur and Enter key triggers
   - [ ] Implement seamless input field replacement in `TopicSidebar.tsx`
