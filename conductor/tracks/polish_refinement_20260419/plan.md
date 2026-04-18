@@ -22,9 +22,9 @@
 
 ## Phase 3: Hero Experience & Landing Page [checkpoint: ]
 
-- [ ] Task: Update Landing Page with Feature Highlight Cards
-  - [ ] Write tests for landing page rendering and card interactions
-  - [ ] Implement 3D, glassmorphic, icon-centric cards in `LandingPage.tsx`
+- [x] Task: Update Landing Page with Feature Highlight Cards 1461be8
+  - [x] Write tests for landing page rendering and card interactions
+  - [x] Implement 3D, glassmorphic, icon-centric cards in `LandingPage.tsx`
 - [ ] Task: Implement Dynamic Tab Title Synchronization
   - [ ] Write tests for document title changes based on room state
   - [ ] Implement a custom hook or effect in `RoomPage.tsx` to manage `document.title`
