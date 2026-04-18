@@ -14,9 +14,9 @@
 
 ## Phase 2: Reaction UI & Real-Time Sync
 
-- [ ] Task: Build Emoji Reaction Bar
-  - [ ] Write tests for `EmojiActionBar` component rendering and keyboard accessibility
-  - [ ] Implement `EmojiActionBar` with predefined emojis (❤️, 👏, 🔥, 😂, 🎉)
+- [x] Task: Build Emoji Reaction Bar (fe81cdc)
+  - [x] Write tests for `EmojiActionBar` component rendering and keyboard accessibility
+  - [x] Implement `EmojiActionBar` with predefined emojis (❤️, 👏, 🔥, 😂, 🎉)
 - [ ] Task: Implement Optimistic Batching Logic
   - [ ] Write tests for local throttling/batching utility function
   - [ ] Wire up the UI action bar to trigger immediate local state and delayed/batched Convex mutations
