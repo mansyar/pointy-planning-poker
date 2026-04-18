@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { PokerCard } from '../src/components/PokerCard';
 import { CardGrid } from '../src/components/CardGrid';
+import { CardDeck } from '../src/components/CardDeck';
 import { describe, it, expect, vi } from 'vitest';
 
 // Mock framer-motion to avoid animation issues in tests
@@ -75,5 +76,20 @@ describe('CardGrid', () => {
     render(<CardGrid players={players} votes={votes} revealed={false} />);
 
     expect(screen.getAllByTestId('player-card-wrapper').length).toBe(2);
+  });
+});
+
+describe('CardDeck', () => {
+  it('renders all voting options', () => {
+    render(<CardDeck onSelect={() => {}} />);
+    // Fib + ? + Coffee = 8 + 1 + 1 = 10 cards usually
+    expect(screen.getAllByTestId('poker-card').length).toBeGreaterThan(5);
+  });
+
+  it('calls onSelect when a card is clicked', () => {
+    const onSelect = vi.fn();
+    render(<CardDeck onSelect={onSelect} />);
+    fireEvent.click(screen.getByText('5'));
+    expect(onSelect).toHaveBeenCalledWith(5);
   });
 });
