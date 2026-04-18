@@ -5,6 +5,7 @@ import JoinModal from './JoinModal';
 import { PresenceSidebar } from './PresenceSidebar';
 import { TopicSidebar } from './TopicSidebar';
 import { BatchAddModal } from './BatchAddModal';
+import { ActiveTopicHeader } from './ActiveTopicHeader';
 import { ClaimBanner } from './ClaimBanner';
 import { CardGrid } from './CardGrid';
 import { CardDeck } from './CardDeck';
@@ -33,12 +34,16 @@ export function RoomPage({ slug }: RoomPageProps) {
     roomId: room?._id as Id<'rooms'>,
     identityId: identityId!,
   });
+  const topics = useQuery(api.topics.listByRoom, {
+    roomId: room?._id as Id<'rooms'>,
+  });
 
   const joinRoom = useMutation(api.players.join);
   const castVote = useMutation(api.votes.cast);
   const revealVotes = useMutation(api.rooms.reveal);
-  const resetRound = useMutation(api.rooms.reset);
   const addBatch = useMutation(api.topics.addBatch);
+  const nextTopic = useMutation(api.rooms.nextTopic);
+  const setFinalEstimate = useMutation(api.topics.setFinalEstimate);
 
   // Synchronously determine if we *should* already be considered "joined"
   // based on whether we have a nickname. This prevents flicker.
@@ -126,6 +131,49 @@ export function RoomPage({ slug }: RoomPageProps) {
     }
   };
 
+  const handleReveal = async () => {
+    if (!room) return;
+    try {
+      play('whoosh');
+      await revealVotes({
+        roomId: room._id,
+        identityId: identityId!,
+      });
+    } catch (error) {
+      console.error('Failed to reveal votes:', error);
+    }
+  };
+
+  const handleConfirmNext = async () => {
+    if (!room || !votes) return;
+    const stats = calculateStats(votes.map((v) => v.value));
+    const consensus = stats.average;
+
+    const confirmedEstimate = window.prompt(
+      'Confirm final estimate for this topic:',
+      consensus
+    );
+
+    if (confirmedEstimate !== null) {
+      try {
+        play('whoosh');
+        if (room.currentTopicId) {
+          await setFinalEstimate({
+            topicId: room.currentTopicId,
+            identityId: identityId!,
+            estimate: confirmedEstimate,
+          });
+        }
+        await nextTopic({
+          roomId: room._id,
+          identityId: identityId!,
+        });
+      } catch (error) {
+        console.error('Failed to advance topic:', error);
+      }
+    }
+  };
+
   if (room === undefined) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
@@ -161,6 +209,7 @@ export function RoomPage({ slug }: RoomPageProps) {
 
   const isFacilitator = room.facilitatorId === identityId;
   const myVote = votes?.find((v) => v.identityId === identityId)?.value;
+  const activeTopic = topics?.find((t) => t._id === room.currentTopicId);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -179,51 +228,46 @@ export function RoomPage({ slug }: RoomPageProps) {
             </p>
           </div>
 
-          <div className="flex items-center gap-4">
-            {isFacilitator && (
-              <div className="flex items-center gap-2 pr-4 border-r border-[var(--border-subtle)]">
-                {room.status === 'voting' ? (
-                  <button
-                    onClick={() => {
-                      play('whoosh');
-                      revealVotes({
-                        roomId: room._id,
-                        identityId: identityId!,
-                      });
-                    }}
-                    className="px-4 py-2 bg-[var(--accent)] text-[var(--bg-primary)] text-sm font-bold rounded-xl hover:brightness-110 transition-all shadow-lg"
-                  >
-                    Reveal Votes
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      play('whoosh');
-                      resetRound({ roomId: room._id, identityId: identityId! });
-                    }}
-                    className="px-4 py-2 bg-[var(--bg-tertiary)] text-[var(--text-primary)] text-sm font-bold rounded-xl border border-[var(--border-subtle)] hover:border-[var(--accent)] transition-all"
-                  >
-                    Reset Round
-                  </button>
-                )}
-              </div>
-            )}
-
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900/30 dark:text-green-400">
-                Live
-              </span>
-              <button
-                onClick={() =>
-                  navigator.clipboard.writeText(window.location.href)
-                }
-                className="text-xs font-semibold text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors"
-              >
-                Copy Invite
-              </button>
-            </div>
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900/30 dark:text-green-400">
+              Live
+            </span>
+            <button
+              onClick={() =>
+                navigator.clipboard.writeText(window.location.href)
+              }
+              className="text-xs font-semibold text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors"
+            >
+              Copy Invite
+            </button>
           </div>
         </header>
+
+        {activeTopic ? (
+          <ActiveTopicHeader
+            roomStatus={room.status}
+            activeTopic={activeTopic}
+            isFacilitator={isFacilitator}
+            onReveal={handleReveal}
+            onConfirmNext={handleConfirmNext}
+          />
+        ) : (
+          isFacilitator && (
+            <div className="mb-12 island-shell p-8 rounded-3xl bg-[var(--bg-secondary)] border border-dashed border-[var(--border-subtle)] text-center rise-in">
+              <h2 className="text-xl font-bold text-[var(--text-secondary)] mb-4">
+                No active topic. Ready to start?
+              </h2>
+              <button
+                onClick={() =>
+                  nextTopic({ roomId: room._id, identityId: identityId! })
+                }
+                className="px-8 py-3 bg-[var(--accent)] text-white font-bold rounded-xl hover:brightness-110 transition-all shadow-lg"
+              >
+                Start Estimation
+              </button>
+            </div>
+          )
+        )}
 
         <div className="grid gap-12 lg:grid-cols-3">
           <section className="lg:col-span-2">
