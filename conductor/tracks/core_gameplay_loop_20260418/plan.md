@@ -18,7 +18,7 @@
 - [x] Task: Implement Masked Voting Schema and Mutations (e8b7f9b)
   - [ ] Write tests for `votes:cast` and masked `votes:listByRoom` query
   - [ ] Implement `votes:cast` and `votes:listByRoom` with server-side masking
-- [ ] Task: Implement Room State Controls (Reveal/Reset)
+- [x] Task: Implement Room State Controls (Reveal/Reset) (8f05ba8)
   - [ ] Write tests for `rooms:reveal` and `rooms:reset` (facilitator-only)
   - [ ] Implement facilitator mutations for round management
 - [ ] Task: Conductor - User Manual Verification 'The Mask Backend' (Protocol in workflow.md)
