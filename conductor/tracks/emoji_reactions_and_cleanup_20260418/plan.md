@@ -10,7 +10,7 @@
   - [x] Write tests for `cleanup.staleRooms`
   - [x] Implement `cleanup.staleRooms` in `convex/crons.ts` to delete rooms and cascading data where `updatedAt` is older than 24h
   - [x] Register `cleanup.staleRooms` cron job to run every hour
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Database & Backend Logic' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Database & Backend Logic' (88f260e)
 
 ## Phase 2: Reaction UI & Real-Time Sync
 
