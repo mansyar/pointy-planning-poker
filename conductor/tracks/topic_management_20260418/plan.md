@@ -1,6 +1,6 @@
 # Implementation Plan: Topic Management & Estimation Workflow
 
-## Phase 1: Database & Backend Logic [checkpoint: ]
+## Phase 1: Database & Backend Logic [checkpoint: 4f63d42]
 
 - [x] Task: Implement Topic Schema and Core Mutations bc2a37d
   - [x] Write unit tests for `topics:add`, `topics:listByRoom`, and `topics:remove`
