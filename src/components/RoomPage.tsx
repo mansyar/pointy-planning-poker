@@ -7,7 +7,9 @@ import { ClaimBanner } from './ClaimBanner';
 import { CardGrid } from './CardGrid';
 import { CardDeck } from './CardDeck';
 import { usePresence } from '../hooks/usePresence';
+import { useSound } from '../hooks/useSound';
 import { useState, useEffect } from 'react';
+
 import type { Id } from '../../convex/_generated/dataModel';
 
 interface RoomPageProps {
@@ -16,6 +18,7 @@ interface RoomPageProps {
 
 export function RoomPage({ slug }: RoomPageProps) {
   const { identityId, nickname } = useIdentity();
+  const { play } = useSound();
   const room = useQuery(api.rooms.getBySlug, { slug });
   const players = useQuery(api.players.listByRoom, {
     roomId: room?._id as Id<'rooms'>,
@@ -70,6 +73,7 @@ export function RoomPage({ slug }: RoomPageProps) {
   const handleVote = async (value: string | number) => {
     if (!room) return;
     try {
+      play('pop');
       await castVote({
         roomId: room._id,
         identityId: identityId!,
@@ -138,18 +142,23 @@ export function RoomPage({ slug }: RoomPageProps) {
               <div className="flex items-center gap-2 pr-4 border-r border-[var(--border-subtle)]">
                 {room.status === 'voting' ? (
                   <button
-                    onClick={() =>
-                      revealVotes({ roomId: room._id, identityId: identityId! })
-                    }
+                    onClick={() => {
+                      play('whoosh');
+                      revealVotes({
+                        roomId: room._id,
+                        identityId: identityId!,
+                      });
+                    }}
                     className="px-4 py-2 bg-[var(--accent)] text-[var(--bg-primary)] text-sm font-bold rounded-xl hover:brightness-110 transition-all shadow-lg"
                   >
                     Reveal Votes
                   </button>
                 ) : (
                   <button
-                    onClick={() =>
-                      resetRound({ roomId: room._id, identityId: identityId! })
-                    }
+                    onClick={() => {
+                      play('whoosh');
+                      resetRound({ roomId: room._id, identityId: identityId! });
+                    }}
                     className="px-4 py-2 bg-[var(--bg-tertiary)] text-[var(--text-primary)] text-sm font-bold rounded-xl border border-[var(--border-subtle)] hover:border-[var(--accent)] transition-all"
                   >
                     Reset Round
