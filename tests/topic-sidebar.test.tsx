@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { TopicSidebar } from '../src/components/TopicSidebar';
 import { describe, it, expect, vi } from 'vitest';
-import { useQuery } from 'convex/react';
+import { useQuery, useMutation } from 'convex/react';
 import type { Id } from '../convex/_generated/dataModel';
 
 vi.mock('convex/react', () => ({
@@ -65,8 +65,7 @@ describe('TopicSidebar', () => {
       />
     );
 
-    // This will fail until we implement it
-    expect(screen.getByRole('button', { name: /add topic/i })).toBeDefined();
+    expect(screen.getByPlaceholderText(/Add a topic/i)).toBeDefined();
   });
 
   it('renders empty states when there are no topics', () => {
@@ -82,5 +81,84 @@ describe('TopicSidebar', () => {
 
     expect(screen.getByText(/No topics in queue/i)).toBeDefined();
     expect(screen.getByText(/Empty history/i)).toBeDefined();
+  });
+
+  it('allows facilitator to add a topic', () => {
+    const addMutation = vi.fn();
+    vi.mocked(useQuery).mockReturnValue([]);
+    vi.mocked(useMutation).mockReturnValue(addMutation);
+
+    render(
+      <TopicSidebar
+        roomId={'room1' as unknown as Id<'rooms'>}
+        facilitatorId="user1"
+        identityId="user1"
+      />
+    );
+
+    const input = screen.getByPlaceholderText(/Add a topic/i);
+    fireEvent.change(input, { target: { value: 'New Topic' } });
+    fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' });
+
+    expect(addMutation).toHaveBeenCalledWith({
+      roomId: 'room1',
+      identityId: 'user1',
+      title: 'New Topic',
+    });
+  });
+
+  it('allows facilitator to remove a topic', () => {
+    const removeMutation = vi.fn();
+    vi.mocked(useQuery).mockReturnValue([
+      {
+        _id: '1' as Id<'topics'>,
+        title: 'Topic to Delete',
+        order: 1,
+        status: 'pending',
+      },
+    ]);
+    vi.mocked(useMutation).mockReturnValue(removeMutation);
+
+    render(
+      <TopicSidebar
+        roomId={'room1' as unknown as Id<'rooms'>}
+        facilitatorId="user1"
+        identityId="user1"
+      />
+    );
+
+    const deleteButton = screen.getByLabelText(/Remove Topic/i);
+    fireEvent.click(deleteButton);
+
+    expect(removeMutation).toHaveBeenCalledWith({
+      topicId: '1',
+      identityId: 'user1',
+    });
+  });
+
+  it('allows facilitator to reorder topics', () => {
+    const reorderMutation = vi.fn();
+    vi.mocked(useQuery).mockReturnValue([
+      { _id: '1' as Id<'topics'>, title: 'T1', order: 1, status: 'pending' },
+      { _id: '2' as Id<'topics'>, title: 'T2', order: 2, status: 'pending' },
+    ]);
+    vi.mocked(useMutation).mockReturnValue(reorderMutation);
+
+    render(
+      <TopicSidebar
+        roomId={'room1' as unknown as Id<'rooms'>}
+        facilitatorId="user1"
+        identityId="user1"
+      />
+    );
+
+    const moveDownButton = screen.getAllByLabelText(/Move Down/i)[0];
+    fireEvent.click(moveDownButton);
+
+    expect(reorderMutation).toHaveBeenCalledWith({
+      topicId: '1',
+      identityId: 'user1',
+      newOrder: 2,
+    });
   });
 });

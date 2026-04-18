@@ -1,7 +1,16 @@
-import { useQuery } from 'convex/react';
+import { useQuery, useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import { ListPlus, History, Clock, CheckCircle2 } from 'lucide-react';
+import {
+  ListPlus,
+  History,
+  Clock,
+  CheckCircle2,
+  Trash2,
+  ChevronUp,
+  ChevronDown,
+} from 'lucide-react';
+import { useState } from 'react';
 
 interface TopicSidebarProps {
   roomId: Id<'rooms'>;
@@ -14,13 +23,53 @@ export function TopicSidebar({
   facilitatorId,
   identityId,
 }: TopicSidebarProps) {
+  const [newTopicTitle, setNewTopicTitle] = useState('');
   const topics = useQuery(api.topics.listByRoom, { roomId });
   const isFacilitator = facilitatorId === identityId;
+
+  const addTopic = useMutation(api.topics.add);
+  const removeTopic = useMutation(api.topics.remove);
+  const reorderTopic = useMutation(api.topics.reorder);
 
   const pendingTopics =
     topics?.filter((t) => t.status === 'pending' || t.status === 'active') ||
     [];
   const completedTopics = topics?.filter((t) => t.status === 'completed') || [];
+
+  const handleAddTopic = async () => {
+    if (!newTopicTitle.trim()) return;
+    try {
+      await addTopic({
+        roomId,
+        identityId,
+        title: newTopicTitle.trim(),
+      });
+      setNewTopicTitle('');
+    } catch (err) {
+      console.error('Failed to add topic:', err);
+    }
+  };
+
+  const handleRemoveTopic = async (topicId: Id<'topics'>) => {
+    try {
+      await removeTopic({ topicId, identityId });
+    } catch (err) {
+      console.error('Failed to remove topic:', err);
+    }
+  };
+
+  const handleReorder = async (
+    topicId: Id<'topics'>,
+    currentOrder: number,
+    direction: 'up' | 'down'
+  ) => {
+    const newOrder = direction === 'up' ? currentOrder - 1 : currentOrder + 1;
+    try {
+      await reorderTopic({ topicId, identityId, newOrder });
+    } catch (err) {
+      console.error('Failed to reorder topic:', err);
+    }
+  };
 
   return (
     <aside className="w-80 flex flex-col h-full border-l border-[var(--border-subtle)] bg-[var(--bg-secondary)] overflow-hidden">
@@ -32,18 +81,33 @@ export function TopicSidebar({
             Topic Queue
           </h2>
         </div>
-        {isFacilitator && (
-          <button
-            className="p-1.5 rounded-sm bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white transition-colors"
-            aria-label="Add Topic"
-          >
-            <ListPlus className="w-4 h-4" />
-          </button>
-        )}
       </div>
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto p-4 space-y-6">
+        {/* Add Topic Input (Facilitator Only) */}
+        {isFacilitator && (
+          <section>
+            <div className="relative">
+              <input
+                type="text"
+                value={newTopicTitle}
+                onChange={(e) => setNewTopicTitle(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleAddTopic()}
+                placeholder="Add a topic..."
+                className="w-full bg-[var(--bg-primary)] border border-[var(--border-subtle)] rounded-md py-2 pl-3 pr-10 text-sm focus:outline-none focus:border-[var(--accent)] transition-colors text-[var(--text-primary)]"
+              />
+              <button
+                onClick={handleAddTopic}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-[var(--text-tertiary)] hover:text-[var(--accent)] transition-colors"
+                aria-label="Submit Topic"
+              >
+                <ListPlus className="w-4 h-4" />
+              </button>
+            </div>
+          </section>
+        )}
+
         {/* Pending Topics */}
         <section>
           <div className="flex items-center gap-2 mb-3">
@@ -60,10 +124,10 @@ export function TopicSidebar({
             ) : (
               pendingTopics
                 .sort((a, b) => a.order - b.order)
-                .map((topic) => (
+                .map((topic, _index) => (
                   <div
                     key={topic._id}
-                    className={`p-3 rounded-md border flex items-center gap-3 transition-all ${
+                    className={`p-3 rounded-md border flex items-center gap-3 group transition-all ${
                       topic.status === 'active'
                         ? 'border-[var(--accent)] bg-[var(--bg-tertiary)] shadow-[var(--shadow-sm)]'
                         : 'border-[var(--border-subtle)] bg-[var(--bg-primary)]'
@@ -87,6 +151,39 @@ export function TopicSidebar({
                     >
                       {topic.title}
                     </span>
+
+                    {isFacilitator && topic.status !== 'active' && (
+                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button
+                          onClick={() =>
+                            handleReorder(topic._id, topic.order, 'up')
+                          }
+                          disabled={topic.order === 1}
+                          className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] disabled:opacity-30"
+                          aria-label="Move Up"
+                        >
+                          <ChevronUp className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleReorder(topic._id, topic.order, 'down')
+                          }
+                          disabled={topic.order === pendingTopics.length}
+                          className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] disabled:opacity-30"
+                          aria-label="Move Down"
+                        >
+                          <ChevronDown className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => handleRemoveTopic(topic._id)}
+                          className="p-1 text-[var(--text-tertiary)] hover:text-[var(--danger)]"
+                          aria-label="Remove Topic"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    )}
+
                     {topic.status === 'active' && (
                       <div className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
                     )}
