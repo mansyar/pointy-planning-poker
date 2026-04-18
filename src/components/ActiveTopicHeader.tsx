@@ -12,6 +12,7 @@ interface ActiveTopicHeaderProps {
   isFacilitator: boolean;
   onReveal: () => void;
   onConfirmNext: () => void;
+  revealDisabled?: boolean;
 }
 
 export function ActiveTopicHeader({
@@ -20,6 +21,7 @@ export function ActiveTopicHeader({
   isFacilitator,
   onReveal,
   onConfirmNext,
+  revealDisabled = false,
 }: ActiveTopicHeaderProps) {
   if (!activeTopic) return null;
 
@@ -44,7 +46,13 @@ export function ActiveTopicHeader({
           {roomStatus === 'voting' ? (
             <button
               onClick={onReveal}
-              className="group flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white text-sm font-bold rounded-xl hover:brightness-110 transition-all shadow-lg active:scale-95"
+              disabled={revealDisabled}
+              className="group flex items-center gap-2 px-6 py-3 bg-[var(--accent)] text-white text-sm font-bold rounded-xl hover:brightness-110 transition-all shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:grayscale"
+              title={
+                revealDisabled
+                  ? 'Waiting for all players to vote'
+                  : 'Reveal votes'
+              }
             >
               <Play className="w-4 h-4 fill-current transition-transform group-hover:translate-x-0.5" />
               Reveal Votes

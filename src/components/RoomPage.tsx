@@ -215,6 +215,15 @@ export function RoomPage({ slug }: RoomPageProps) {
   const myVote = votes?.find((v) => v.identityId === identityId)?.value;
   const activeTopic = topics?.find((t) => t._id === room.currentTopicId);
 
+  // Logic to disable reveal if not everyone has voted
+  const onlinePlayers = players?.filter((p) => p.isOnline) || [];
+  // For the current topic, how many people have cast a non-null vote?
+  const currentTopicVotes =
+    votes?.filter(
+      (v) => v.topicId === room.currentTopicId && v.value !== null
+    ) || [];
+  const revealDisabled = currentTopicVotes.length < onlinePlayers.length;
+
   return (
     <div className="min-h-screen flex flex-col">
       <div className="flex-1 page-wrap px-4 py-8">
@@ -254,6 +263,7 @@ export function RoomPage({ slug }: RoomPageProps) {
             isFacilitator={isFacilitator}
             onReveal={handleReveal}
             onConfirmNext={handleConfirmNext}
+            revealDisabled={revealDisabled}
           />
         ) : (
           isFacilitator && (

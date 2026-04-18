@@ -43,6 +43,29 @@ describe('ActiveTopicHeader', () => {
     expect(screen.getByRole('button', { name: /Reveal Votes/i })).toBeDefined();
   });
 
+  it('can disable Reveal button via prop', () => {
+    render(
+      <ActiveTopicHeader
+        roomStatus="voting"
+        activeTopic={{
+          _id: '1' as Id<'topics'>,
+          title: 'T1',
+          order: 1,
+          status: 'active',
+        }}
+        isFacilitator={true}
+        onReveal={vi.fn()}
+        onConfirmNext={vi.fn()}
+        revealDisabled={true}
+      />
+    );
+
+    const btn = screen.getByRole('button', {
+      name: /Reveal Votes/i,
+    }) as HTMLButtonElement;
+    expect(btn.disabled).toBe(true);
+  });
+
   it('shows Confirm & Next button for facilitator when revealed', () => {
     render(
       <ActiveTopicHeader
