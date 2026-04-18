@@ -18,9 +18,9 @@
 
 ## Phase 2: Topic Management UI (Facilitator) [checkpoint: ]
 
-- [ ] Task: Build Topic Sidebar Shell and List
-  - [ ] Write tests for `TopicSidebar` component (read-only vs facilitator views)
-  - [ ] Implement `TopicSidebar` displaying pending topics and history
+- [x] Task: Build Topic Sidebar Shell and List 568d7f6
+  - [x] Write tests for `TopicSidebar` component (read-only vs facilitator views)
+  - [x] Implement `TopicSidebar` displaying pending topics and history
 - [ ] Task: Implement Add & Manage Topic UI
   - [ ] Write tests for inline add input and topic action buttons (Edit/Delete/Reorder)
   - [ ] Implement inline addition and item management controls in sidebar
