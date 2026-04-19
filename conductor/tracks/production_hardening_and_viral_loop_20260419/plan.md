@@ -8,9 +8,9 @@
 - [x] Task: Build `InviteModal.tsx` and Integrate QR Code 00e8d3d
   - [x] Write tests for `InviteModal` rendering, QR code generation, and clipboard interaction
   - [x] Implement `InviteModal.tsx` featuring a QR code (via `qrcode.react`), a "Copy Link" button, and Web Share API integration
-- [ ] Task: Refactor `RoomPage.tsx` to use `InviteModal`
-  - [ ] Write tests for the "Copy Invite" button correctly triggering the modal
-  - [ ] Replace the simple `navigator.clipboard` logic with a state-controlled modal trigger
+- [x] Task: Refactor `RoomPage.tsx` to use InviteModal 3608f18
+  - [x] Write tests for the "Copy Invite" button correctly triggering the modal
+  - [x] Replace the simple `navigator.clipboard` logic with a state-controlled modal trigger
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Human-Readable Slugs & Social Sharing' (Protocol in workflow.md)
 
 ## Phase 2: Unified Feedback & Resilience [checkpoint: ]
