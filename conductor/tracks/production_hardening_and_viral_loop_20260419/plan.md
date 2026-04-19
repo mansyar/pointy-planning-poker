@@ -18,9 +18,9 @@
 - [x] Task: Integrate `sonner` for Global Toasts aef1986
   - [x] Write tests for toast triggers on success/error events
   - [x] Setup `Toaster` in `__root.tsx` and replace existing alerts with `toast()` for copy-success and errors
-- [ ] Task: Implement Scoped Error Boundaries
-  - [ ] Write tests for component-level crash recovery (fallback UI)
-  - [ ] Implement `SectionErrorBoundary` wrapper and apply to Sidebar and Table components
+- [x] Task: Implement Scoped Error Boundaries 6fd2dfb
+  - [x] Write tests for component-level crash recovery (fallback UI)
+  - [x] Implement `SectionErrorBoundary` wrapper and apply to Sidebar and Table components
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Unified Feedback & Resilience' (Protocol in workflow.md)
 
 ## Phase 3: Performance Audit & Asset Optimization [checkpoint: ]
