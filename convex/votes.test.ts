@@ -18,7 +18,7 @@ test('votes:cast and masked votes:listByRoom', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId: 'user1',
   });
@@ -77,7 +77,7 @@ test('votes:cast with topicId', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId: 'user1',
   });

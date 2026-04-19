@@ -6,10 +6,6 @@ import { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Zap, Target, Lock, type LucideIcon } from 'lucide-react';
 
-function generateSlug() {
-  return Math.random().toString(36).substring(2, 10);
-}
-
 function FeatureCard({
   icon: Icon,
   title,
@@ -101,9 +97,8 @@ export function LandingPage() {
   const handleCreateRoom = async () => {
     if (!nickname.trim()) return;
 
-    const slug = generateSlug();
     try {
-      await createRoom({ slug, facilitatorId: identityId! });
+      const { slug } = await createRoom({ facilitatorId: identityId! });
       navigate({ to: '/room/$slug', params: { slug } });
     } catch (error) {
       console.error('Failed to create room:', error);

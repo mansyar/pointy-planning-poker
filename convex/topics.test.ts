@@ -15,7 +15,7 @@ test('topics:add and topics:listByRoom', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test-room',
     facilitatorId: 'user1',
   });
@@ -55,7 +55,7 @@ test('topics:add is facilitator-only', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test-room',
     facilitatorId: 'user1',
   });
@@ -78,7 +78,7 @@ test('topics:remove', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test-room',
     facilitatorId: 'user1',
   });
@@ -118,7 +118,7 @@ test('topics:remove and reorder', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test-room',
     facilitatorId: 'user1',
   });
@@ -164,7 +164,7 @@ test('topics:addBatch', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test-room',
     facilitatorId: 'user1',
   });
@@ -194,7 +194,7 @@ test('topics:reorder', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test-room',
     facilitatorId: 'user1',
   });
@@ -245,7 +245,7 @@ test('topics:reorder edge cases', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test-room',
     facilitatorId: 'user1',
   });
@@ -292,7 +292,7 @@ test('topics:setFinalEstimate', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test-room',
     facilitatorId: 'user1',
   });

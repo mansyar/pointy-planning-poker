@@ -17,7 +17,7 @@ test('players:claimFacilitator updates facilitatorId when current is offline', a
 
   const facilitatorId = 'user1';
   const claimantId = 'user2';
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId,
   });
@@ -61,7 +61,7 @@ test('players:claimFacilitator fails if current facilitator is online', async ()
 
   const facilitatorId = 'user1';
   const claimantId = 'user2';
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId,
   });
@@ -92,7 +92,7 @@ test('players:join auto-assigns facilitator if current is offline', async () => 
 
   const facilitatorId = 'user1';
   const newcomerId = 'user2';
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId,
   });

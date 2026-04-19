@@ -15,7 +15,7 @@ test('reactions:send and listRecent', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId: 'user1',
   });
@@ -42,7 +42,7 @@ test('reactions:listRecent filters old reactions', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId: 'user1',
   });

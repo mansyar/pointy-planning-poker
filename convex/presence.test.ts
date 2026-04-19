@@ -15,7 +15,7 @@ test('players:heartbeat updates lastHeartbeat', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId: 'user1',
   });
@@ -45,7 +45,7 @@ test('players:markOffline marks inactive players as offline', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId: 'user1',
   });
@@ -74,7 +74,7 @@ test('players:leave marks player as offline', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId: 'user1',
   });
@@ -105,7 +105,7 @@ test('players:listByRoom returns all players in a room', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId: 'user1',
   });
@@ -132,7 +132,7 @@ test('players:join updates existing player', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId: 'user1',
   });

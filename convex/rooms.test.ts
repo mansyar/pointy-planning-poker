@@ -20,7 +20,10 @@ test('rooms.create and players.join', async () => {
   // 1. Create a room
   const slug = 'test-room';
   const facilitatorId = 'facilitator-1';
-  const roomId = await t.mutation(api.rooms.create, { slug, facilitatorId });
+  const { roomId } = await t.mutation(api.rooms.create, {
+    slug,
+    facilitatorId,
+  });
 
   const room = await t.run(async (ctx) => {
     return await ctx.db.get(roomId);
@@ -57,7 +60,7 @@ test('rooms:reveal is facilitator-only', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId: 'user1',
   });
@@ -81,7 +84,7 @@ test('rooms:reset clears votes and is facilitator-only', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test',
     facilitatorId: 'user1',
   });
@@ -116,7 +119,7 @@ test('rooms:nextTopic flow', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test-room',
     facilitatorId: 'user1',
   });

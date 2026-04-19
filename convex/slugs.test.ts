@@ -15,7 +15,7 @@ test('rooms:create generates human-readable slugs (adjective-noun-number)', asyn
 
   const facilitatorId = 'facilitator-1';
   // Note: We'll change rooms.create to make slug optional and auto-generate it if missing
-  const roomId = await t.mutation(api.rooms.create, { facilitatorId });
+  const { roomId } = await t.mutation(api.rooms.create, { facilitatorId });
 
   const room = await t.run(async (ctx) => {
     return await ctx.db.get(roomId);
@@ -37,7 +37,7 @@ test('rooms:create generates unique slugs', async () => {
 
   const slugs = new Set();
   for (let i = 0; i < 10; i++) {
-    const roomId = await t.mutation(api.rooms.create, {
+    const { roomId } = await t.mutation(api.rooms.create, {
       facilitatorId: 'user',
     });
     const room = await t.run(async (ctx) => await ctx.db.get(roomId));
@@ -54,7 +54,7 @@ test('rooms:create accepts custom slug', async () => {
   });
 
   const customSlug = 'custom-slug';
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     facilitatorId: 'user',
     slug: customSlug,
   });

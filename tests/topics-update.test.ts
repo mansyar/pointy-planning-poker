@@ -15,7 +15,7 @@ test('topics:update', async () => {
     '_generated/server': async () => serverModule,
   });
 
-  const roomId = await t.mutation(api.rooms.create, {
+  const { roomId } = await t.mutation(api.rooms.create, {
     slug: 'test-room',
     facilitatorId: 'user1',
   });

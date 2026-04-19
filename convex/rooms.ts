@@ -47,7 +47,7 @@ export const create = mutation({
       status: 'voting',
       updatedAt: Date.now(),
     });
-    return roomId;
+    return { roomId, slug };
   },
 });
 
