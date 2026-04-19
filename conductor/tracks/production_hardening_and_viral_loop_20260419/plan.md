@@ -5,9 +5,9 @@
 - [x] Task: Implement Human-Readable Slug Generator in Convex bc95ffb
   - [x] Write tests for slug uniqueness and format (adjective-noun-number)
   - [x] Implement slug generation logic using `unique-names-generator` in `convex/rooms.ts`
-- [ ] Task: Build `InviteModal.tsx` and Integrate QR Code
-  - [ ] Write tests for `InviteModal` rendering, QR code generation, and clipboard interaction
-  - [ ] Implement `InviteModal.tsx` featuring a QR code (via `qrcode.react`), a "Copy Link" button, and Web Share API integration
+- [x] Task: Build `InviteModal.tsx` and Integrate QR Code 00e8d3d
+  - [x] Write tests for `InviteModal` rendering, QR code generation, and clipboard interaction
+  - [x] Implement `InviteModal.tsx` featuring a QR code (via `qrcode.react`), a "Copy Link" button, and Web Share API integration
 - [ ] Task: Refactor `RoomPage.tsx` to use `InviteModal`
   - [ ] Write tests for the "Copy Invite" button correctly triggering the modal
   - [ ] Replace the simple `navigator.clipboard` logic with a state-controlled modal trigger
