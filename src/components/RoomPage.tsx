@@ -7,6 +7,7 @@ import { TopicSidebar } from './TopicSidebar';
 import { BatchAddModal } from './BatchAddModal';
 import { ConfirmEstimateModal } from './ConfirmEstimateModal';
 import InviteModal from './InviteModal';
+import SectionErrorBoundary from './SectionErrorBoundary';
 import { ActiveTopicHeader } from './ActiveTopicHeader';
 import { ClaimBanner } from './ClaimBanner';
 import { CardGrid } from './CardGrid';
@@ -336,37 +337,45 @@ export function RoomPage({ slug }: RoomPageProps) {
           <section className="lg:col-span-2">
             {room.status === 'revealed' && votes && players && (
               <div className="mb-12">
-                <StatsPanel players={players} votes={votes} />
+                <SectionErrorBoundary name="Statistics">
+                  <StatsPanel players={players} votes={votes} />
+                </SectionErrorBoundary>
               </div>
             )}
 
-            {players && votes ? (
-              <CardGrid
-                players={players}
-                votes={votes}
-                revealed={room.status === 'revealed'}
-              />
-            ) : (
-              <div className="h-64 flex items-center justify-center italic text-[var(--text-tertiary)]">
-                Loading voting area...
-              </div>
-            )}
+            <SectionErrorBoundary name="Voting Grid">
+              {players && votes ? (
+                <CardGrid
+                  players={players}
+                  votes={votes}
+                  revealed={room.status === 'revealed'}
+                />
+              ) : (
+                <div className="h-64 flex items-center justify-center italic text-[var(--text-tertiary)]">
+                  Loading voting area...
+                </div>
+              )}
+            </SectionErrorBoundary>
           </section>
 
           <aside className="space-y-8 flex flex-col min-h-[500px]">
             <div className="island-shell rounded-2xl flex-1 flex flex-col overflow-hidden">
-              <TopicSidebar
-                roomId={room._id}
-                facilitatorId={room.facilitatorId}
-                identityId={identityId!}
-                onOpenBatchAdd={() => setIsBatchAddOpen(true)}
-              />
+              <SectionErrorBoundary name="Topic Sidebar">
+                <TopicSidebar
+                  roomId={room._id}
+                  facilitatorId={room.facilitatorId}
+                  identityId={identityId!}
+                  onOpenBatchAdd={() => setIsBatchAddOpen(true)}
+                />
+              </SectionErrorBoundary>
             </div>
             <div className="island-shell p-6 rounded-2xl shrink-0">
-              <PresenceSidebar
-                roomId={room._id}
-                facilitatorId={room.facilitatorId}
-              />
+              <SectionErrorBoundary name="Presence Sidebar">
+                <PresenceSidebar
+                  roomId={room._id}
+                  facilitatorId={room.facilitatorId}
+                />
+              </SectionErrorBoundary>
             </div>
           </aside>
         </div>
