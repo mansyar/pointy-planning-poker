@@ -1,7 +1,11 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
-// I'll create this file next
 import { useIdentity } from '../src/hooks/useIdentity';
+
+// Mock convex
+vi.mock('convex/react', () => ({
+  useMutation: vi.fn().mockReturnValue(vi.fn()),
+}));
 
 describe('useIdentity hook', () => {
   beforeEach(() => {
@@ -13,7 +17,9 @@ describe('useIdentity hook', () => {
     const { result } = renderHook(() => useIdentity());
     expect(result.current.identityId).toBeDefined();
     expect(typeof result.current.identityId).toBe('string');
-    expect(localStorage.getItem('pointy_identityId')).toBe(result.current.identityId);
+    expect(localStorage.getItem('pointy_identityId')).toBe(
+      result.current.identityId
+    );
   });
 
   it('should load existing identityId from localStorage', () => {

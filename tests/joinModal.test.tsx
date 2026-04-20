@@ -1,6 +1,22 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import JoinModal from '../src/components/JoinModal';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import React from 'react';
+
+// Mock useIdentity
+vi.mock('../src/hooks/useIdentity', () => ({
+  useIdentity: () => ({
+    identityId: 'test-identity-id',
+    nickname: '',
+    setNickname: (name: string) =>
+      localStorage.setItem('pointy_nickname', name),
+  }),
+}));
+
+// Mock convex
+vi.mock('convex/react', () => ({
+  useMutation: vi.fn().mockReturnValue(vi.fn()),
+}));
 
 describe('JoinModal component', () => {
   const mockOnJoin = vi.fn();

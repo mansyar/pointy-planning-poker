@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useMutation } from 'convex/react';
+import { api } from '../../convex/_generated/api';
 
 const STORAGE_KEYS = {
   IDENTITY_ID: 'pointy_identityId',
@@ -21,21 +23,46 @@ export function useIdentity() {
   // Initialize with empty/null for SSR stability
   const [identityId, setIdentityId] = useState<string | null>(null);
   const [nickname, setNicknameState] = useState<string>('');
+  const verifySyncToken = useMutation(api.sync.verify);
 
   useEffect(() => {
     // Client-side initialization
     if (typeof window !== 'undefined') {
-      let id = localStorage.getItem(STORAGE_KEYS.IDENTITY_ID);
-      if (!id) {
-        id = simpleUUID();
-        localStorage.setItem(STORAGE_KEYS.IDENTITY_ID, id);
+      const urlParams = new URLSearchParams(window.location.search);
+      const syncToken = urlParams.get('sync');
+
+      if (syncToken) {
+        verifySyncToken({ token: syncToken })
+          .then((syncedId) => {
+            localStorage.setItem(STORAGE_KEYS.IDENTITY_ID, syncedId);
+            setIdentityId(syncedId);
+            // Clean up the URL
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, '', newUrl);
+          })
+          .catch((err) => {
+            console.error('Failed to sync identity:', err);
+            // Fallback to local identity
+            let id = localStorage.getItem(STORAGE_KEYS.IDENTITY_ID);
+            if (!id) {
+              id = simpleUUID();
+              localStorage.setItem(STORAGE_KEYS.IDENTITY_ID, id);
+            }
+            setIdentityId(id);
+          });
+      } else {
+        let id = localStorage.getItem(STORAGE_KEYS.IDENTITY_ID);
+        if (!id) {
+          id = simpleUUID();
+          localStorage.setItem(STORAGE_KEYS.IDENTITY_ID, id);
+        }
+        setIdentityId(id);
       }
-      setIdentityId(id);
 
       const name = localStorage.getItem(STORAGE_KEYS.NICKNAME) || '';
       setNicknameState(name);
     }
-  }, []);
+  }, [verifySyncToken]);
 
   const setNickname = (newNickname: string) => {
     setNicknameState(newNickname);
