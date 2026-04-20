@@ -11,8 +11,15 @@ import {
   ChevronUp,
   ChevronDown,
   Layers,
+  Download,
+  FileText,
 } from 'lucide-react';
 import { useState } from 'react';
+import {
+  generateMarkdown,
+  generateSummary,
+  generateCSV,
+} from '../utils/exporter';
 
 interface TopicSidebarProps {
   roomId: Id<'rooms'>;
@@ -33,7 +40,11 @@ export function TopicSidebar({
     null
   );
   const [editingTitle, setEditingTitle] = useState('');
+  const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
 
+  const room = useQuery(api.rooms.getBySlug, {
+    slug: window.location.pathname.split('/').pop() || '',
+  });
   const topics = useQuery(api.topics.listByRoom, { roomId });
   const isFacilitator = facilitatorId === identityId;
 
@@ -115,6 +126,41 @@ export function TopicSidebar({
       }
     }
     setEditingTopicId(null);
+  };
+
+  const handleExport = (format: 'markdown' | 'summary' | 'csv') => {
+    if (!completedTopics.length) {
+      toast.error('No completed topics to export');
+      return;
+    }
+
+    const roomName = room?.slug || 'Session';
+    let content = '';
+    let fileName = `${roomName}-export`;
+    let type = 'text/plain';
+
+    if (format === 'markdown') {
+      content = generateMarkdown(roomName, completedTopics);
+      fileName += '.md';
+      type = 'text/markdown';
+    } else if (format === 'summary') {
+      content = generateSummary(roomName, completedTopics);
+      fileName += '.txt';
+    } else if (format === 'csv') {
+      content = generateCSV(completedTopics);
+      fileName += '.csv';
+      type = 'text/csv';
+    }
+
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    link.click();
+    URL.revokeObjectURL(url);
+    setIsExportMenuOpen(false);
+    toast.success(`Exported as ${format.toUpperCase()}`);
   };
 
   return (
@@ -286,11 +332,57 @@ export function TopicSidebar({
 
         {/* History */}
         <section>
-          <div className="flex items-center gap-2 mb-3">
-            <History className="w-4 h-4 text-[var(--text-tertiary)]" />
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-tertiary)]">
-              History
-            </h3>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <History className="w-4 h-4 text-[var(--text-tertiary)]" />
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--text-tertiary)]">
+                History
+              </h3>
+            </div>
+            {isFacilitator && completedTopics.length > 0 && (
+              <div className="relative">
+                <button
+                  onClick={() => setIsExportMenuOpen(!isExportMenuOpen)}
+                  className="p-1 rounded-md text-[var(--text-tertiary)] hover:text-[var(--accent)] hover:bg-[var(--bg-tertiary)] transition-all"
+                  title="Export Session"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                </button>
+
+                {isExportMenuOpen && (
+                  <div className="absolute right-0 bottom-full mb-2 w-48 bg-[var(--bg-secondary)] border border-[var(--border-subtle)] rounded-xl shadow-2xl z-[60] overflow-hidden island-shell animate-in slide-in-from-bottom-2">
+                    <div className="p-2 border-b border-[var(--border-subtle)] bg-[var(--bg-tertiary)]/50">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-tertiary)] px-2">
+                        Export Format
+                      </p>
+                    </div>
+                    <div className="p-1">
+                      <button
+                        onClick={() => handleExport('markdown')}
+                        className="w-full flex items-center gap-3 px-3 py-2 text-xs font-medium text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] rounded-lg transition-colors"
+                      >
+                        <FileText className="w-3.5 h-3.5 text-[var(--accent)]" />
+                        Markdown Table
+                      </button>
+                      <button
+                        onClick={() => handleExport('summary')}
+                        className="w-full flex items-center gap-3 px-3 py-2 text-xs font-medium text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] rounded-lg transition-colors"
+                      >
+                        <ListPlus className="w-3.5 h-3.5 text-[var(--success)]" />
+                        Plain Text Summary
+                      </button>
+                      <button
+                        onClick={() => handleExport('csv')}
+                        className="w-full flex items-center gap-3 px-3 py-2 text-xs font-medium text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] rounded-lg transition-colors"
+                      >
+                        <Download className="w-3.5 h-3.5 text-[var(--warning)]" />
+                        CSV Data
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           <div className="space-y-2">
             {completedTopics.length === 0 ? (
