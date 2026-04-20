@@ -9,7 +9,7 @@
 - [x] Task: Build Sync Mobile Tab in InviteModal.tsx 34165fc
   - [ ] Write tests for `SyncMobileTab` rendering and QR code generation with the sync token
   - [ ] Implement the UI for generating and displaying the "Sync Controller" QR code
-- [ ] Task: Implement Client-Side Identity Mirroring
+- [x] Task: Implement Client-Side Identity Mirroring 8b10516
   - [ ] Write tests for token detection and `identityId` replacement logic in `useIdentity.ts`
   - [ ] Implement logic in the root loader or `useIdentity` hook to detect `?sync=TOKEN` and call `sync:verify`
 - [ ] Task: Build "Mobile Controller Mode" UI
