@@ -12,6 +12,19 @@ vi.mock('sonner', () => ({
   },
 }));
 
+// Mock useIdentity
+vi.mock('../src/hooks/useIdentity', () => ({
+  useIdentity: () => ({
+    identityId: 'test-identity-id',
+    nickname: 'Test User',
+  }),
+}));
+
+// Mock convex
+vi.mock('convex/react', () => ({
+  useMutation: vi.fn().mockReturnValue(vi.fn().mockResolvedValue('test-token')),
+}));
+
 describe('Sonner Integration', () => {
   beforeEach(() => {
     vi.clearAllMocks();

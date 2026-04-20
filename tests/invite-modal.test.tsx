@@ -3,6 +3,19 @@ import InviteModal from '../src/components/InviteModal';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import React from 'react';
 
+// Mock useIdentity
+vi.mock('../src/hooks/useIdentity', () => ({
+  useIdentity: () => ({
+    identityId: 'test-identity-id',
+    nickname: 'Test User',
+  }),
+}));
+
+// Mock convex
+vi.mock('convex/react', () => ({
+  useMutation: vi.fn().mockReturnValue(vi.fn().mockResolvedValue('test-token')),
+}));
+
 describe('InviteModal component', () => {
   const mockOnClose = vi.fn();
   const roomUrl = 'http://localhost:3000/room/test-room';
