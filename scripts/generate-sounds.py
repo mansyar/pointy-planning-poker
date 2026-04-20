@@ -4,7 +4,7 @@ import struct
 import os
 
 def generate_wave(filename, duration, frequency_func, volume=0.5):
-    sample_rate = 44100.0
+    sample_rate = 22050.0
     num_samples = int(duration * sample_rate)
     
     path = os.path.join("public", "sounds", filename)
