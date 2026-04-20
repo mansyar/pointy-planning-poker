@@ -35,6 +35,7 @@ export function useIdentity() {
         verifySyncToken({ token: syncToken })
           .then((syncedId) => {
             localStorage.setItem(STORAGE_KEYS.IDENTITY_ID, syncedId);
+            localStorage.setItem('pointy_isController', 'true');
             setIdentityId(syncedId);
             // Clean up the URL
             const newUrl = window.location.pathname;

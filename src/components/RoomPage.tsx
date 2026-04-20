@@ -2,6 +2,7 @@ import { useQuery, useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { useIdentity } from '../hooks/useIdentity';
 import JoinModal from './JoinModal';
+import MobileController from './MobileController';
 import { PresenceSidebar } from './PresenceSidebar';
 import { TopicSidebar } from './TopicSidebar';
 import { ConfirmEstimateModal } from './ConfirmEstimateModal';
@@ -41,6 +42,23 @@ export function RoomPage({ slug }: RoomPageProps) {
   const { identityId, nickname } = useIdentity();
   const { play, vibrate, patterns } = useSound();
   const { enabled: juiceEnabled } = useJuice();
+  const [isControllerMode, setIsControllerMode] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const isMobile = window.innerWidth < 768;
+      const synced = localStorage.getItem('pointy_isController') === 'true';
+      if (isMobile && synced) {
+        setIsControllerMode(true);
+      }
+    }
+  }, []);
+
+  const handleExitController = () => {
+    localStorage.removeItem('pointy_isController');
+    setIsControllerMode(false);
+  };
+
   const room = useQuery(api.rooms.getBySlug, { slug });
   const players = useQuery(api.players.listByRoom, {
     roomId: room?._id as Id<'rooms'>,
@@ -265,6 +283,10 @@ export function RoomPage({ slug }: RoomPageProps) {
         </a>
       </div>
     );
+  }
+
+  if (isControllerMode) {
+    return <MobileController slug={slug} onExit={handleExitController} />;
   }
 
   // If we don't have a nickname, show the join modal immediately
