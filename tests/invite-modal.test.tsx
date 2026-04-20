@@ -66,7 +66,7 @@ describe('InviteModal component', () => {
     const shareButton = screen.getByRole('button', { name: /share/i });
     fireEvent.click(shareButton);
     expect(navigator.share).toHaveBeenCalledWith({
-      title: 'Pointy Planning Poker',
+      title: 'Tempo - Planning Poker',
       text: 'Join my planning poker room!',
       url: roomUrl,
     });

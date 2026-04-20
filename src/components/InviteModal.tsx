@@ -63,7 +63,7 @@ export function InviteModal({ isOpen, onClose, roomUrl }: InviteModalProps) {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Pointy Planning Poker',
+          title: 'Tempo - Planning Poker',
           text: 'Join my planning poker room!',
           url: roomUrl,
         });
