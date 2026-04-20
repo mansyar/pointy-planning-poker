@@ -12,7 +12,7 @@
 - [x] Task: Implement Client-Side Identity Mirroring 8b10516
   - [ ] Write tests for token detection and `identityId` replacement logic in `useIdentity.ts`
   - [ ] Implement logic in the root loader or `useIdentity` hook to detect `?sync=TOKEN` and call `sync:verify`
-- [ ] Task: Build "Mobile Controller Mode" UI
+- [x] Task: Build "Mobile Controller Mode" UI e438db8
   - [ ] Write tests for detecting mobile devices and synced sessions
   - [ ] Create a compact `MobileController.tsx` component with haptic-first voting and facilitator controls
   - [ ] Update `RoomPage.tsx` to conditionally render the controller mode for synced mobile users
