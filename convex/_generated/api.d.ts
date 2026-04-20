@@ -13,6 +13,7 @@ import type * as crons from "../crons.js";
 import type * as players from "../players.js";
 import type * as reactions from "../reactions.js";
 import type * as rooms from "../rooms.js";
+import type * as sync from "../sync.js";
 import type * as topics from "../topics.js";
 import type * as votes from "../votes.js";
 
@@ -28,6 +29,7 @@ declare const fullApi: ApiFromModules<{
   players: typeof players;
   reactions: typeof reactions;
   rooms: typeof rooms;
+  sync: typeof sync;
   topics: typeof topics;
   votes: typeof votes;
 }>;

@@ -55,4 +55,11 @@ export default defineSchema({
   })
     .index('by_room', ['roomId'])
     .index('by_room_and_time', ['roomId', 'createdAt']),
+
+  sync_tokens: defineTable({
+    token: v.string(),
+    identityId: v.string(),
+    expiresAt: v.number(),
+    isUsed: v.boolean(),
+  }).index('by_token', ['token']),
 });
