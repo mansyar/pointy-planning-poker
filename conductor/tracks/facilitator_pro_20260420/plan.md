@@ -33,7 +33,7 @@
   - [ ] Update `usePresence.ts` to listen for nudge events and trigger a haptic pulse/toast on the player's device
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Round Timer & Facilitator Nudge' (Protocol in workflow.md) 46e8d0d
 
-## Phase 3: Session Exporter & Advanced Settings [checkpoint: none]
+## Phase 3: Session Exporter & Advanced Settings [checkpoint: f2afb23]
 
 - [x] Task: Implement Session Export Utilities 7f13f76
   - [ ] Write unit tests for Markdown Table, Summary List, and CSV format generators
@@ -45,4 +45,4 @@
   - [ ] Write tests for `Auto-Reveal` logic (revealing once all online players have voted)
   - [ ] Update `convex/schema.ts` with `autoReveal` toggle and `scaleType` in the `rooms` table
   - [ ] Update `CardDeck.tsx` and `StatsPanel.tsx` to support the T-Shirt Sizing scale (S, M, L, XL, ?)
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Session Exporter & Advanced Settings' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Session Exporter & Advanced Settings' (Protocol in workflow.md) f2afb23
