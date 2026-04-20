@@ -27,7 +27,7 @@
 - [x] Task: Build UI Timer Component 355b2f6
   - [ ] Write tests for real-time timer countdown and synchronization across clients
   - [ ] Implement `RoundTimer.tsx` and integrate it into the `ActiveTopicHeader.tsx`
-- [ ] Task: Implement "Nudge" Mutation and Haptic Triggers
+- [x] Task: Implement "Nudge" Mutation and Haptic Triggers 9766f87
   - [ ] Write tests for `players:nudge` mutation (ensuring it's facilitator-only)
   - [ ] Implement `players:nudge` mutation to broadcast a targeted nudge event
   - [ ] Update `usePresence.ts` to listen for nudge events and trigger a haptic pulse/toast on the player's device
