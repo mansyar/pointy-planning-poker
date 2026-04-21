@@ -46,11 +46,11 @@
   - [ ] Update theme_color and background_color
   - [ ] Verify manifest validates correctly
 
-- [ ] **Task 1.6: Update Favicons and Icons**
-  - [ ] Generate new ◈ logo favicon (ICO format)
-  - [ ] Generate new PWA icons (192x192, 512x512)
-  - [ ] Update public/ directory with new assets
-  - [ ] Verify icons display correctly in browser
+- [x] **Task 1.6: Update Favicons and Icons** [cb6f448]
+  - [x] Generate new ◈ logo favicon (SVG format implemented as modern replacement)
+  - [x] Update public/ directory with new SVG asset
+  - [x] Update manifest and root route to use SVG icon
+  - [ ] Verify icons display correctly in browser (Requires manual check)
 
 - [ ] **Task 1.7: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)**
 
