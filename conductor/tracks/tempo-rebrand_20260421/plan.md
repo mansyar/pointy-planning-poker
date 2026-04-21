@@ -23,7 +23,7 @@
   - [ ] Update Footer tests to reflect new branding
   - [ ] Run tests to ensure no regressions
 
-- [ ] **Task 1.3: Update Landing Page (Hub)**
+- [x] **Task 1.3: Update Landing Page (Hub)** [1d58d1b]
   - [ ] Transform LandingPage into tool selector hub
   - [ ] Update hero text from "Pointy Poker" to "Tempo"
   - [ ] Update tagline to "Scrum Tools for Modern Teams"
