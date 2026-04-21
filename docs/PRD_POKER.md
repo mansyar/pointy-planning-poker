@@ -2,13 +2,13 @@
 
 > **Product:** Tempo — Scrum Tools for Modern Teams  
 > **Module:** 🃏 Planning Poker  
-> **Status:** Shipped · **Version:** 1.0 · **Last Updated:** 2026-04-18
+> **Status:** Shipped · **Version:** 1.1 · **Last Updated:** 2026-04-21
 
 ---
 
 ## 1. Product Overview
 
-**Pointy** is a high-performance, real-time estimation tool for agile teams. Designed for a "zero-friction" workflow, it requires no accounts or long-term data storage. It leverages **TanStack Start** for sophisticated routing and **Convex** for live-syncing, resulting in a "gaming-grade" UI for professional sprint planning.
+**Planning Poker** is a high-performance, real-time estimation tool for agile teams, and the founding module of the **Tempo** suite. Designed for a "zero-friction" workflow, it requires no accounts or long-term data storage. It leverages **TanStack Start** for sophisticated routing and **Convex** for live-syncing, resulting in a "gaming-grade" UI for professional sprint planning.
 
 ## 2. Target User & Use Case
 
@@ -22,7 +22,7 @@
 | -------------- | --------------------------------------------------------------- | ------------------------------------------------------------------- |
 | **Framework**  | TanStack Start (Beta/Latest)                                    | SSR, type-safe routing, Vinxi/Vite-based bundling                   |
 | **Backend**    | Convex                                                          | Real-time document store, mutations, scheduled functions, cron jobs |
-| **Styling**    | Tailwind CSS v4                                                 | Utility-first, great DX with Vite, composable glassmorphism         |
+| **Styling**    | Vanilla CSS with Design Tokens                                  | Modern, lightweight, no-build-step runtime performance              |
 | **State**      | TanStack Search Params (UI) + `localStorage` (Session Identity) | URL-shareable state + persistence without auth                      |
 | **Animation**  | Framer Motion                                                   | 3D transforms, spring physics, layout animations                    |
 | **PWA**        | Web Manifest + Service Workers                                  | Standalone mobile "controller" experience                           |
@@ -59,7 +59,7 @@ The Facilitator manages a queue of items to be estimated:
   - Heartbeat ping every **10 seconds** via Convex mutation; player marked offline after **30 seconds** without a ping.
   - Live sidebar showing online status and "Voted" / "Waiting" indicators.
 - **The Mask:** Individual vote values are hidden on the server until the Facilitator triggers the `revealed` state. The query returns `null` for unrevealed votes of other players.
-- **Estimation Scale:** Fixed Fibonacci: `0, 1, 2, 3, 5, 8, 13, 21, ?, ☕`
+- **Estimation Scale:** Configurable between Fibonacci (`0, 1, 2, 3, 5, 8, 13, 21, ?, ☕`) and T-Shirt (`XS, S, M, L, XL, ?`).
 - **Emoji Reactions:** Users can send floating emojis (❤️, 👏, 🔥, 😂, 🎉) that stream across the screen in real-time. Reactions auto-expire after **5 seconds**.
 
 ### D. Results & Statistics Panel
@@ -101,7 +101,7 @@ After the Facilitator triggers **Reveal**, the stats panel displays:
 
 ### Sensory Feedback (Unified Toggle)
 
-- A single "Feedback" toggle in settings controlling both:
+- A single "Juice" toggle in settings controlling both:
   - **Haptic:** Short vibration on card selection (PWA / mobile).
   - **Sound Effects:** Card flip, reveal whoosh, confetti pop, emoji ping.
 - Default: **On**. Persisted in `localStorage`.
@@ -182,13 +182,11 @@ reactions:   by_room(roomId)
 
 ## 8. Route Inventory
 
-| Route          | Page        | Description                                               |
-| -------------- | ----------- | --------------------------------------------------------- |
-| `/`            | Landing     | Hero section, "Create Room" CTA, brief feature highlights |
-| `/poker/:slug` | Room (Game) | Main poker table, topic queue, voting interface, stats    |
-| `/room/:slug`  | Redirect    | Legacy route → `/poker/:slug` (backward compat)           |
-
-> Routes with rebrand: `/poker/:slug` serves the poker experience, with `/room/:slug` as a redirect for backward compatibility.
+| Route          | Page        | Description                                            |
+| -------------- | ----------- | ------------------------------------------------------ |
+| `/`            | Landing     | Hub section, "Create Room" CTA, tool selection         |
+| `/poker/:slug` | Room (Game) | Main poker table, topic queue, voting interface, stats |
+| `/room/:slug`  | Redirect    | Legacy route → `/poker/:slug` (backward compat)        |
 
 ## 9. Convex API Contract
 
