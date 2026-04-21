@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { EmojiActionBar } from '../src/components/EmojiActionBar';
+import { EmojiActionBar } from '../src/components/shared/EmojiActionBar';
 import { describe, it, expect, vi } from 'vitest';
 
 describe('EmojiActionBar', () => {

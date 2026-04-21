@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import Footer from '../src/components/Footer';
+import Footer from '../src/components/shared/Footer';
 
 describe('Footer Rebranding', () => {
   it('renders footer with Tempo copyright', () => {

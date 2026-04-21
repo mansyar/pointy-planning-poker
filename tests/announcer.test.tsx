@@ -2,8 +2,8 @@ import { render, screen, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import {
   AriaLiveAnnouncer,
-  announce,
-} from '../src/components/AriaLiveAnnouncer';
+  announce
+} from "../src/components/shared/AriaLiveAnnouncer";
 
 describe('AriaLiveAnnouncer Component', () => {
   beforeEach(() => {

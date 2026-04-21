@@ -33,7 +33,7 @@ vi.mock('../src/components/JuiceToggle', () => ({
 }));
 
 // Mock InviteModal
-vi.mock('../src/components/InviteModal', () => ({
+vi.mock('../src/components/shared/InviteModal', () => ({
   InviteModal: ({
     isOpen,
     onClose,

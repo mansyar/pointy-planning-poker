@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { EmojiBurst } from '../src/components/EmojiBurst';
+import { EmojiBurst } from '../src/components/shared/EmojiBurst';
 import { describe, it, expect, vi } from 'vitest';
 import * as framerMotion from 'framer-motion';
 

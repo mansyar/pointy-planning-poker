@@ -5,12 +5,13 @@ import { useQuery } from 'convex/react';
 import type { Id } from '../convex/_generated/dataModel';
 
 // Mock Convex
+const mockMutation = Object.assign(vi.fn().mockResolvedValue({}), {
+  withOptimisticUpdate: vi.fn().mockReturnThis(),
+});
+
 vi.mock('convex/react', () => ({
   useQuery: vi.fn(),
-  useMutation: vi.fn(() => ({
-    mutate: vi.fn().mockResolvedValue({}),
-    withOptimisticUpdate: vi.fn().mockReturnThis(),
-  })),
+  useMutation: vi.fn(() => mockMutation),
 }));
 
 // Mock useIdentity

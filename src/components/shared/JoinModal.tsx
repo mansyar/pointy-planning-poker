@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useIdentity } from '../hooks/useIdentity';
+import { useIdentity } from '../../hooks/useIdentity';
 
 interface JoinModalProps {
   roomSlug: string;

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { type ReactNode, type ReactElement } from 'react';
-import Header from '../src/components/Header';
+import Header from '../src/components/shared/Header';
 import { JuiceProvider } from '../src/components/JuiceToggle';
 import { useLocation } from '@tanstack/react-router';
 

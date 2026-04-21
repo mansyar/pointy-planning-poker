@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import type { FloatingEmoji } from '../hooks/useEmojiReactions';
+import type { FloatingEmoji } from '../../hooks/useEmojiReactions';
 
 interface EmojiItemProps {
   reaction: FloatingEmoji;

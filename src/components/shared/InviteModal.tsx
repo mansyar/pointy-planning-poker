@@ -3,8 +3,8 @@ import { QRCodeSVG } from 'qrcode.react';
 import { X, Copy, Check, Share, Smartphone, Link } from 'lucide-react';
 import { toast } from 'sonner';
 import { useMutation } from 'convex/react';
-import { api } from '../../convex/_generated/api';
-import { useIdentity } from '../hooks/useIdentity';
+import { api } from '../../../convex/_generated/api';
+import { useIdentity } from '../../hooks/useIdentity';
 
 interface InviteModalProps {
   isOpen: boolean;

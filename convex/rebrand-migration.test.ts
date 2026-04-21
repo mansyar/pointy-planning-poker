@@ -7,7 +7,6 @@ import * as serverModule from './_generated/server';
 
 test('migration: backfillToolType', async () => {
   const t = convexTest(schema, {
-    // @ts-expect-error: convex-test type mismatch
     migrations: async () => migrations,
     '_generated/api': async () => apiModule,
     '_generated/server': async () => serverModule,

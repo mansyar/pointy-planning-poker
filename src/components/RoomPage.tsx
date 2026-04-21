@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { useIdentity } from '../hooks/useIdentity';
-import { JoinModal } from './JoinModal';
+import { JoinModal } from './shared/JoinModal';
 import { MobileController } from './MobileController';
 import { RoomSettingsModal } from './RoomSettingsModal';
 import { PresenceSidebar } from './PresenceSidebar';
@@ -9,12 +9,12 @@ import { TopicSidebar } from './TopicSidebar';
 import { ConfirmEstimateModal } from './ConfirmEstimateModal';
 import SectionErrorBoundary from './SectionErrorBoundary';
 import { ActiveTopicHeader } from './ActiveTopicHeader';
-import { ClaimBanner } from './ClaimBanner';
+import { ClaimBanner } from './shared/ClaimBanner';
 import { CardGrid } from './CardGrid';
 import { CardDeck } from './CardDeck';
-import { EmojiActionBar } from './EmojiActionBar';
-import { EmojiBurst } from './EmojiBurst';
-import { announce } from './AriaLiveAnnouncer';
+import { EmojiActionBar } from './shared/EmojiActionBar';
+import { EmojiBurst } from './shared/EmojiBurst';
+import { announce } from './shared/AriaLiveAnnouncer';
 import { usePresence } from '../hooks/usePresence';
 import { useEmojiReactions } from '../hooks/useEmojiReactions';
 import { useSound } from '../hooks/useSound';
@@ -34,7 +34,7 @@ const StatsPanel = lazy(() =>
   import('./StatsPanel').then((m) => ({ default: m.StatsPanel }))
 );
 const InviteModal = lazy(() =>
-  import('./InviteModal').then((m) => ({ default: m.InviteModal }))
+  import('./shared/InviteModal').then((m) => ({ default: m.InviteModal }))
 );
 
 interface RoomPageProps {

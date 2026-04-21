@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { JoinModal } from '../src/components/JoinModal';
+import { JoinModal } from '../src/components/shared/JoinModal';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock useIdentity

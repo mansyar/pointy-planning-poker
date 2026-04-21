@@ -2,7 +2,7 @@ import { useQuery, useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { useIdentity } from '../hooks/useIdentity';
 import { CardDeck } from './CardDeck';
-import { EmojiActionBar } from './EmojiActionBar';
+import { EmojiActionBar } from './shared/EmojiActionBar';
 import { useSound } from '../hooks/useSound';
 import { RoundTimer } from './RoundTimer';
 import { toast } from 'sonner';
