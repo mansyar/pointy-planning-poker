@@ -129,7 +129,7 @@
   - [ ] Create poker components directory
   - [ ] Verify directory structure created
 
-- [ ] **Task 4.2: Extract Shared Components (Part 1)**
+- [x] **Task 4.2: Extract Shared Components (Part 1)** [8b152eb]
   - [ ] Move components to src/components/shared/ (AriaLiveAnnouncer through JoinModal)
   - [ ] Move AriaLiveAnnouncer.tsx
   - [ ] Move ClaimBanner.tsx
