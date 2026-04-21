@@ -27,10 +27,10 @@
 
 ## Phase 3: Room & Poker UI Revamp
 
-- [ ] Task: Redesign Poker Room Layout & Sidebar
-  - [ ] Write tests for the updated Room sidebar and participant list.
-  - [ ] Implement heavy borders, solid backgrounds, and the new font in the Room UI.
-  - [ ] Remove all glassmorphism and soft gradients from the Room layout.
+- [x] Task: Redesign Poker Room Layout & Sidebar 3948dd2
+  - [x] Write tests for the updated Room sidebar and participant list.
+  - [x] Implement heavy borders, solid backgrounds, and the new font in the Room UI.
+  - [x] Remove all glassmorphism and soft gradients from the Room layout.
 - [ ] Task: Revamp Poker Estimation Cards & Modals
   - [ ] Write tests for the redesigned Poker cards and their 3D transform states.
   - [ ] Update cards to use snappy transforms and rigid transitions.
