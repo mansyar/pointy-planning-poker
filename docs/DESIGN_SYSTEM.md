@@ -1,6 +1,7 @@
 # Design System: Tempo
 
 > **Visual Direction:** "Modern Corporate" — Linear/Vercel-inspired  
+> **Tech Stack:** Tailwind CSS v4 (CSS-first config)
 > **Scope:** All Tempo modules (Planning Poker, Daily Standup, future tools)  
 > **Last Updated:** 2026-04-21
 

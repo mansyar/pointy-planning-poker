@@ -16,7 +16,7 @@
 - **Framework**: [TanStack Start](https://tanstack.com/start) (React + Vite)
 - **Database/Backend**: [Convex](https://convex.dev/) (Real-time sync)
 - **Routing**: [TanStack Router](https://tanstack.com/router)
-- **Styling**: Vanilla CSS with Design Tokens
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) (using CSS-first configuration)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
 

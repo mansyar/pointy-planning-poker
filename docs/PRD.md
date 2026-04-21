@@ -54,15 +54,15 @@ Tempo is organized as a collection of **modules**, each covering a specific scru
 
 ### 5.1 Stack
 
-| Layer          | Technology                                               | Rationale                                              |
-| -------------- | -------------------------------------------------------- | ------------------------------------------------------ |
-| **Framework**  | TanStack Start (Latest)                                  | SSR, type-safe routing, Vite-based bundling            |
-| **Backend**    | Convex                                                   | Real-time document store, mutations, cron jobs         |
-| **Styling**    | Tailwind CSS v4                                          | Utility-first, great DX, composable glassmorphism      |
-| **Animation**  | Framer Motion                                            | 3D transforms, spring physics, layout animations       |
-| **State**      | TanStack Search Params + `localStorage`                  | URL-shareable state + session persistence without auth |
-| **PWA**        | Web Manifest + Service Workers                           | Standalone mobile experience                           |
-| **Deployment** | Private VPS + Coolify (frontend), Convex Cloud (backend) | Self-hosted, Docker-based                              |
+| Layer          | Technology                                               | Rationale                                                           |
+| -------------- | -------------------------------------------------------- | ------------------------------------------------------------------- |
+| **Framework**  | TanStack Start (Latest)                                  | SSR, type-safe routing, Vite-based bundling                         |
+| **Backend**    | Convex                                                   | Real-time document store, mutations, cron jobs                      |
+| **Styling**    | Tailwind CSS v4                                          | Utility-first, great DX, CSS-first config, composable glassmorphism |
+| **Animation**  | Framer Motion                                            | 3D transforms, spring physics, layout animations                    |
+| **State**      | TanStack Search Params + `localStorage`                  | URL-shareable state + session persistence without auth              |
+| **PWA**        | Web Manifest + Service Workers                           | Standalone mobile experience                                        |
+| **Deployment** | Private VPS + Coolify (frontend), Convex Cloud (backend) | Self-hosted, Docker-based                                           |
 
 ### 5.2 Multi-Tool Architecture
 

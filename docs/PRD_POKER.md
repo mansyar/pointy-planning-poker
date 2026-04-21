@@ -22,7 +22,7 @@
 | -------------- | --------------------------------------------------------------- | ------------------------------------------------------------------- |
 | **Framework**  | TanStack Start (Beta/Latest)                                    | SSR, type-safe routing, Vinxi/Vite-based bundling                   |
 | **Backend**    | Convex                                                          | Real-time document store, mutations, scheduled functions, cron jobs |
-| **Styling**    | Vanilla CSS with Design Tokens                                  | Modern, lightweight, no-build-step runtime performance              |
+| **Styling**    | Tailwind CSS v4                                                 | Utility-first, great DX with Vite, CSS-first config                 |
 | **State**      | TanStack Search Params (UI) + `localStorage` (Session Identity) | URL-shareable state + persistence without auth                      |
 | **Animation**  | Framer Motion                                                   | 3D transforms, spring physics, layout animations                    |
 | **PWA**        | Web Manifest + Service Workers                                  | Standalone mobile "controller" experience                           |
