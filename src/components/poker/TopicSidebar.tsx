@@ -194,7 +194,7 @@ export function TopicSidebar({
       </div>
 
       {/* Content */}
-      <div className={`flex-1 overflow-y-auto overflow-x-hidden p-2 space-y-3 text-left bg-grid ${!isPendingExpanded && !isHistoryExpanded ? 'no-scrollbar' : ''}`}>
+      <div className={`flex-1 overflow-y-auto overflow-x-hidden p-2.5 space-y-4 text-left bg-grid ${!isPendingExpanded && !isHistoryExpanded ? 'no-scrollbar' : ''}`}>
         {/* Add Topic Input (Facilitator Only) */}
         {isFacilitator && (
           <section>
@@ -205,7 +205,7 @@ export function TopicSidebar({
                 onChange={(e) => setNewTopicTitle(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleAddTopic()}
                 placeholder="ADD A TOPIC..."
-                className="w-full bg-white brutal-border py-1.5 pl-3 pr-10 text-xs font-black uppercase focus:outline-none focus:bg-retro-yellow transition-colors brutal-shadow"
+                className="w-full bg-white brutal-border py-2 pl-3 pr-10 text-xs font-black uppercase focus:outline-none focus:bg-retro-yellow transition-colors brutal-shadow"
               />
               <button
                 onClick={handleAddTopic}
@@ -220,13 +220,13 @@ export function TopicSidebar({
 
         {/* Pending Topics */}
         <section>
-          <div className="flex items-center gap-2 mb-1.5 bg-black text-white px-2 py-0.5 brutal-border w-fit">
+          <div className="flex items-center gap-2 mb-2 bg-black text-white px-2 py-1 brutal-border">
             <Clock className="w-3.5 h-3.5" />
-            <h3 className="text-[8px] font-black uppercase tracking-widest">
+            <h3 className="text-xs font-black uppercase tracking-widest">
               Pending
             </h3>
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             {pendingTopics.length === 0 ? (
               <p className="text-xs font-bold uppercase opacity-60 italic py-1">
                 No topics in queue
@@ -236,10 +236,10 @@ export function TopicSidebar({
                 {visiblePending.map((topic, _index) => (
                   <div
                     key={topic._id}
-                    className={`p-1.5 brutal-border flex items-center gap-2 group transition-all brutal-shadow ${
+                    className={`p-2 brutal-border flex items-center gap-2 group transition-all brutal-shadow ${
                       topic.status === 'active'
                         ? 'bg-retro-green translate-x-0.5 translate-y-0.5 shadow-none'
-                        : 'bg-white hover:bg-gray-50'
+                        : 'bg-white hover:bg-gray-50 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-sm'
                     }`}
                   >
                     <span
@@ -272,7 +272,7 @@ export function TopicSidebar({
                           topic.status === 'active'
                             ? 'text-black'
                             : 'text-gray-800'
-                        } ${isFacilitator ? 'cursor-pointer hover:underline decoration-2' : ''}`}
+                        } ${isFacilitator ? 'cursor-pointer hover:underline' : ''}`}
                       >
                         {topic.title}
                       </span>
@@ -340,10 +340,10 @@ export function TopicSidebar({
 
         {/* History */}
         <section>
-          <div className="flex items-center justify-between mb-1.5 bg-black text-white px-2 py-0.5 brutal-border">
+          <div className="flex items-center justify-between mb-2 bg-black text-white px-2 py-1 brutal-border">
             <div className="flex items-center gap-2">
-              <History className="w-3 h-3" />
-              <h3 className="text-[8px] font-black uppercase tracking-widest">
+              <History className="w-3.5 h-3.5" />
+              <h3 className="text-xs font-black uppercase tracking-widest">
                 History
               </h3>
             </div>
@@ -392,7 +392,7 @@ export function TopicSidebar({
               </div>
             )}
           </div>
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             {completedTopics.length === 0 ? (
               <p className="text-xs font-bold uppercase opacity-60 italic py-1">
                 Empty history
@@ -402,9 +402,9 @@ export function TopicSidebar({
                 {visibleHistory.map((topic) => (
                   <div
                     key={topic._id}
-                    className="p-1.5 brutal-border bg-white flex items-center gap-2 transition-all brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-sm"
+                    className="p-2 brutal-border bg-white flex items-center gap-2 transition-all brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-sm"
                   >
-                    <CheckCircle2 className="w-3 h-3 text-black shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-black shrink-0" />
                     <span className="text-xs font-black uppercase text-black flex-1 break-words py-0.5">
                       {topic.title}
                     </span>
