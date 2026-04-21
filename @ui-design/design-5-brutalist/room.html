@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tempo - Poker Room (Brutalist)</title>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap');
+    body { font-family: 'Space Grotesk', sans-serif; background-color: #fff; color: #000; overflow: hidden; }
+    .brutal-border { border: 4px solid #000; }
+    .brutal-shadow { box-shadow: 6px 6px 0px 0px #000; transition: transform 0.1s, box-shadow 0.1s; }
+    .brutal-shadow:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0px 0px #000; }
+    .marquee { white-space: nowrap; overflow: hidden; box-sizing: border-box; }
+    .marquee span { display: inline-block; padding-left: 100%; animation: marquee 15s linear infinite; }
+    @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+  </style>
+</head>
+<body class="h-screen flex flex-col uppercase font-bold">
+  
+  <!-- Ticker Tape Header -->
+  <div class="bg-black text-white py-1 brutal-border border-l-0 border-r-0 border-t-0 flex items-center text-sm tracking-wider marquee">
+    <span>ROOM: CLUMSY-TIGER // 5 ONLINE // ESTIMATION IN PROGRESS // NO LURKERS ALLOWED</span>
+  </div>
+
+  <div class="flex-1 flex w-full relative">
+    
+    <!-- Left Sidebar -->
+    <aside class="w-80 bg-blue-200 brutal-border border-t-0 border-l-0 border-b-0 flex flex-col shrink-0 z-10">
+      <div class="bg-white p-4 border-b-4 border-black text-center text-xl bg-yellow-300">
+        TOPIC QUEUE
+      </div>
+      <div class="p-4 space-y-4 flex-1">
+        <!-- Active -->
+        <div class="bg-green-400 brutal-border p-3 brutal-shadow translate-x-1 translate-y-1 relative">
+          <div class="absolute -top-2 -left-2 bg-black text-white text-[10px] px-1 py-0.5">NOW</div>
+          <div class="text-xl leading-tight">ADD PASSWORD RESET FLOW</div>
+        </div>
+        <!-- Pending -->
+        <div class="bg-white brutal-border p-3 cursor-pointer hover:bg-gray-100">
+          <div class="text-lg opacity-70">FIX MOBILE NAV BUG</div>
+        </div>
+        <div class="bg-white brutal-border p-3 cursor-pointer hover:bg-gray-100">
+          <div class="text-lg opacity-70">IMPLEMENT SEARCH API</div>
+        </div>
+      </div>
+      <button class="bg-white m-4 py-3 brutal-border brutal-shadow text-center cursor-pointer hover:bg-pink-300">
+        + ADD SHIT TO DO
+      </button>
+    </aside>
+
+    <!-- Main Table -->
+    <main class="flex-1 flex flex-col bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CiAgPGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9IiMwMDAiIG9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')]">
+      
+      <!-- Big Topic Header -->
+      <div class="w-full bg-white brutal-border border-t-0 border-l-0 border-r-0 p-8 text-center bg-pink-300">
+        <h2 class="text-4xl md:text-5xl border-b-4 border-black inline-block pb-2 mb-2">ADD PASSWORD RESET FLOW</h2>
+        <div class="text-xl">VOTE OR GET OUT</div>
+      </div>
+
+      <!-- Action Area / Table -->
+      <div class="flex-1 flex flex-col items-center justify-center p-8 relative">
+        <button class="bg-red-500 text-white text-3xl py-4 px-8 brutal-border brutal-shadow hover:bg-red-600 z-20">
+          WHAM! REVEAL VOTES!
+        </button>
+
+        <!-- Player representations scattered -->
+        <div class="absolute top-1/4 left-1/4 bg-white brutal-border py-2 px-4 shadow-[4px_4px_0_0_#34d399] -rotate-6">
+          ALICE <span class="text-green-500">✓ Voted</span>
+        </div>
+        <div class="absolute top-1/3 right-1/4 bg-white brutal-border py-2 px-4 shadow-[4px_4px_0_0_#000] rotate-3 text-gray-400">
+          EVE <span class="animate-pulse">Thinking...</span>
+        </div>
+        <div class="absolute bottom-1/3 left-1/3 bg-white brutal-border py-2 px-4 shadow-[4px_4px_0_0_#34d399] rotate-12">
+          BOB <span class="text-green-500">✓ Voted</span>
+        </div>
+      </div>
+
+      <!-- Voting Cards -->
+      <div class="bg-white border-t-4 border-black p-6 flex justify-center gap-4 shrink-0 bg-yellow-200">
+        <div class="w-16 h-24 bg-white brutal-border flex items-center justify-center text-3xl brutal-shadow cursor-pointer hover:bg-gray-100">1</div>
+        <div class="w-16 h-24 bg-white brutal-border flex items-center justify-center text-3xl brutal-shadow cursor-pointer hover:bg-gray-100">3</div>
+        <!-- Selected -->
+        <div class="w-16 h-24 bg-blue-500 text-white brutal-border flex items-center justify-center text-4xl shadow-[2px_2px_0_0_#000] translate-x-[4px] translate-y-[4px] cursor-pointer">5</div>
+        <div class="w-16 h-24 bg-white brutal-border flex items-center justify-center text-3xl brutal-shadow cursor-pointer hover:bg-gray-100">8</div>
+        <div class="w-16 h-24 bg-white brutal-border flex items-center justify-center text-3xl brutal-shadow cursor-pointer hover:bg-gray-100">13</div>
+      </div>
+    </main>
+
+  </div>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
