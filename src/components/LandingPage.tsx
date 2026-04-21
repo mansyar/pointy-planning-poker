@@ -98,8 +98,11 @@ export function LandingPage() {
     if (!nickname.trim()) return;
 
     try {
-      const { slug } = await createRoom({ facilitatorId: identityId! });
-      navigate({ to: '/room/$slug', params: { slug } });
+      const { slug } = await createRoom({
+        facilitatorId: identityId!,
+        toolType: 'poker',
+      });
+      navigate({ to: '/poker/$slug', params: { slug } });
     } catch (error) {
       console.error('Failed to create poker room:', error);
     }
@@ -116,7 +119,7 @@ export function LandingPage() {
       slug = parts[parts.length - 1].split('/')[0];
     }
 
-    navigate({ to: '/room/$slug', params: { slug } });
+    navigate({ to: '/poker/$slug', params: { slug } });
   };
 
   return (

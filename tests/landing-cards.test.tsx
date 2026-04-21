@@ -40,7 +40,7 @@ describe('LandingPage Feature Cards', () => {
     fireEvent.click(joinButton);
 
     expect(navigate).toHaveBeenCalledWith({
-      to: '/room/$slug',
+      to: '/poker/$slug',
       params: { slug: 'test-slug' },
     });
   });
@@ -60,7 +60,7 @@ describe('LandingPage Feature Cards', () => {
     fireEvent.click(joinButton);
 
     expect(navigate).toHaveBeenCalledWith({
-      to: '/room/$slug',
+      to: '/poker/$slug',
       params: { slug: 'abc-123' },
     });
   });

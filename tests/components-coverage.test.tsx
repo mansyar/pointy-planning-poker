@@ -342,8 +342,7 @@ describe('RootLayout', () => {
 });
 
 import { Route as IndexRoute } from '../src/routes/index';
-import { Route as RoomRoute } from '../src/routes/room.$slug';
-import '../src/router';
+import { Route as PokerRoute } from '../src/routes/poker.$slug';
 
 describe('IndexRoute', () => {
   it('renders index route', () => {
@@ -356,8 +355,8 @@ describe('IndexRoute', () => {
   });
 });
 
-describe('RoomRoute', () => {
-  it('renders room route', async () => {
+describe('PokerRoute', () => {
+  it('renders poker route', async () => {
     mockIdentity.nickname = '';
     vi.mocked(convex.useMutation).mockReturnValue(
       vi.fn().mockResolvedValue({})
@@ -391,7 +390,7 @@ describe('RoomRoute', () => {
         return null;
       }
     );
-    const route = RoomRoute as unknown as {
+    const route = PokerRoute as unknown as {
       options: { component: React.ComponentType };
     };
     const Component = route.options.component;

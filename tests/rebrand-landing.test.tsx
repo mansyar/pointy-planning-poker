@@ -1,8 +1,10 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import React from 'react';
 import { LandingPage } from '../src/components/LandingPage';
 import { JuiceProvider } from '../src/components/JuiceToggle';
+import { useNavigate } from '@tanstack/react-router';
+import { useMutation } from 'convex/react';
 
 // Mock TanStack Router
 vi.mock('@tanstack/react-router', () => ({
@@ -41,9 +43,24 @@ describe('Landing Page Rebranding', () => {
     expect(screen.queryByText('Pointy Poker')).toBeNull();
   });
 
-  it('shows Poker tool with updated CTA', () => {
+  it('shows Poker tool with updated CTA and navigates to /poker/', async () => {
+    const navigate = vi.fn();
+    vi.mocked(useNavigate).mockReturnValue(navigate);
+
+    const createRoom = vi.fn().mockResolvedValue({ slug: 'new-poker-room' });
+    vi.mocked(useMutation).mockReturnValue(createRoom);
+
     renderWithJuice(<LandingPage />);
-    expect(screen.getByText(/Create Poker Room/i)).toBeTruthy();
+
+    const button = screen.getByText(/Create Poker Room/i);
+    fireEvent.click(button);
+
+    await waitFor(() => {
+      expect(navigate).toHaveBeenCalledWith({
+        to: '/poker/$slug',
+        params: { slug: 'new-poker-room' },
+      });
+    });
   });
 
   it('shows Standup tool as Coming Soon', () => {

@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { LandingPage as App } from '../src/components/LandingPage';
 import { describe, it, expect, vi } from 'vitest';
 import { useNavigate } from '@tanstack/react-router';
@@ -18,7 +18,7 @@ describe('Room Flow', () => {
     const navigate = vi.fn();
     vi.mocked(useNavigate).mockReturnValue(navigate);
 
-    const createRoom = vi.fn().mockResolvedValue('test-room-id');
+    const createRoom = vi.fn().mockResolvedValue({ slug: 'test-slug' });
     vi.mocked(useMutation).mockReturnValue(createRoom);
 
     render(<App />);
@@ -33,6 +33,11 @@ describe('Room Flow', () => {
 
     expect(createRoom).toHaveBeenCalled();
     // Redirect should happen after mutation
-    // expect(navigate).toHaveBeenCalledWith({ to: '/room/$slug', params: { slug: expect.any(String) } });
+    await waitFor(() => {
+      expect(navigate).toHaveBeenCalledWith({
+        to: '/poker/$slug',
+        params: { slug: expect.any(String) },
+      });
+    });
   });
 });
