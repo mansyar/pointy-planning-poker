@@ -4,5 +4,5 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Neo-Brutalist UI Revamp**
+- [x] **Track: Neo-Brutalist UI Revamp**
       _Link: [./tracks/neo_brutalist_revamp_20260421/](./tracks/neo_brutalist_revamp_20260421/)_
