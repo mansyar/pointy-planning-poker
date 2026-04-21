@@ -2,11 +2,11 @@
 
 ## Phase 1: Foundations & Global Styling
 
-- [ ] Task: Configure Tailwind CSS v4 Neo-Brutalist Foundations
-  - [ ] Update `src/styles.css` to define the new color palette (Retro Yellow #f7df1e, Blue-300, Green-400).
-  - [ ] Implement global `.brutal-border` (4px solid #000, 8px radius) and `.brutal-shadow` (6px offset) classes.
-  - [ ] Add the `bg-grid` radial-gradient pattern to the global styles.
-  - [ ] Integrate "Space Grotesk" via Google Fonts and set as default typeface.
+- [x] Task: Configure Tailwind CSS v4 Neo-Brutalist Foundations 565f8b0
+  - [x] Update `src/styles.css` to define the new color palette (Retro Yellow #f7df1e, Blue-300, Green-400).
+  - [x] Implement global `.brutal-border` (4px solid #000, 8px radius) and `.brutal-shadow` (6px offset) classes.
+  - [x] Add the `bg-grid` radial-gradient pattern to the global styles.
+  - [x] Integrate "Space Grotesk" via Google Fonts and set as default typeface.
 - [ ] Task: Implement Global Page Layout Foundation
   - [ ] Write tests to verify typography and global style application.
   - [ ] Implement the `translate(4px, 4px)` active state logic for all `.brutal-shadow` elements.
