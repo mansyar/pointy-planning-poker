@@ -205,6 +205,7 @@ export function TopicSidebar({
                 onChange={(e) => setNewTopicTitle(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleAddTopic()}
                 placeholder="ADD A TOPIC..."
+                aria-label="New topic title"
                 className="w-full bg-white brutal-border py-2 pl-3 pr-10 text-xs font-black uppercase focus:outline-none focus:bg-retro-yellow transition-colors brutal-shadow"
               />
               <button
@@ -226,7 +227,7 @@ export function TopicSidebar({
               Pending
             </h3>
           </div>
-          <div className="space-y-2.5">
+          <div id="pending-topics-list" className="space-y-2.5">
             {pendingTopics.length === 0 ? (
               <p className="text-xs font-bold uppercase opacity-60 italic py-1">
                 No topics in queue
@@ -319,6 +320,8 @@ export function TopicSidebar({
                 {hasMorePending && (
                   <button
                     onClick={() => setIsPendingExpanded(!isPendingExpanded)}
+                    aria-expanded={isPendingExpanded}
+                    aria-controls="pending-topics-list"
                     className="w-full py-2 text-[10px] font-black uppercase bg-white brutal-border border-dashed hover:bg-gray-50 transition-all flex items-center justify-center gap-1 mt-2"
                   >
                     {isPendingExpanded ? (
@@ -392,7 +395,7 @@ export function TopicSidebar({
               </div>
             )}
           </div>
-          <div className="space-y-2.5">
+          <div id="history-topics-list" className="space-y-2.5">
             {completedTopics.length === 0 ? (
               <p className="text-xs font-bold uppercase opacity-60 italic py-1">
                 Empty history
@@ -419,6 +422,8 @@ export function TopicSidebar({
                 {hasMoreHistory && (
                   <button
                     onClick={() => setIsHistoryExpanded(!isHistoryExpanded)}
+                    aria-expanded={isHistoryExpanded}
+                    aria-controls="history-topics-list"
                     className="w-full py-2 text-[10px] font-black uppercase bg-white brutal-border border-dashed hover:bg-gray-50 transition-all flex items-center justify-center gap-1 mt-2"
                   >
                     {isHistoryExpanded ? (

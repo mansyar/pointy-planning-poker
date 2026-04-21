@@ -121,6 +121,7 @@ export function RoomPage({ slug }: RoomPageProps) {
   const [isBatchAddOpen, setIsBatchAddOpen] = useState(false);
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [confirmEstimateState, setConfirmEstimateState] = useState<{
     isOpen: boolean;
     suggested: string;
@@ -322,7 +323,19 @@ export function RoomPage({ slug }: RoomPageProps) {
       </div>
 
       <div className="flex-1 flex w-full min-h-0 relative overflow-hidden">
-        <aside className="w-80 bg-white brutal-border border-t-0 border-l-0 border-b-0 flex flex-col shrink-0 z-10 overflow-hidden">
+        {/* Backdrop for mobile sidebar */}
+        {isSidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black/60 z-20 md:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
+
+        <aside
+          className={`fixed inset-y-0 left-0 w-80 bg-white brutal-border border-t-0 border-l-0 border-b-0 flex flex-col shrink-0 z-30 transition-transform duration-200 ease-in-out md:relative md:translate-x-0 ${
+            isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+          }`}
+        >
           <SectionErrorBoundary name="Topic Sidebar">
             <TopicSidebar
               roomId={room._id}

@@ -35,8 +35,8 @@ export function PokerCard({
       {...props}
       whileTap={!disabled ? { scale: 0.98, translate: '2px 2px' } : {}}
       className={`
-        relative w-14 h-20 sm:w-16 sm:h-24 brutal-border cursor-pointer
-        flex items-center justify-center text-xl sm:text-2xl font-black
+        relative w-12 h-16 sm:w-16 sm:h-24 brutal-border cursor-pointer
+        flex items-center justify-center text-lg sm:text-2xl font-black
         transition-all duration-75 outline-none brutal-shadow
         ${disabled ? 'opacity-40 grayscale cursor-not-allowed' : ''}
         ${

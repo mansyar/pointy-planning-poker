@@ -41,7 +41,7 @@ export function PresenceSidebar({
 
   if (layout === 'horizontal') {
     return (
-      <ul className="flex items-center gap-2">
+      <ul className="flex items-center gap-1 sm:gap-2">
         {players.map((player) => {
           const hasVoted = votes?.some(
             (v) => v.identityId === player.identityId && v.value !== null
@@ -49,18 +49,18 @@ export function PresenceSidebar({
           return (
             <li
               key={player._id}
-              className={`flex items-center gap-2 px-2 py-1 brutal-border transition-all shrink-0 ${player.isOnline ? 'bg-white' : 'bg-gray-100 opacity-40'}`}
+              className={`flex items-center gap-1 sm:gap-2 px-1.5 sm:px-2 py-0.5 sm:py-1 brutal-border transition-all shrink-0 ${player.isOnline ? 'bg-white' : 'bg-gray-100 opacity-40'}`}
               title={player.name}
             >
               <div className="relative">
-                <div className={`w-6 h-6 brutal-border flex items-center justify-center text-[10px] font-black ${hasVoted ? 'bg-retro-green' : 'bg-retro-yellow'}`}>
+                <div className={`w-5 h-5 sm:w-6 sm:h-6 brutal-border flex items-center justify-center text-[9px] sm:text-[10px] font-black ${hasVoted ? 'bg-retro-green' : 'bg-retro-yellow'}`}>
                   {player.name.charAt(0).toUpperCase()}
                 </div>
                 {player.identityId === facilitatorId && (
-                   <div className="absolute -top-1.5 -right-1.5 text-[8px]">👑</div>
+                   <div className="absolute -top-1.5 -right-1.5 text-[7px] sm:text-[8px]">👑</div>
                 )}
               </div>
-              <span className="text-[10px] font-black uppercase max-w-[60px] truncate">
+              <span className="text-[9px] sm:text-[10px] font-black uppercase max-w-[40px] sm:max-w-[60px] truncate">
                 {player.name}
               </span>
               

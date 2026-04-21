@@ -37,40 +37,44 @@ export function ActiveTopicHeader({
   return (
     <header className="w-full bg-retro-pink brutal-border border-t-0 border-l-0 border-r-0 p-3 flex items-center justify-between relative shrink-0 gap-6">
       {/* Title Area */}
-      <div className="flex items-center gap-4 flex-1 min-w-0">
-        <div className="bg-black text-white px-2 py-0.5 brutal-border text-[8px] font-black tracking-widest uppercase shrink-0">
+      <div className="flex items-center gap-3 flex-1 min-w-0">
+        <div className="hidden sm:block bg-black text-white px-2 py-0.5 brutal-border text-[8px] font-black tracking-widest uppercase shrink-0">
           {roomStatus === 'revealed' ? 'DONE' : 'NOW'}
         </div>
-        <h2 className="text-3xl font-black uppercase text-black border-b-4 border-black truncate tracking-tighter leading-none">
+        <h2 className="text-xl sm:text-3xl font-black uppercase text-black border-b-4 border-black truncate tracking-tighter leading-none">
           {activeTopic.title}
         </h2>
       </div>
 
       {/* Actions Area */}
-      <div className="flex items-center gap-4 shrink-0">
-        <RoundTimer
-          roomId={roomId}
-          identityId={identityId}
-          timerStartedAt={timerStartedAt}
-          isFacilitator={isFacilitator}
-        />
+      <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+        <div className="brutal-border bg-white px-2 py-1">
+          <RoundTimer
+            roomId={roomId}
+            identityId={identityId}
+            timerStartedAt={timerStartedAt}
+            isFacilitator={isFacilitator}
+          />
+        </div>
 
         {isFacilitator && (
           <div className="flex items-center gap-2">
             {roomStatus === 'revealed' ? (
               <button
                 onClick={onConfirmNext}
-                className="px-4 py-2 bg-black text-white text-sm font-black uppercase brutal-border brutal-shadow hover:bg-retro-green hover:text-black hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all"
+                className="brutal-btn bg-black text-white px-3 sm:px-4 py-2 text-xs sm:text-sm hover:bg-retro-green hover:text-black"
               >
-                Next Topic
+                <span className="hidden sm:inline">Next Topic</span>
+                <Play className="w-4 h-4 sm:hidden fill-current" />
               </button>
             ) : (
               <button
                 onClick={onReveal}
                 disabled={revealDisabled}
-                className="px-4 py-2 bg-white text-black text-sm font-black uppercase brutal-border brutal-shadow hover:bg-retro-yellow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+                className="brutal-btn bg-white text-black px-3 sm:px-4 py-2 text-xs sm:text-sm hover:bg-retro-yellow disabled:opacity-30 disabled:cursor-not-allowed"
               >
-                Reveal
+                <span className="hidden sm:inline">Reveal</span>
+                <Eye className="w-4 h-4 sm:hidden" />
               </button>
             )}
           </div>
@@ -79,7 +83,7 @@ export function ActiveTopicHeader({
         {onOpenSettings && (
           <button
             onClick={onOpenSettings}
-            className="p-2 brutal-border bg-white text-black hover:bg-retro-yellow transition-all brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+            className="brutal-btn p-2 bg-white text-black hover:bg-retro-yellow"
             title="Settings"
           >
             <Settings className="w-4 h-4" />
