@@ -33,7 +33,7 @@
   - [ ] Update LandingPage tests to reflect new layout
   - [ ] Run tests to ensure no regressions
 
-- [ ] **Task 1.4: Update HTML Meta Tags**
+- [x] **Task 1.4: Update HTML Meta Tags** [e7dd368]
   - [ ] Update title tags to use "Tempo" branding
   - [ ] Update og:title and og:description
   - [ ] Ensure dynamic titles reflect "Tempo" branding
