@@ -66,7 +66,7 @@
   - [ ] Update schema tests
   - [ ] Run tests to ensure no regressions
 
-- [ ] **Task 2.2: Create Data Migration Script**
+- [x] **Task 2.2: Create Data Migration Script** [09843ba]
   - [ ] Create migration to backfill existing rooms
   - [ ] Write mutation to backfill toolType: 'poker' for all rooms
   - [ ] Test migration on development database
