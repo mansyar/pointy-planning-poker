@@ -8,7 +8,7 @@ describe('PWA & Manifest', () => {
     expect(existsSync(manifestPath)).toBe(true);
 
     const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
-    expect(manifest.name).toBe('Tempo - Planning Poker');
+    expect(manifest.name).toBe('Tempo');
     expect(manifest.short_name).toBe('Tempo');
     expect(manifest.display).toBe('standalone');
   });

@@ -1,6 +1,7 @@
 {
   "short_name": "Tempo",
-  "name": "Tempo - Planning Poker",
+  "name": "Tempo",
+  "description": "Scrum Tools for Modern Teams",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#6366f1",
   "background_color": "#ffffff"
 }
