@@ -1,6 +1,6 @@
 # Implementation Plan: Neo-Brutalist UI Revamp
 
-## Phase 1: Foundations & Global Styling
+## Phase 1: Foundations & Global Styling [checkpoint: 78e1ce7]
 
 - [x] Task: Configure Tailwind CSS v4 Neo-Brutalist Foundations 565f8b0
   - [x] Update `src/styles.css` to define the new color palette (Retro Yellow #f7df1e, Blue-300, Green-400).
