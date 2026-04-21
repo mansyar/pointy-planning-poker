@@ -2,21 +2,21 @@
 
 ## 1. Design & UX Principles
 
-- **Vibe:** "Modern Corporate" with Linear/Vercel-inspired aesthetics.
-- **Core Look:** Deep shadows, subtle glassmorphism (`backdrop-blur`), and a clean, utility-first layout.
-- **Sensory Feedback:** Provide "gaming-grade" juice—3D transforms, haptic pulses, and sound effects—controlled via a unified "Juice" toggle.
+- **Vibe:** "Neo-Brutalist" — raw, high-contrast, and uncompromising.
+- **Core Look:** Heavy 4px black borders, hard 6px offset shadows (`brutal-shadow`), and zero glassmorphism. Layouts should utilize full horizontal real-estate (Dashboards).
+- **Sensory Feedback:** Provide "high-juice" tactile feedback—Shadow Shifts (4px translation on active), snappy 0.1s transitions, haptic pulses, and sound effects—controlled via a unified "Juice" toggle.
 - **Celebration:** Reward team consensus with subtle confetti, and use emoji rain for live, ephemeral reactions.
 - **Responsiveness:**
-  - Desktop (≥1024px): Multi-column layouts with dedicated tool areas and sidebars.
-  - Mobile (<1024px): Specialized controller views and compact layouts optimized for thumb-driven interaction.
+  - Desktop (≥1024px): Multi-column dashboard layouts with dedicated tool areas and sidebars.
+  - Mobile (<1024px): Specialized controller views and compact collapsible layouts.
 
 ## 2. Branding & Theming
 
-- **Identity:** Tempo — Scrum Tools for Modern Teams. Logo mark: ◈.
+- **Identity:** Tempo — Scrum Tools for Modern Teams. Logo mark: ◈ (Rotated 45deg).
 - **Color Palette:**
-  - Dark Mode (Default): `#0A0A0B` (primary bg), `#141416` (secondary), with `#818CF8` accents.
-  - Light Mode: `#FAFAFA` (primary bg), `#FFFFFF` (secondary), `#6366F1` accents.
-- **Typography:** **Inter** for UI; **JetBrains Mono** for numbers and code.
+  - Backgrounds: Primary white (`#ffffff`), Secondary black (`#000000`).
+  - Accents: Retro Yellow (`#f7df1e`), Retro Pink (`#FF00E5`), Retro Blue (`#93c5fd`), Retro Green (`#4ade80`).
+- **Typography:** **Space Grotesk** for UI/Headings; **JetBrains Mono** for numbers and code.
 
 ## 3. Prose & Communication Style
 

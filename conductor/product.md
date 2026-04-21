@@ -29,4 +29,4 @@ Tempo is the companion tool teams open during ceremonies — the dedicated "seco
 
 ## User Experience (UX) Vision
 
-A "Modern Corporate" aesthetic featuring deep shadows, subtle glassmorphism, and smooth 3D animations. The experience should feel responsive and app-like, serving as a professional standalone companion for modern product teams.
+A "Neo-Brutalist" aesthetic featuring heavy 4px solid borders, hard 6px offset shadows, and a high-contrast palette (Retro Yellow, Pink, Green, Blue). The experience should feel raw, tactile, and extremely fast, serving as a high-juice standalone companion for modern agile teams.
