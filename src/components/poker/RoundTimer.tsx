@@ -61,33 +61,33 @@ export function RoundTimer({
   const isUrgent = timeLeft !== null && timeLeft <= 10 && timeLeft > 0;
 
   return (
-    <div className="flex items-center gap-4 bg-white px-6 py-3 brutal-border brutal-shadow">
+    <div className="flex items-center gap-3 bg-white px-3 py-1.5 brutal-border brutal-shadow">
       <div
-        className={`flex items-center gap-3 ${isUrgent ? 'animate-pulse text-retro-pink' : 'text-black'}`}
+        className={`flex items-center gap-2 ${isUrgent ? 'animate-pulse text-retro-pink' : 'text-black'}`}
       >
-        <Timer className="w-6 h-6" />
-        <span className="font-black text-2xl min-w-[3ch]">
+        <Timer className="w-4 h-4" />
+        <span className="font-black text-lg min-w-[3ch]">
           {timeLeft !== null ? `${timeLeft}S` : '--'}
         </span>
       </div>
 
       {isFacilitator && (
-        <div className="flex items-center gap-2 border-l-4 border-black pl-4 ml-2">
+        <div className="flex items-center gap-1.5 border-l-2 border-black pl-3 ml-1.5">
           {timeLeft === null ? (
             <button
               onClick={handleStart}
-              className="p-2 hover:bg-retro-green brutal-border transition-colors bg-white brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+              className="p-1 hover:bg-retro-green brutal-border transition-colors bg-white brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
               title="Start Timer"
             >
-              <Play className="w-5 h-5 fill-current" />
+              <Play className="w-4 h-4 fill-current" />
             </button>
           ) : (
             <button
               onClick={handleReset}
-              className="p-2 hover:bg-retro-pink brutal-border transition-colors bg-white brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+              className="p-1 hover:bg-retro-pink brutal-border transition-colors bg-white brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
               title="Reset Timer"
             >
-              <RotateCcw className="w-5 h-5" />
+              <RotateCcw className="w-4 h-4" />
             </button>
           )}
         </div>
