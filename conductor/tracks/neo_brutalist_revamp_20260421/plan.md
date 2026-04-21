@@ -19,10 +19,10 @@
   - [x] Write tests for the new Landing Page component structure.
   - [x] Implement the Hero section with `mix-blend-multiply` headers and `rotate-12` badges.
   - [x] Add the scrolling ticker-tape component for key value propositions.
-- [ ] Task: Revamp Landing Feature Cards
-  - [ ] Write tests for card interactions (hover/click feedback).
-  - [ ] Implement the "Shadow Shift" active state using `translate(4px, 4px)`.
-  - [ ] Replace existing card styles with the `brutal-border` and vibrant background colors.
+- [x] Task: Revamp Landing Feature Cards 7be96f1
+  - [x] Write tests for card interactions (hover/click feedback).
+  - [x] Implement the "Shadow Shift" active state using `translate(4px, 4px)`.
+  - [x] Replace existing card styles with the `brutal-border` and vibrant background colors.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Landing Page Revamp' (Protocol in workflow.md)
 
 ## Phase 3: Room & Poker UI Revamp
