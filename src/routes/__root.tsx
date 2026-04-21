@@ -3,6 +3,7 @@ import {
   Scripts,
   createRootRoute,
   Outlet,
+  useLocation,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanStackDevtools } from '@tanstack/react-devtools';
@@ -59,6 +60,10 @@ function RootComponent() {
   const [convex] = useState(
     () => new ConvexReactClient(import.meta.env.VITE_CONVEX_URL)
   );
+  const location = useLocation();
+  const isRoomRoute =
+    location.pathname.includes('/poker/') ||
+    location.pathname.includes('/room/');
 
   useEffect(() => {
     if (
@@ -84,7 +89,14 @@ function RootComponent() {
 
   return (
     <ConvexProvider client={convex}>
-      <Outlet />
+      <JuiceProvider>
+        <Toaster richColors closeButton position="top-center" />
+        <AriaLiveAnnouncer />
+        <OfflineBanner />
+        {!isRoomRoute && <Header />}
+        <Outlet />
+        {!isRoomRoute && <Footer />}
+      </JuiceProvider>
     </ConvexProvider>
   );
 }
@@ -98,14 +110,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)] bg-grid">
-        <JuiceProvider>
-          <Toaster richColors closeButton position="top-center" />
-          <AriaLiveAnnouncer />
-          <OfflineBanner />
-          <Header />
-          {children}
-          <Footer />
-        </JuiceProvider>
+        {children}
         <TanStackDevtools />
         <TanStackRouterDevtoolsPanel />
         <Scripts />

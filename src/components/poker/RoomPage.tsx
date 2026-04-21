@@ -309,7 +309,7 @@ export function RoomPage({ slug }: RoomPageProps) {
   const revealDisabled = currentTopicVotes.length < onlinePlayers.length;
 
   return (
-    <div className="h-screen w-screen flex flex-col overflow-hidden uppercase font-black bg-white">
+    <div className="h-[100dvh] w-screen flex flex-col overflow-hidden uppercase font-black bg-white">
       {/* Ticker Tape Header */}
       <div className="bg-black text-white py-2 brutal-border border-l-0 border-r-0 border-t-0 flex items-center text-base tracking-widest overflow-hidden shrink-0">
         <div className="flex whitespace-nowrap marquee-content animate-[marquee_20s_linear_infinite]">
@@ -322,7 +322,7 @@ export function RoomPage({ slug }: RoomPageProps) {
       </div>
 
       <div className="flex-1 flex w-full min-h-0 relative overflow-hidden">
-        <aside className="w-96 bg-white brutal-border border-t-0 border-l-0 border-b-0 flex flex-col shrink-0 z-10 overflow-hidden">
+        <aside className="w-80 bg-white brutal-border border-t-0 border-l-0 border-b-0 flex flex-col shrink-0 z-10 overflow-hidden">
           <SectionErrorBoundary name="Topic Sidebar">
             <TopicSidebar
               roomId={room._id}
@@ -357,11 +357,11 @@ export function RoomPage({ slug }: RoomPageProps) {
 
               <div className="flex-1 flex flex-col items-center justify-center p-4 relative min-h-0 overflow-hidden">
                 {room.status === 'revealed' && votes && players && (
-                  <div className="w-full max-w-5xl mb-8">
+                  <div className="w-full max-w-4xl mb-6">
                     <SectionErrorBoundary name="Statistics">
                       <Suspense
                         fallback={
-                          <div className="h-64 brutal-border animate-pulse bg-white" />
+                          <div className="h-48 brutal-border animate-pulse bg-white" />
                         }
                       >
                         <StatsPanel players={players} votes={votes} />
@@ -370,7 +370,7 @@ export function RoomPage({ slug }: RoomPageProps) {
                   </div>
                 )}
 
-                <div className="w-full flex-1 flex items-center justify-center overflow-y-auto custom-scrollbar p-10">
+                <div className="w-full flex-1 flex items-center justify-center overflow-y-auto custom-scrollbar p-6">
                   <SectionErrorBoundary name="Voting Grid">
                     {players && votes ? (
                       <CardGrid
@@ -379,7 +379,7 @@ export function RoomPage({ slug }: RoomPageProps) {
                         revealed={room.status === 'revealed'}
                       />
                     ) : (
-                      <div className="text-4xl italic font-black">
+                      <div className="text-3xl italic font-black">
                         LOADING...
                       </div>
                     )}
@@ -388,29 +388,29 @@ export function RoomPage({ slug }: RoomPageProps) {
               </div>
             </div>
           ) : (
-            <div className="flex-1 flex items-center justify-center p-12">
+            <div className="flex-1 flex items-center justify-center p-6">
               {isFacilitator && (
-                <div className="bg-white brutal-border brutal-shadow p-16 text-center max-w-2xl">
-                  <h2 className="text-6xl font-black mb-6">
+                <div className="bg-white brutal-border brutal-shadow p-8 text-center max-w-xl w-full">
+                  <h2 className="text-3xl font-black mb-1 tracking-tighter">
                     NO ACTIVE TOPIC.
                   </h2>
-                  <p className="text-2xl font-bold mb-16 opacity-60">
+                  <p className="text-xs font-bold mb-6 opacity-60">
                     CHOOSE YOUR SCALE IN SETTINGS OR HIT THE BUTTON TO COMMENCE.
                   </p>
-                  <div className="flex flex-col gap-8">
+                  <div className="flex flex-row gap-3">
                     <button
                       onClick={() =>
                         nextTopic({ roomId: room._id, identityId: identityId! })
                       }
-                      className="w-full py-8 bg-retro-green text-black text-3xl font-black brutal-border brutal-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+                      className="flex-1 py-3 bg-retro-green text-black text-lg font-black brutal-border brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all uppercase"
                     >
-                      START ESTIMATION
+                      Start Estimation
                     </button>
                     <button
                       onClick={() => setIsSettingsOpen(true)}
-                      className="w-full py-6 bg-retro-yellow text-black text-2xl font-black brutal-border brutal-shadow hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
+                      className="flex-1 py-3 bg-retro-yellow text-black text-lg font-black brutal-border brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all uppercase"
                     >
-                      ROOM SETTINGS
+                      Settings
                     </button>
                   </div>
                 </div>
@@ -428,10 +428,10 @@ export function RoomPage({ slug }: RoomPageProps) {
         </main>
 
         {/* Presence Floating Sidebar */}
-        <div className="absolute top-6 right-6 z-20 w-80 pointer-events-none">
-           <div className="pointer-events-auto bg-white brutal-border brutal-shadow p-6">
-              <div className="mb-4 flex items-center justify-between border-b-4 border-black pb-2">
-                <h3 className="text-sm font-black tracking-widest">PLAYERS — {onlinePlayers.length}/{players?.length || 0}</h3>
+        <div className="absolute top-4 right-4 z-20 w-72 pointer-events-none">
+           <div className="pointer-events-auto bg-white brutal-border brutal-shadow p-4">
+              <div className="mb-3 flex items-center justify-between border-b-2 border-black pb-1">
+                <h3 className="text-[10px] font-black tracking-widest">PLAYERS — {onlinePlayers.length}/{players?.length || 0}</h3>
               </div>
               <SectionErrorBoundary name="Presence Sidebar">
                 <PresenceSidebar
@@ -443,7 +443,7 @@ export function RoomPage({ slug }: RoomPageProps) {
               </SectionErrorBoundary>
               <button
                 onClick={() => setIsInviteModalOpen(true)}
-                className="w-full mt-6 py-4 bg-black text-white text-sm font-black uppercase brutal-border hover:bg-retro-pink transition-colors brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-sm"
+                className="w-full mt-4 py-3 bg-black text-white text-xs font-black uppercase brutal-border hover:bg-retro-pink transition-colors brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-sm"
               >
                 Invite Players
               </button>
