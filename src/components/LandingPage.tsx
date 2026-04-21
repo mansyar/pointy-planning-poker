@@ -4,7 +4,7 @@ import { useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Zap, Target, Lock, type LucideIcon } from 'lucide-react';
+import { Zap, Target, Lock, Users, type LucideIcon } from 'lucide-react';
 
 function FeatureCard({
   icon: Icon,
@@ -94,14 +94,14 @@ export function LandingPage() {
   const navigate = useNavigate();
   const createRoom = useMutation(api.rooms.create);
 
-  const handleCreateRoom = async () => {
+  const handleCreatePokerRoom = async () => {
     if (!nickname.trim()) return;
 
     try {
       const { slug } = await createRoom({ facilitatorId: identityId! });
       navigate({ to: '/room/$slug', params: { slug } });
     } catch (error) {
-      console.error('Failed to create room:', error);
+      console.error('Failed to create poker room:', error);
     }
   };
 
@@ -110,8 +110,9 @@ export function LandingPage() {
 
     // Extract slug from URL if pasted
     let slug = joinSlug.trim();
-    if (slug.includes('/room/')) {
-      const parts = slug.split('/room/');
+    const roomPath = slug.includes('/poker/') ? '/poker/' : '/room/';
+    if (slug.includes(roomPath)) {
+      const parts = slug.split(roomPath);
       slug = parts[parts.length - 1].split('/')[0];
     }
 
@@ -120,26 +121,23 @@ export function LandingPage() {
 
   return (
     <main className="page-wrap px-4 pb-16 pt-14 flex flex-col items-center justify-center min-h-[85vh]">
-      <section className="island-shell rise-in relative overflow-hidden rounded-[2.5rem] px-6 py-12 sm:px-10 sm:py-16 w-full max-w-3xl text-center shadow-2xl">
+      <section className="island-shell rise-in relative overflow-hidden rounded-[2.5rem] px-6 py-12 sm:px-10 sm:py-16 w-full max-w-4xl text-center shadow-2xl">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent opacity-50" />
 
-        <div className="mb-8 flex justify-center space-x-3 text-4xl opacity-80">
-          <span className="text-[var(--accent)]">♠</span>
-          <span className="text-[var(--danger)]">♥</span>
-          <span className="text-[var(--accent)]">♦</span>
-          <span className="text-[var(--danger)]">♣</span>
+        <div className="mb-8 flex justify-center text-5xl opacity-80 text-[var(--accent)]">
+          ◈
         </div>
 
         <h1 className="display-title mb-6 text-5xl leading-tight font-black tracking-tight text-[var(--text-primary)] sm:text-7xl">
-          Pointy Poker
+          Tempo
         </h1>
 
         <p className="mb-12 text-lg text-[var(--text-secondary)] sm:text-xl max-w-2xl mx-auto leading-relaxed">
-          The high-juice planning poker tool for elite product teams. Real-time
-          estimation without the friction.
+          Scrum Tools for Modern Teams. High-juice, real-time collaboration
+          without the friction.
         </p>
 
-        <div className="flex flex-col gap-6 max-w-md mx-auto">
+        <div className="mb-10 max-w-md mx-auto">
           <div className="relative group">
             <input
               type="text"
@@ -149,14 +147,51 @@ export function LandingPage() {
               className="w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-tertiary)] px-5 py-4 text-lg text-[var(--text-primary)] focus:border-[var(--accent)] focus:outline-none transition-all group-hover:border-[var(--text-tertiary)]"
             />
           </div>
+        </div>
 
+        <div className="grid gap-6 sm:grid-cols-2 max-w-2xl mx-auto">
+          {/* Tool: Planning Poker */}
           <button
-            onClick={handleCreateRoom}
+            onClick={handleCreatePokerRoom}
             disabled={!nickname.trim()}
-            className="w-full rounded-xl bg-[var(--accent)] px-8 py-5 text-xl font-black text-white shadow-[0_0_20px_rgba(129,140,248,0.3)] transition-all hover:bg-[var(--accent-hover)] hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(129,140,248,0.5)] active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:shadow-none"
+            className="group relative flex flex-col items-center gap-4 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-tertiary)] p-6 transition-all hover:border-[var(--accent)] hover:bg-[var(--bg-secondary)] hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            🚀 Create Master Room
+            <div className="rounded-full bg-[var(--bg-primary)] p-4 text-[var(--accent)] shadow-inner transition-transform group-hover:scale-110">
+              <Target className="w-8 h-8" />
+            </div>
+            <div className="text-center">
+              <h3 className="text-xl font-bold text-[var(--text-primary)]">
+                Planning Poker
+              </h3>
+              <p className="text-sm text-[var(--text-secondary)]">
+                Real-time estimation
+              </p>
+            </div>
+            <div className="mt-2 w-full rounded-lg bg-[var(--accent)] py-3 text-sm font-black text-white transition-colors group-hover:bg-[var(--accent-hover)]">
+              🚀 Create Poker Room
+            </div>
           </button>
+
+          {/* Tool: Daily Standup (Coming Soon) */}
+          <div className="group relative flex flex-col items-center gap-4 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-tertiary)] p-6 opacity-60 grayscale transition-all">
+            <div className="absolute top-4 right-4 rounded-full bg-[var(--bg-primary)] px-2 py-1 text-[10px] font-black uppercase tracking-widest text-[var(--accent)] border border-[var(--border-subtle)]">
+              Coming Soon
+            </div>
+            <div className="rounded-full bg-[var(--bg-primary)] p-4 text-[var(--text-tertiary)] shadow-inner">
+              <Users className="w-8 h-8" />
+            </div>
+            <div className="text-center">
+              <h3 className="text-xl font-bold text-[var(--text-primary)]">
+                Daily Standup
+              </h3>
+              <p className="text-sm text-[var(--text-secondary)]">
+                Sync your ceremony
+              </p>
+            </div>
+            <div className="mt-2 w-full rounded-lg bg-[var(--bg-secondary)] py-3 text-sm font-black text-[var(--text-tertiary)] border border-[var(--border-subtle)]">
+              🔒 Unavailable
+            </div>
+          </div>
         </div>
 
         <div className="mt-12 border-t border-[var(--border-subtle)] pt-10">

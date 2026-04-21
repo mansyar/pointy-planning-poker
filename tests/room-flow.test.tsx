@@ -27,7 +27,7 @@ describe('Room Flow', () => {
     fireEvent.change(nicknameInput, { target: { value: 'Alice' } });
 
     const createButton = screen.getByRole('button', {
-      name: /create master room/i,
+      name: /create poker room/i,
     });
     fireEvent.click(createButton);
 

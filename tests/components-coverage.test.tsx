@@ -352,7 +352,7 @@ describe('IndexRoute', () => {
     };
     const Component = route.options.component;
     render(<Component />);
-    expect(screen.getByText(/Create Master Room/)).toBeDefined();
+    expect(screen.getByText(/Create Poker Room/)).toBeDefined();
   });
 });
 
