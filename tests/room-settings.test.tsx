@@ -49,7 +49,7 @@ describe('RoomSettings UI', () => {
     const tshirtBtn = screen.getByText(/T-Shirt/i);
     fireEvent.click(tshirtBtn);
 
-    const saveBtn = screen.getByText(/Save Changes/i);
+    const saveBtn = screen.getByText(/^Save$/i);
     fireEvent.click(saveBtn);
 
     await waitFor(() => {

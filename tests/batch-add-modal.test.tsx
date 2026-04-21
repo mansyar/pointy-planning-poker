@@ -17,9 +17,9 @@ describe('BatchAddModal', () => {
       />
     );
 
-    expect(screen.getByText(/Batch Add Topics/i)).toBeDefined();
+    expect(screen.getByText(/Batch Add/i)).toBeDefined();
 
-    const textarea = screen.getByPlaceholderText(/Topic 1/i);
+    const textarea = screen.getByPlaceholderText(/TOPIC 1/i);
     fireEvent.change(textarea, {
       target: { value: 'Topic 1\nTopic 2\n\nTopic 3' },
     });

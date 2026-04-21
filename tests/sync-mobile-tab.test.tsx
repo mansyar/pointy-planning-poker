@@ -30,20 +30,20 @@ describe('InviteModal Sync Controller Tab', () => {
     vi.mocked(useMutation).mockReturnValue(mockCreateSyncToken);
   });
 
-  it('should have two tabs: Invite Link and Sync Controller', () => {
+  it('should have two tabs: Link and Mobile', () => {
     render(
       <InviteModal isOpen={true} onClose={mockOnClose} roomUrl={roomUrl} />
     );
-    expect(screen.getByText(/Invite Link/i)).toBeDefined();
-    expect(screen.getByText(/Sync Controller/i)).toBeDefined();
+    expect(screen.getByRole('button', { name: /^Link$/i })).toBeDefined();
+    expect(screen.getByRole('button', { name: /^Mobile$/i })).toBeDefined();
   });
 
-  it('should call sync:create and show QR code when Sync Controller tab is selected', async () => {
+  it('should call sync:create and show QR code when Mobile tab is selected', async () => {
     render(
       <InviteModal isOpen={true} onClose={mockOnClose} roomUrl={roomUrl} />
     );
 
-    const syncTab = screen.getByText(/Sync Controller/i);
+    const syncTab = screen.getByRole('button', { name: /^Mobile$/i });
     fireEvent.click(syncTab);
 
     await waitFor(() => {

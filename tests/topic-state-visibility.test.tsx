@@ -30,8 +30,8 @@ describe('TopicSidebar State Visibility', () => {
     );
 
     const activeContainer = screen.getByText('Active Topic').closest('div');
-    // Check for accent border or ring class
-    expect(activeContainer?.className).toContain('border-[var(--accent)]');
+    // Check for retro-green background
+    expect(activeContainer?.className).toContain('bg-retro-green');
   });
 
   it('applies correct classes for completed topic', () => {
@@ -57,7 +57,7 @@ describe('TopicSidebar State Visibility', () => {
     const completedContainer = screen
       .getByText('Completed Topic')
       .closest('div');
-    expect(completedContainer?.className).toContain('bg-[var(--bg-tertiary)]');
-    expect(completedContainer?.className).toContain('opacity-');
+    expect(completedContainer?.className).toContain('bg-white');
+    expect(completedContainer?.className).toContain('brutal-border');
   });
 });

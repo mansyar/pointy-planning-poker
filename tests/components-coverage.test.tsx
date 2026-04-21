@@ -204,8 +204,8 @@ describe('RoomPage Component', () => {
       fireEvent.click(joinBtn);
     });
 
-    expect(await screen.findByText(/test-room/)).toBeDefined();
-    expect(screen.getByText(/Choose your estimate/)).toBeDefined();
+    expect((await screen.findAllByText((content) => content.includes('test-room'))).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Choose your estimate/i)).toBeDefined();
   });
 
   it('handles join error', async () => {
@@ -309,7 +309,7 @@ describe('RoomPage Component', () => {
     );
 
     // 2. Reveal
-    const revealBtn = screen.getByRole('button', { name: /Reveal Votes/i });
+    const revealBtn = screen.getByRole('button', { name: /^Reveal$/i });
     await act(async () => {
       fireEvent.click(revealBtn);
     });
@@ -322,7 +322,7 @@ describe('RoomPage Component', () => {
       fireEvent.click(batchAddBtn);
     });
 
-    const batchInput = screen.getByPlaceholderText(/Topic 1/i);
+    const batchInput = screen.getByPlaceholderText(/TOPIC 1/i);
     await act(async () => {
       fireEvent.change(batchInput, { target: { value: 'New Topic' } });
     });
@@ -367,7 +367,7 @@ describe('IndexRoute', () => {
     };
     const Component = route.options.component;
     render(<Component />);
-    expect(screen.getByText(/Create Poker Room/)).toBeDefined();
+    expect(screen.getByRole('button', { name: /Start Session/i })).toBeDefined();
   });
 });
 
@@ -416,7 +416,6 @@ describe('PokerRoute', () => {
       fireEvent.click(joinBtn);
     });
 
-    expect(await screen.findByText(/test-room/)).toBeDefined();
+    expect((await screen.findAllByText((content) => content.includes('test-room'))).length).toBeGreaterThan(0);
   });
 });
-

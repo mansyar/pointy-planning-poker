@@ -58,16 +58,16 @@ describe('RoundTimer Component', () => {
       />
     );
 
-    expect(screen.getByText('60s')).toBeDefined();
+    expect(screen.getByText('60S')).toBeDefined();
 
     act(() => {
       vi.advanceTimersByTime(1000);
     });
 
-    expect(screen.getByText('59s')).toBeDefined();
+    expect(screen.getByText('59S')).toBeDefined();
   });
 
-  it('should show 0s when timer is finished', () => {
+  it('should show 0S when timer is finished', () => {
     const startTime = Date.now() - 61000;
     render(
       <RoundTimer
@@ -78,10 +78,10 @@ describe('RoundTimer Component', () => {
       />
     );
 
-    expect(screen.getByText('0s')).toBeDefined();
+    expect(screen.getByText('0S')).toBeDefined();
   });
 
-  it('should show urgency state when < 10s', () => {
+  it('should show urgency state when < 10S', () => {
     const startTime = Date.now() - 51000; // 9s left
     const { container } = render(
       <RoundTimer
@@ -94,7 +94,7 @@ describe('RoundTimer Component', () => {
 
     const timerDiv = container.querySelector('.animate-pulse');
     expect(timerDiv).toBeDefined();
-    expect(timerDiv?.className).toContain('text-red-500');
+    expect(timerDiv?.className).toContain('text-retro-pink');
   });
 
   it('should call startTimer when facilitator clicks start button', () => {
@@ -155,7 +155,7 @@ describe('RoundTimer Component', () => {
       vi.advanceTimersByTime(61000);
     });
 
-    expect(screen.getByText('0s')).toBeDefined();
+    expect(screen.getByText('0S')).toBeDefined();
   });
 
   it('should clean up interval on unmount', () => {
@@ -173,7 +173,7 @@ describe('RoundTimer Component', () => {
     act(() => {
       vi.advanceTimersByTime(1000);
     });
-    expect(screen.getByText('59s')).toBeDefined();
+    expect(screen.getByText('59S')).toBeDefined();
 
     // Unmount should clear interval
     unmount();

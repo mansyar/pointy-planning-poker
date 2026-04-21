@@ -51,18 +51,29 @@ vi.mock('../src/components/shared/InviteModal', () => ({
 describe('RoomPage Invite Flow', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    let callCount = 0;
-    vi.mocked(useQuery).mockImplementation(() => {
-      callCount++;
-      if (callCount === 1) {
+    vi.mocked(useQuery).mockImplementation((...args) => {
+      const a = args[1] as any;
+      if (a?.slug === 'test-room') {
         return {
           _id: 'room-1',
           slug: 'test-room',
           facilitatorId: 'user-1',
           status: 'voting',
+          currentTopicId: 'topic-1',
         };
       }
-      return []; // Default to empty array for players, votes, topics
+      if (a?.roomId === 'room-1') {
+        // Topics list
+        return [
+          {
+            _id: 'topic-1',
+            title: 'Test Topic',
+            status: 'active',
+            order: 1,
+          },
+        ];
+      }
+      return []; // Default to empty array for players, votes
     });
     vi.mocked(useMutation).mockReturnValue(
       Object.assign(vi.fn().mockResolvedValue({}), {
@@ -74,7 +85,7 @@ describe('RoomPage Invite Flow', () => {
   it('should open InviteModal when "Copy Invite" is clicked', async () => {
     render(<RoomPage slug="test-room" />);
 
-    const inviteButton = screen.getByRole('button', { name: /copy invite/i });
+    const inviteButton = screen.getByRole('button', { name: /Invite/i });
     fireEvent.click(inviteButton);
 
     expect(await screen.findByTestId('invite-modal')).toBeDefined();

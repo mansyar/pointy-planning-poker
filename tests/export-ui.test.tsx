@@ -109,8 +109,8 @@ describe('TopicSidebar Export UI', () => {
     fireEvent.click(exportBtn);
 
     expect(screen.getByText(/Export Format/i)).toBeDefined();
-    expect(screen.getByText(/Markdown Table/i)).toBeDefined();
-    expect(screen.getByText(/CSV Data/i)).toBeDefined();
+    expect(screen.getByText(/^Markdown$/i)).toBeDefined();
+    expect(screen.getByText(/^CSV$/i)).toBeDefined();
   });
 
   it('should trigger download when a format is selected', async () => {
@@ -144,7 +144,7 @@ describe('TopicSidebar Export UI', () => {
     fireEvent.click(screen.getByTitle(/Export Session/i));
 
     // Click Markdown
-    fireEvent.click(screen.getByText(/Markdown Table/i));
+    fireEvent.click(screen.getByText(/Markdown/i));
 
     expect(global.URL.createObjectURL).toHaveBeenCalled();
     expect(global.URL.revokeObjectURL).toHaveBeenCalled();

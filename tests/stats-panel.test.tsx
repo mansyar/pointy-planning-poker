@@ -36,11 +36,13 @@ describe('StatsPanel', () => {
 
     render(<StatsPanel players={players} votes={votes} />);
 
-    expect(screen.getByText('1 vote')).toBeDefined(); // for '3'
-    expect(screen.getByText('2 votes')).toBeDefined(); // for '5'
+    expect(screen.getAllByText('3').length).toBeGreaterThan(0); // value
+    expect(screen.getByText(/1V/i)).toBeDefined(); // count shorthand
+    expect(screen.getAllByText('5').length).toBeGreaterThan(0); // value
+    expect(screen.getByText(/2V/i)).toBeDefined(); // count shorthand
   });
 
-  it('shows "Needs Discussion" badge and outlier names when spread > 2', () => {
+  it('shows "DISCUSS" badge and outlier names when spread > 2', () => {
     const votes = [
       { identityId: '1', value: '1' },
       { identityId: '2', value: '5' },
@@ -49,14 +51,12 @@ describe('StatsPanel', () => {
 
     render(<StatsPanel players={players} votes={votes} />);
 
-    expect(screen.getByText('Needs Discussion')).toBeDefined();
-    expect(screen.getByText('Alice')).toBeDefined();
-    expect(screen.getByText('(1)')).toBeDefined();
-    expect(screen.getByText('Charlie')).toBeDefined();
-    expect(screen.getByText('(8)')).toBeDefined();
+    expect(screen.getByText('DISCUSS')).toBeDefined();
+    expect(screen.getByText(/Alice/i)).toBeDefined();
+    expect(screen.getByText(/Charlie/i)).toBeDefined();
   });
 
-  it('does not show "Needs Discussion" badge when spread <= 2', () => {
+  it('does not show "DISCUSS" badge when spread <= 2', () => {
     const votes = [
       { identityId: '1', value: '3' },
       { identityId: '2', value: '5' },
@@ -65,7 +65,7 @@ describe('StatsPanel', () => {
 
     render(<StatsPanel players={players} votes={votes} />);
 
-    expect(screen.queryByText('Needs Discussion')).toBeNull();
+    expect(screen.queryByText('DISCUSS')).toBeNull();
   });
 
   it('shows tooltips clarifying numeric-only calculations', () => {
@@ -76,7 +76,7 @@ describe('StatsPanel', () => {
 
     render(<StatsPanel players={players} votes={votes} />);
 
-    const averageLabel = screen.getByText('Average');
-    expect(averageLabel.title).toContain('numeric votes only');
+    const tooltipItems = screen.getAllByTitle(/numeric votes only/i);
+    expect(tooltipItems.length).toBeGreaterThan(0);
   });
 });

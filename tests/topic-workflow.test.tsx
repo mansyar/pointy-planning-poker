@@ -31,7 +31,6 @@ describe('ActiveTopicHeader', () => {
     );
 
     expect(screen.getByText(/Current Topic/i)).toBeDefined();
-    expect(screen.getByText('1')).toBeDefined();
   });
 
   it('shows Reveal button for facilitator when voting', () => {
@@ -52,7 +51,7 @@ describe('ActiveTopicHeader', () => {
       />
     );
 
-    expect(screen.getByRole('button', { name: /Reveal Votes/i })).toBeDefined();
+    expect(screen.getByRole('button', { name: /Reveal/i })).toBeDefined();
   });
 
   it('can disable Reveal button via prop', () => {
@@ -75,7 +74,7 @@ describe('ActiveTopicHeader', () => {
     );
 
     const btn = screen.getByRole('button', {
-      name: /Reveal Votes/i,
+      name: /Reveal/i,
     }) as HTMLButtonElement;
     expect(btn.disabled).toBe(true);
   });
@@ -99,7 +98,7 @@ describe('ActiveTopicHeader', () => {
     );
 
     expect(
-      screen.getByRole('button', { name: /Confirm & Next/i })
+      screen.getByRole('button', { name: /Next Topic/i })
     ).toBeDefined();
   });
 

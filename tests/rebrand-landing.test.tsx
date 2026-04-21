@@ -56,7 +56,7 @@ describe('Landing Page Rebranding', () => {
 
     renderWithJuice(<LandingPage />);
 
-    const button = screen.getByText(/Create Poker Room/i);
+    const button = screen.getByRole('button', { name: /Start Session/i });
     fireEvent.click(button);
 
     await waitFor(() => {
@@ -67,9 +67,9 @@ describe('Landing Page Rebranding', () => {
     });
   });
 
-  it('shows Standup tool as Coming Soon', () => {
+  it('shows Standup tool as Soon', () => {
     renderWithJuice(<LandingPage />);
     expect(screen.getByText(/Daily Standup/i)).toBeTruthy();
-    expect(screen.getByText(/Coming Soon/i)).toBeTruthy();
+    expect(screen.getByText(/Soon/i)).toBeTruthy();
   });
 });

@@ -33,7 +33,7 @@ describe('LandingPage Feature Cards', () => {
 
     render(<LandingPage />);
 
-    const input = screen.getByPlaceholderText(/Paste room link or slug/i);
+    const input = screen.getByPlaceholderText(/PASTE LINK OR SLUG/i);
     fireEvent.change(input, { target: { value: 'test-slug' } });
 
     const joinButton = screen.getByRole('button', { name: /Join/i });
@@ -51,7 +51,7 @@ describe('LandingPage Feature Cards', () => {
 
     render(<LandingPage />);
 
-    const input = screen.getByPlaceholderText(/Paste room link or slug/i);
+    const input = screen.getByPlaceholderText(/PASTE LINK OR SLUG/i);
     fireEvent.change(input, {
       target: { value: 'http://localhost:3000/room/abc-123' },
     });
