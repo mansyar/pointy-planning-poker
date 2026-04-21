@@ -52,13 +52,13 @@
   - [x] Update manifest and root route to use SVG icon
   - [ ] Verify icons display correctly in browser (Requires manual check)
 
-- [ ] **Task 1.7: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)**
+- [x] **Task 1.7: Conductor - User Manual Verification 'Phase 1' (Protocol in workflow.md)** [Verified]
 
 ---
 
 ## Phase 2: Schema Migration
 
-- [ ] **Task 2.1: Add toolType Field to Rooms Schema**
+- [x] **Task 2.1: Add toolType Field to Rooms Schema** [4048637]
   - [ ] Update convex/schema.ts with toolType field
   - [ ] Add toolType field to rooms table schema
   - [ ] Type: v.union(v.literal('poker'), v.literal('standup'))
