@@ -206,7 +206,7 @@ export function MobileController({ slug, onExit }: MobileControllerProps) {
 
       <div className="fixed bottom-32 right-4 z-50">
         <EmojiActionBar
-          onSelect={(emoji) => {
+          onSelect={(_emoji) => {
             // Placeholder for emoji reaction logic
             if (window.navigator.vibrate) window.navigator.vibrate(20);
           }}

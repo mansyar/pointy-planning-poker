@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { RoomPage } from '../src/components/poker/RoomPage';
 import { useQuery } from 'convex/react';
 import { JuiceProvider } from '../src/components/shared/JuiceToggle';
@@ -31,8 +31,9 @@ vi.mock('../../hooks/useSound', () => ({ useSound: vi.fn(() => ({ play: vi.fn(),
 
 describe('Neo-Brutalist Room Layout', () => {
   it('should have a sidebar with retro blue background', () => {
-    vi.mocked(useQuery).mockImplementation((...args: any[]) => {
-       if (args[0].name === 'getBySlug') return { _id: 'room-id', facilitatorId: 'test-id', slug: 'test-room', status: 'voting' };
+    vi.mocked(useQuery).mockImplementation((...args: unknown[]) => {
+       const query = args[0] as { name: string };
+       if (query.name === 'getBySlug') return { _id: 'room-id', facilitatorId: 'test-id', slug: 'test-room', status: 'voting' };
        return [];
     });
 
@@ -53,7 +54,6 @@ describe('Neo-Brutalist Room Layout', () => {
         <RoomPage slug="test-room" />
       </JuiceProvider>
     );
-    const island = document.querySelector('.island-shell');
     // After redesign, island-shell should be replaced or updated with brutal classes
     const containers = document.querySelectorAll('.brutal-border');
     expect(containers.length).toBeGreaterThan(0);

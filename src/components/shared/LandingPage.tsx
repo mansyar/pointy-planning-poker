@@ -3,7 +3,7 @@ import { useIdentity } from '../../hooks/useIdentity';
 import { useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Zap, Target, Lock, Users, type LucideIcon } from 'lucide-react';
 
 function FeatureCard({
@@ -61,7 +61,7 @@ export function LandingPage() {
         facilitatorId: identityId!,
         toolType: 'poker',
       });
-      navigate({ to: '/poker/$slug', params: { slug } });
+      navigate({ to: '/poker/$slug', params: { slug } as any });
     } catch (error) {
       console.error('Failed to create poker room:', error);
     }
@@ -78,7 +78,7 @@ export function LandingPage() {
       slug = parts[parts.length - 1].split('/')[0];
     }
 
-    navigate({ to: '/poker/$slug', params: { slug } });
+    navigate({ to: '/poker/$slug', params: { slug } as any });
   };
 
   return (

@@ -69,9 +69,9 @@ describe('Header Rebranding', () => {
       pathname: '/room/test-slug',
     } as unknown as ReturnType<typeof useLocation>);
     renderWithJuice(<Header />);
-    // Spec says: "◈ Tempo ▸ Poker"
+    // Spec says: "◈ Tempo ▸ Poker Mode"
     expect(screen.queryByText('Tempo')).toBeTruthy();
-    expect(screen.queryByText('Poker')).toBeTruthy();
+    expect(screen.queryByText('Poker Mode')).toBeTruthy();
     expect(screen.queryByText('▸')).toBeTruthy();
   });
 });

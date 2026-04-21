@@ -17,16 +17,16 @@ describe('JuiceToggle Component', () => {
     const button = screen.getByRole('button');
 
     // Initial state (default true)
-    expect(button.textContent).toContain('Juice On');
+    expect(button.textContent).toContain('Juice: ON');
 
     // Toggle to off
     fireEvent.click(button);
-    expect(button.textContent).toContain('Juice Off');
+    expect(button.textContent).toContain('Juice: OFF');
     expect(localStorage.getItem('sensory-juice')).toBe('false');
 
     // Toggle back to on
     fireEvent.click(button);
-    expect(button.textContent).toContain('Juice On');
+    expect(button.textContent).toContain('Juice: ON');
     expect(localStorage.getItem('sensory-juice')).toBe('true');
   });
 });

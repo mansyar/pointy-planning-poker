@@ -54,7 +54,7 @@ export function PresenceSidebar({
             >
               <div className="relative">
                 <div className={`w-5 h-5 sm:w-6 sm:h-6 brutal-border flex items-center justify-center text-[9px] sm:text-[10px] font-black ${hasVoted ? 'bg-retro-green' : 'bg-retro-yellow'}`}>
-                  {player.name.charAt(0).toUpperCase()}
+                  {(player.name || '?').charAt(0).toUpperCase()}
                 </div>
                 {player.identityId === facilitatorId && (
                    <div className="absolute -top-1.5 -right-1.5 text-[7px] sm:text-[8px]">👑</div>
@@ -90,7 +90,7 @@ export function PresenceSidebar({
             <div className="flex items-center gap-4">
               <div className="relative">
                 <div className="w-12 h-12 brutal-border bg-retro-yellow flex items-center justify-center text-xl font-black">
-                  {player.name.charAt(0).toUpperCase()}
+                  {(player.name || '?').charAt(0).toUpperCase()}
                 </div>
                 {player.isOnline && (
                   <div className="absolute -top-2 -right-2 w-4 h-4 brutal-border bg-retro-green" />
