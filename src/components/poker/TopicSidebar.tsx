@@ -35,7 +35,8 @@ export function TopicSidebar({
   onOpenBatchAdd,
 }: TopicSidebarProps) {
   const [newTopicTitle, setNewTopicTitle] = useState('');
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isPendingExpanded, setIsPendingExpanded] = useState(false);
+  const [isHistoryExpanded, setIsHistoryExpanded] = useState(false);
   const [editingTopicId, setEditingTopicId] = useState<Id<'topics'> | null>(
     null
   );
@@ -62,8 +63,15 @@ export function TopicSidebar({
       ?.filter((t) => t.status === 'completed')
       .sort((a, b) => b.order - a.order) || [];
 
-  const visiblePending = isExpanded ? pendingTopics : pendingTopics.slice(0, 3);
+  const visiblePending = isPendingExpanded
+    ? pendingTopics
+    : pendingTopics.slice(0, 3);
   const hasMorePending = pendingTopics.length > 3;
+
+  const visibleHistory = isHistoryExpanded
+    ? completedTopics
+    : completedTopics.slice(0, 3);
+  const hasMoreHistory = completedTopics.length > 3;
 
   const handleAddTopic = async () => {
     if (!newTopicTitle.trim()) return;
@@ -310,10 +318,10 @@ export function TopicSidebar({
 
                 {hasMorePending && (
                   <button
-                    onClick={() => setIsExpanded(!isExpanded)}
-                    className="w-full py-2 text-xs font-bold text-[var(--text-tertiary)] hover:text-[var(--accent)] transition-colors flex items-center justify-center gap-1 border border-dashed border-[var(--border-subtle)] rounded-md mt-2"
+                    onClick={() => setIsPendingExpanded(!isPendingExpanded)}
+                    className="w-full py-2 text-[10px] font-black uppercase bg-white brutal-border border-dashed hover:bg-gray-50 transition-all flex items-center justify-center gap-1 mt-2"
                   >
-                    {isExpanded ? (
+                    {isPendingExpanded ? (
                       <>
                         <ChevronUp className="w-3 h-3" /> Show Less
                       </>
@@ -390,9 +398,8 @@ export function TopicSidebar({
                 Empty history
               </p>
             ) : (
-              completedTopics
-                .sort((a, b) => b.order - a.order)
-                .map((topic) => (
+              <>
+                {visibleHistory.map((topic) => (
                   <div
                     key={topic._id}
                     className="p-4 brutal-border bg-white flex items-center gap-3 transition-all brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-sm"
@@ -407,7 +414,26 @@ export function TopicSidebar({
                       </span>
                     )}
                   </div>
-                ))
+                ))}
+
+                {hasMoreHistory && (
+                  <button
+                    onClick={() => setIsHistoryExpanded(!isHistoryExpanded)}
+                    className="w-full py-2 text-[10px] font-black uppercase bg-white brutal-border border-dashed hover:bg-gray-50 transition-all flex items-center justify-center gap-1 mt-2"
+                  >
+                    {isHistoryExpanded ? (
+                      <>
+                        <ChevronUp className="w-3 h-3" /> Show Less
+                      </>
+                    ) : (
+                      <>
+                        <ChevronDown className="w-3 h-3" /> See all (
+                        {completedTopics.length})
+                      </>
+                    )}
+                  </button>
+                )}
+              </>
             )}
           </div>
         </section>
