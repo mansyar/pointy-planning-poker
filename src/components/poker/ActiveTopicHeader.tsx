@@ -1,4 +1,4 @@
-import type { Id } from '../../convex/_generated/dataModel';
+import type { Id } from '../../../convex/_generated/dataModel';
 import { Play, CheckCircle2, Settings } from 'lucide-react';
 import { RoundTimer } from './RoundTimer';
 

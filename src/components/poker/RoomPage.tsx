@@ -1,30 +1,30 @@
 import { useQuery, useMutation } from 'convex/react';
-import { api } from '../../convex/_generated/api';
-import { useIdentity } from '../hooks/useIdentity';
-import { JoinModal } from './shared/JoinModal';
+import { api } from '../../../convex/_generated/api';
+import { useIdentity } from '../../hooks/useIdentity';
+import { JoinModal } from '../shared/JoinModal';
 import { MobileController } from './MobileController';
 import { RoomSettingsModal } from './RoomSettingsModal';
-import { PresenceSidebar } from './shared/PresenceSidebar';
+import { PresenceSidebar } from '../shared/PresenceSidebar';
 import { TopicSidebar } from './TopicSidebar';
 import { ConfirmEstimateModal } from './ConfirmEstimateModal';
-import SectionErrorBoundary from './shared/SectionErrorBoundary';
+import SectionErrorBoundary from '../shared/SectionErrorBoundary';
 import { ActiveTopicHeader } from './ActiveTopicHeader';
-import { ClaimBanner } from './shared/ClaimBanner';
+import { ClaimBanner } from '../shared/ClaimBanner';
 import { CardGrid } from './CardGrid';
 import { CardDeck } from './CardDeck';
-import { EmojiActionBar } from './shared/EmojiActionBar';
-import { EmojiBurst } from './shared/EmojiBurst';
-import { announce } from './shared/AriaLiveAnnouncer';
-import { useEmojiReactions } from '../hooks/useEmojiReactions';
-import { usePresence } from '../hooks/usePresence';
-import { useSound } from '../hooks/useSound';
-import { useJuice } from './shared/JuiceToggle';
+import { EmojiActionBar } from '../shared/EmojiActionBar';
+import { EmojiBurst } from '../shared/EmojiBurst';
+import { announce } from '../shared/AriaLiveAnnouncer';
+import { useEmojiReactions } from '../../hooks/useEmojiReactions';
+import { usePresence } from '../../hooks/usePresence';
+import { useSound } from '../../hooks/useSound';
+import { useJuice } from '../shared/JuiceToggle';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
-import { calculateStats, isUnanimous } from '../utils/stats';
+import { calculateStats, isUnanimous } from '../../utils/stats';
 
-import type { Id } from '../../convex/_generated/dataModel';
+import type { Id } from '../../../convex/_generated/dataModel';
 
 // Lazy load heavy components
 const BatchAddModal = lazy(() =>
@@ -34,7 +34,7 @@ const StatsPanel = lazy(() =>
   import('./StatsPanel').then((m) => ({ default: m.StatsPanel }))
 );
 const InviteModal = lazy(() =>
-  import('./shared/InviteModal').then((m) => ({ default: m.InviteModal }))
+  import('../shared/InviteModal').then((m) => ({ default: m.InviteModal }))
 );
 
 interface RoomPageProps {

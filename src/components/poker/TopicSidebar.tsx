@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from 'convex/react';
-import { api } from '../../convex/_generated/api';
-import type { Id } from '../../convex/_generated/dataModel';
+import { api } from '../../../convex/_generated/api';
+import type { Id } from '../../../convex/_generated/dataModel';
 import { toast } from 'sonner';
 import {
   ListPlus,
@@ -19,7 +19,7 @@ import {
   generateMarkdown,
   generateSummary,
   generateCSV,
-} from '../utils/exporter';
+} from '../../utils/exporter';
 
 interface TopicSidebarProps {
   roomId: Id<'rooms'>;

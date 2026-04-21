@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { StatsPanel } from '../src/components/StatsPanel';
+import { StatsPanel } from '../src/components/poker/StatsPanel';
 import { describe, it, expect } from 'vitest';
 
 describe('StatsPanel', () => {

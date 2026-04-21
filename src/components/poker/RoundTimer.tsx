@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Timer, RotateCcw, Play } from 'lucide-react';
 import { useMutation } from 'convex/react';
-import { api } from '../../convex/_generated/api';
-import type { Id } from '../../convex/_generated/dataModel';
+import { api } from '../../../convex/_generated/api';
+import type { Id } from '../../../convex/_generated/dataModel';
 
 interface RoundTimerProps {
   roomId: Id<'rooms'>;

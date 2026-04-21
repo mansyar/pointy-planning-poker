@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { TopicSidebar } from '../src/components/TopicSidebar';
+import { TopicSidebar } from '../src/components/poker/TopicSidebar';
 
 // Mock convex
 vi.mock('convex/react', () => {

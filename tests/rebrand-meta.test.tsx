@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, waitFor } from '@testing-library/react';
-import { RoomPage } from '../src/components/RoomPage';
+import { RoomPage } from '../src/components/poker/RoomPage';
 import { useQuery } from 'convex/react';
 import type { Id } from '../convex/_generated/dataModel';
 

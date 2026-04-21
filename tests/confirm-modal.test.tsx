@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { ConfirmEstimateModal } from '../src/components/ConfirmEstimateModal';
+import { ConfirmEstimateModal } from '../src/components/poker/ConfirmEstimateModal';
 import { describe, it, expect, vi } from 'vitest';
 
 describe('ConfirmEstimateModal', () => {

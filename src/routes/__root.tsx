@@ -6,11 +6,11 @@ import {
 } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanStackDevtools } from '@tanstack/react-devtools';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
-import { OfflineBanner } from '../components/OfflineBanner';
-import { AriaLiveAnnouncer } from '../components/AriaLiveAnnouncer';
-import { JuiceProvider } from '../components/JuiceToggle';
+import Footer from '../components/shared/Footer';
+import Header from '../components/shared/Header';
+import { OfflineBanner } from '../components/shared/OfflineBanner';
+import { AriaLiveAnnouncer } from '../components/shared/AriaLiveAnnouncer';
+import { JuiceProvider } from '../components/shared/JuiceToggle';
 import { ConvexProvider, ConvexReactClient } from 'convex/react';
 import { Toaster } from 'sonner';
 import { useState, useEffect } from 'react';

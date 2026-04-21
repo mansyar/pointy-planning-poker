@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { ActiveTopicHeader } from '../src/components/ActiveTopicHeader';
+import { ActiveTopicHeader } from '../src/components/poker/ActiveTopicHeader';
 import { describe, it, expect, vi } from 'vitest';
 import type { Id } from '../convex/_generated/dataModel';
 

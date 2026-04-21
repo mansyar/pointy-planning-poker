@@ -1,4 +1,4 @@
-import { calculateStats, identifyOutliers } from '../utils/stats';
+import { calculateStats, identifyOutliers } from '../../utils/stats';
 
 interface StatsPanelProps {
   players: Array<{ identityId: string; name: string }>;

@@ -1,6 +1,6 @@
 import { render, screen, act, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { RoundTimer } from '../src/components/RoundTimer';
+import { RoundTimer } from '../src/components/poker/RoundTimer';
 import type { Id } from '../convex/_generated/dataModel';
 import { useMutation } from 'convex/react';
 

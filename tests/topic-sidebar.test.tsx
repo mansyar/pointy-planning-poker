@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { TopicSidebar } from '../src/components/TopicSidebar';
+import { TopicSidebar } from '../src/components/poker/TopicSidebar';
 import { describe, it, expect, vi } from 'vitest';
 import { useQuery, useMutation } from 'convex/react';
 import type { Id } from '../convex/_generated/dataModel';

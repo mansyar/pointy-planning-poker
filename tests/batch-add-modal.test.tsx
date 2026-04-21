@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { BatchAddModal } from '../src/components/BatchAddModal';
+import { BatchAddModal } from '../src/components/poker/BatchAddModal';
 import { describe, it, expect, vi } from 'vitest';
 import type { Id } from '../convex/_generated/dataModel';
 

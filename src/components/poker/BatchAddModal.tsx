@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Id } from '../../convex/_generated/dataModel';
+import type { Id } from '../../../convex/_generated/dataModel';
 import { X, ListPlus } from 'lucide-react';
 
 interface BatchAddModalProps {

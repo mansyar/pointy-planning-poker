@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { PokerCard } from '../src/components/PokerCard';
-import { CardGrid } from '../src/components/CardGrid';
-import { CardDeck } from '../src/components/CardDeck';
+import { PokerCard } from '../src/components/poker/PokerCard';
+import { CardGrid } from '../src/components/poker/CardGrid';
+import { CardDeck } from '../src/components/poker/CardDeck';
 import { describe, it, expect, vi } from 'vitest';
 
 // Mock framer-motion to avoid animation issues in tests

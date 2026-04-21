@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { X, Settings, Zap, Layers } from 'lucide-react';
 import { useMutation } from 'convex/react';
-import { api } from '../../convex/_generated/api';
-import type { Id } from '../../convex/_generated/dataModel';
+import { api } from '../../../convex/_generated/api';
+import type { Id } from '../../../convex/_generated/dataModel';
 import { toast } from 'sonner';
 
 interface RoomSettingsModalProps {
