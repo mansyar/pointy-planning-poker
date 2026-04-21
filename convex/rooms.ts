@@ -37,6 +37,7 @@ export const create = mutation({
   args: {
     slug: v.optional(v.string()),
     facilitatorId: v.string(),
+    toolType: v.optional(v.union(v.literal('poker'), v.literal('standup'))),
   },
   handler: async (ctx, args) => {
     const slug = args.slug ?? (await generateUniqueSlug(ctx));
@@ -45,6 +46,7 @@ export const create = mutation({
       slug,
       facilitatorId: args.facilitatorId,
       status: 'voting',
+      toolType: args.toolType ?? 'poker',
       updatedAt: Date.now(),
     });
     return { roomId, slug };
