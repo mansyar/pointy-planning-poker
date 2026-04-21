@@ -21,7 +21,7 @@ export function CardDeck({
   if (isController) {
     return (
       <div className="w-full">
-        <h3 className="text-center text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-tertiary)] mb-4">
+        <h3 className="text-center text-[10px] font-black uppercase tracking-[0.2em] mb-4 bg-black text-white py-1 brutal-border">
           Cast your vote
         </h3>
         <div className="grid grid-cols-5 gap-3">
@@ -29,10 +29,10 @@ export function CardDeck({
             <button
               key={val}
               onClick={() => onSelect(val)}
-              className={`aspect-square flex items-center justify-center rounded-2xl text-lg font-bold transition-all active:scale-90 ${
+              className={`aspect-square flex items-center justify-center brutal-border text-lg font-black transition-all active:translate-x-0.5 active:translate-y-0.5 active:shadow-none brutal-shadow ${
                 selectedVote === val
-                  ? 'bg-[var(--accent)] text-white shadow-lg shadow-[var(--shadow-glow)]'
-                  : 'bg-[var(--bg-tertiary)] text-[var(--text-primary)] border border-[var(--border-subtle)]'
+                  ? 'bg-retro-yellow shadow-none translate-x-0.5 translate-y-0.5'
+                  : 'bg-white hover:bg-gray-50'
               }`}
             >
               {val}
@@ -44,10 +44,10 @@ export function CardDeck({
   }
 
   return (
-    <div className="w-full bg-[var(--bg-secondary)]/50 backdrop-blur-sm border-t border-[var(--border-subtle)] p-6 sm:p-8">
+    <div className="w-full bg-retro-blue border-t-4 border-black p-6 sm:p-8 brutal-shadow">
       <div className="page-wrap max-w-5xl mx-auto">
-        <h3 className="text-center text-xs font-bold uppercase tracking-widest text-[var(--text-tertiary)] mb-6">
-          Choose your estimate
+        <h3 className="text-center text-xs font-black uppercase tracking-widest mb-8">
+          — Choose your estimate —
         </h3>
         <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
           {deckValues.map((val) => (

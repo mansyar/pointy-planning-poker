@@ -77,68 +77,68 @@ export function InviteModal({ isOpen, onClose, roomUrl }: InviteModalProps) {
   const syncUrl = syncToken ? `${roomUrl}?sync=${syncToken}` : '';
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--bg-primary)] bg-opacity-80 backdrop-blur-sm px-4">
-      <div className="island-shell rise-in w-full max-w-md rounded-2xl p-8 text-center relative border border-[var(--border-subtle)] shadow-2xl">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 px-4">
+      <div className="bg-white brutal-border brutal-shadow w-full max-w-md p-8 text-center relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors"
+          className="absolute top-4 right-4 p-2 text-black hover:text-retro-pink transition-colors brutal-border bg-white"
           aria-label="Close"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <h2 className="display-title mb-6 text-2xl font-bold text-[var(--text-primary)]">
+        <h2 className="mb-6 text-3xl font-black uppercase text-black tracking-tight">
           Invite Players
         </h2>
 
         {/* Tabs */}
-        <div className="mb-8 flex p-1 bg-[var(--bg-tertiary)] rounded-xl border border-[var(--border-subtle)]">
+        <div className="mb-8 flex brutal-border bg-black p-1">
           <button
             onClick={() => setActiveTab('invite')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold rounded-lg transition-all ${
+            className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-black uppercase transition-all ${
               activeTab === 'invite'
-                ? 'bg-[var(--bg-primary)] text-[var(--text-primary)] shadow-sm border border-[var(--border-subtle)]'
-                : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
+                ? 'bg-retro-yellow text-black brutal-border'
+                : 'text-white hover:text-retro-yellow'
             }`}
           >
             <Link className="w-4 h-4" />
-            Invite Link
+            Link
           </button>
           <button
             onClick={() => setActiveTab('sync')}
-            className={`flex-1 flex items-center justify-center gap-2 py-2.5 text-sm font-semibold rounded-lg transition-all ${
+            className={`flex-1 flex items-center justify-center gap-2 py-3 text-xs font-black uppercase transition-all ${
               activeTab === 'sync'
-                ? 'bg-[var(--bg-primary)] text-[var(--text-primary)] shadow-sm border border-[var(--border-subtle)]'
-                : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
+                ? 'bg-retro-yellow text-black brutal-border'
+                : 'text-white hover:text-retro-yellow'
             }`}
           >
             <Smartphone className="w-4 h-4" />
-            Sync Controller
+            Mobile
           </button>
         </div>
 
         {activeTab === 'invite' ? (
           <>
-            <p className="mb-6 text-sm text-[var(--text-secondary)]">
+            <p className="mb-6 text-sm font-bold uppercase opacity-80">
               Share this room with your team
             </p>
             <div className="mb-8 flex flex-col items-center">
-              <div className="bg-white p-4 rounded-xl shadow-inner mb-4 inline-block">
+              <div className="bg-white p-6 brutal-border brutal-shadow mb-4 inline-block">
                 <QRCodeSVG value={roomUrl} size={180} />
               </div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-tertiary)]">
-                Scan to Join Room
+              <p className="text-xs font-black uppercase tracking-widest bg-black text-white px-3 py-1 brutal-border">
+                Scan to Join
               </p>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               <button
                 onClick={handleCopy}
-                className="w-full flex items-center justify-center gap-2 rounded-lg bg-[var(--bg-tertiary)] px-6 py-3.5 font-semibold text-[var(--text-primary)] transition hover:bg-[var(--bg-glass)] active:scale-95 border border-[var(--border-subtle)]"
+                className="w-full flex items-center justify-center gap-2 brutal-border bg-white px-6 py-4 font-black uppercase text-black transition hover:bg-retro-blue brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-sm"
               >
                 {copied ? (
                   <>
-                    <Check className="w-5 h-5 text-[var(--success)]" />
+                    <Check className="w-5 h-5" />
                     Copied!
                   </>
                 ) : (
@@ -152,7 +152,7 @@ export function InviteModal({ isOpen, onClose, roomUrl }: InviteModalProps) {
               {canShare && (
                 <button
                   onClick={handleShare}
-                  className="w-full flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-3.5 font-bold text-white transition hover:bg-[var(--accent-hover)] active:scale-95 shadow-lg shadow-[var(--shadow-glow)]"
+                  className="w-full flex items-center justify-center gap-2 brutal-border bg-retro-pink px-6 py-4 font-black uppercase text-black transition hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-sm brutal-shadow"
                 >
                   <Share className="w-5 h-5" />
                   Share
@@ -162,30 +162,30 @@ export function InviteModal({ isOpen, onClose, roomUrl }: InviteModalProps) {
           </>
         ) : (
           <>
-            <p className="mb-6 text-sm text-[var(--text-secondary)]">
+            <p className="mb-6 text-sm font-bold uppercase opacity-80">
               Sync your session to your mobile device
             </p>
             <div className="mb-8 flex flex-col items-center">
-              <div className="bg-white p-4 rounded-xl shadow-inner mb-4 inline-block relative">
+              <div className="bg-white p-6 brutal-border brutal-shadow mb-4 inline-block relative">
                 {!syncToken ? (
-                  <div className="w-[180px] h-[180px] flex items-center justify-center text-[var(--text-tertiary)]">
+                  <div className="w-[180px] h-[180px] flex items-center justify-center font-black uppercase opacity-40">
                     Generating...
                   </div>
                 ) : (
                   <QRCodeSVG value={syncUrl} size={180} />
                 )}
               </div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-tertiary)] mb-2">
-                Scan to Sync Identity
+              <p className="text-xs font-black uppercase tracking-widest bg-black text-white px-3 py-1 brutal-border mb-3">
+                Scan to Sync
               </p>
               {syncToken && (
-                <p className="text-xs font-mono text-[var(--text-secondary)] bg-[var(--bg-tertiary)] px-2 py-1 rounded">
+                <p className="text-xs font-black uppercase text-black bg-retro-green px-3 py-1 brutal-border">
                   Expires in: {Math.floor(expiresIn / 60)}:
                   {(expiresIn % 60).toString().padStart(2, '0')}
                 </p>
               )}
             </div>
-            <p className="text-xs text-[var(--text-tertiary)] italic">
+            <p className="text-xs font-bold uppercase opacity-60 italic">
               Scanning this will automatically log you in on mobile with your
               current identity.
             </p>

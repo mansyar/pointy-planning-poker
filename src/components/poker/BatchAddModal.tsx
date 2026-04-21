@@ -27,26 +27,28 @@ export function BatchAddModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-[var(--bg-primary)] bg-opacity-80 backdrop-blur-sm px-4">
-      <div className="island-shell rise-in w-full max-w-lg rounded-2xl p-8 flex flex-col overflow-hidden">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2">
-            <ListPlus className="w-5 h-5 text-[var(--accent)]" />
-            <h2 className="text-xl font-bold text-[var(--text-primary)]">
-              Batch Add Topics
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 px-4">
+      <div className="bg-white brutal-border brutal-shadow w-full max-w-lg p-8 flex flex-col overflow-hidden relative">
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-retro-yellow brutal-border">
+              <ListPlus className="w-6 h-6 text-black" />
+            </div>
+            <h2 className="text-2xl font-black uppercase text-black tracking-tight">
+              Batch Add
             </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-1 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors"
+            className="p-2 text-black hover:text-retro-pink transition-colors brutal-border bg-white"
             aria-label="Close"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <p className="text-sm text-[var(--text-secondary)] mb-4 text-left">
-          Enter multiple topics, one per line. Blank lines will be ignored.
+        <p className="text-sm font-bold uppercase opacity-80 mb-6 text-left">
+          Enter topics, one per line. Blank lines ignored.
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col flex-1">
@@ -54,22 +56,22 @@ export function BatchAddModal({
             autoFocus
             value={titlesString}
             onChange={(e) => setTitlesString(e.target.value)}
-            placeholder="Topic 1&#10;Topic 2&#10;Topic 3..."
-            className="w-full flex-1 min-h-[200px] rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-tertiary)] px-4 py-3 text-[var(--text-primary)] focus:border-[var(--border-focus)] focus:outline-none focus:ring-1 focus:ring-[var(--border-focus)] transition-all font-mono text-sm resize-none mb-6"
+            placeholder="TOPIC 1&#10;TOPIC 2&#10;TOPIC 3..."
+            className="w-full flex-1 min-h-[200px] brutal-border bg-white px-4 py-4 text-black focus:bg-retro-yellow focus:outline-none transition-all font-black uppercase text-sm resize-none mb-8 brutal-shadow"
           />
 
-          <div className="flex items-center justify-end gap-3">
+          <div className="flex items-center justify-end gap-4">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              className="px-6 py-3 text-xs font-black uppercase text-black hover:underline decoration-2"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={!titlesString.trim()}
-              className="px-6 py-2 bg-[var(--accent)] text-white text-sm font-bold rounded-xl hover:bg-[var(--accent-hover)] transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-8 py-4 bg-black text-white text-xs font-black uppercase brutal-border brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-sm transition-all disabled:opacity-30 disabled:cursor-not-allowed"
             >
               Add Topics
             </button>

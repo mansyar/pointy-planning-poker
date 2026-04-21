@@ -44,50 +44,50 @@ export function RoomSettingsModal({
   };
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center bg-[var(--bg-primary)] bg-opacity-80 backdrop-blur-sm px-4">
-      <div className="island-shell rise-in w-full max-w-md rounded-2xl p-8 relative border border-[var(--border-subtle)] shadow-2xl">
+    <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/80 px-4">
+      <div className="bg-white brutal-border brutal-shadow w-full max-w-md p-8 relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors"
+          className="absolute top-4 right-4 p-2 text-black hover:text-retro-pink transition-colors brutal-border bg-white"
           aria-label="Close"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <div className="flex items-center gap-3 mb-8">
-          <div className="p-2 bg-[var(--bg-tertiary)] rounded-xl">
-            <Settings className="w-6 h-6 text-[var(--accent)]" />
+        <div className="flex items-center gap-4 mb-10">
+          <div className="p-3 bg-retro-yellow brutal-border">
+            <Settings className="w-6 h-6 text-black" />
           </div>
-          <h2 className="display-title text-2xl font-bold text-[var(--text-primary)]">
-            Room Settings
+          <h2 className="text-3xl font-black uppercase text-black tracking-tight">
+            Settings
           </h2>
         </div>
 
-        <div className="space-y-8 text-left">
+        <div className="space-y-10 text-left">
           {/* Auto-Reveal */}
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-start gap-3">
+          <div className="flex items-center justify-between gap-6 bg-retro-blue/10 p-4 brutal-border">
+            <div className="flex items-start gap-4">
               <div className="mt-1">
-                <Zap className="w-5 h-5 text-[var(--success)]" />
+                <Zap className="w-5 h-5 text-black" />
               </div>
               <div>
-                <p className="font-bold text-[var(--text-primary)]">
+                <p className="font-black uppercase text-sm text-black">
                   Auto-Reveal
                 </p>
-                <p className="text-xs text-[var(--text-tertiary)]">
-                  Automatically show results when everyone has voted.
+                <p className="text-[10px] font-bold uppercase opacity-60">
+                  Instant results on final vote.
                 </p>
               </div>
             </div>
             <button
               onClick={() => setAutoReveal(!autoReveal)}
-              className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                autoReveal ? 'bg-[var(--success)]' : 'bg-[var(--bg-tertiary)]'
+              className={`relative inline-flex h-8 w-14 shrink-0 cursor-pointer brutal-border transition-colors duration-100 focus:outline-none ${
+                autoReveal ? 'bg-retro-green' : 'bg-white'
               }`}
             >
               <span
-                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
-                  autoReveal ? 'translate-x-5' : 'translate-x-0'
+                className={`pointer-events-none inline-block h-6 w-6 transform brutal-border bg-black transition duration-100 ${
+                  autoReveal ? 'translate-x-6' : 'translate-x-0'
                 }`}
               />
             </button>
@@ -95,43 +95,36 @@ export function RoomSettingsModal({
 
           {/* Scale Type */}
           <div>
-            <div className="flex items-start gap-3 mb-4">
-              <div className="mt-1">
-                <Layers className="w-5 h-5 text-[var(--accent)]" />
-              </div>
-              <div>
-                <p className="font-bold text-[var(--text-primary)]">
-                  Estimation Scale
-                </p>
-                <p className="text-xs text-[var(--text-tertiary)]">
-                  Choose the values for your planning cards.
-                </p>
-              </div>
+            <div className="flex items-start gap-3 mb-6 bg-black text-white px-2 py-1 brutal-border w-fit">
+              <Layers className="w-4 h-4" />
+              <h3 className="text-[10px] font-black uppercase tracking-widest">
+                Estimation Scale
+              </h3>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-4">
               <button
                 onClick={() => setScaleType('fibonacci')}
-                className={`p-4 rounded-xl border text-sm font-bold transition-all ${
+                className={`p-4 brutal-border text-sm font-black uppercase transition-all brutal-shadow ${
                   scaleType === 'fibonacci'
-                    ? 'border-[var(--accent)] bg-[var(--bg-tertiary)] text-[var(--text-primary)] shadow-sm'
-                    : 'border-[var(--border-subtle)] text-[var(--text-tertiary)] hover:border-[var(--accent)]/50'
+                    ? 'bg-retro-yellow translate-x-0.5 translate-y-0.5 shadow-none'
+                    : 'bg-white hover:bg-gray-50'
                 }`}
               >
                 🔢 Fibonacci
-                <p className="text-[10px] font-normal mt-1 opacity-60">
-                  0, 1, 2, 3, 5, 8, 13...
+                <p className="text-[10px] font-bold mt-2 opacity-60">
+                  0, 1, 2, 3, 5, 8...
                 </p>
               </button>
               <button
                 onClick={() => setScaleType('tshirt')}
-                className={`p-4 rounded-xl border text-sm font-bold transition-all ${
+                className={`p-4 brutal-border text-sm font-black uppercase transition-all brutal-shadow ${
                   scaleType === 'tshirt'
-                    ? 'border-[var(--accent)] bg-[var(--bg-tertiary)] text-[var(--text-primary)] shadow-sm'
-                    : 'border-[var(--border-subtle)] text-[var(--text-tertiary)] hover:border-[var(--accent)]/50'
+                    ? 'bg-retro-yellow translate-x-0.5 translate-y-0.5 shadow-none'
+                    : 'bg-white hover:bg-gray-50'
                 }`}
               >
                 👕 T-Shirt
-                <p className="text-[10px] font-normal mt-1 opacity-60">
+                <p className="text-[10px] font-bold mt-2 opacity-60">
                   XS, S, M, L, XL...
                 </p>
               </button>
@@ -139,18 +132,18 @@ export function RoomSettingsModal({
           </div>
         </div>
 
-        <div className="mt-12 flex gap-3">
+        <div className="mt-12 flex gap-4">
           <button
             onClick={onClose}
-            className="flex-1 px-6 py-3 rounded-xl border border-[var(--border-subtle)] text-sm font-bold text-[var(--text-secondary)] hover:bg-[var(--bg-tertiary)] transition-colors"
+            className="flex-1 px-6 py-4 brutal-border bg-white text-xs font-black uppercase text-black hover:bg-gray-100 transition-all brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-sm"
           >
             Cancel
           </button>
           <button
             onClick={handleSave}
-            className="flex-1 px-6 py-3 rounded-xl bg-[var(--accent)] text-white text-sm font-bold hover:brightness-110 shadow-lg shadow-[var(--accent)]/20 active:scale-95 transition-all"
+            className="flex-1 px-6 py-4 brutal-border bg-black text-xs font-black uppercase text-white hover:bg-retro-pink transition-all brutal-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-sm"
           >
-            Save Changes
+            Save
           </button>
         </div>
       </div>
