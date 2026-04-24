@@ -13,7 +13,7 @@ Tempo is the companion tool teams open during ceremonies — the dedicated "seco
 ## Core Toolkit
 
 1. **Planning Poker (Estimation):** Real-time collaborative estimation with multi-scale support (Fibonacci, T-Shirt) and automated consensus analysis.
-2. **Daily Standup (Coming Soon):** Streamlined status updates with per-person timeboxing and parking lot management.
+2. **Daily Standup:** Streamlined status updates with per-person timeboxing and parking lot management.
 3. **Common Ceremony Infrastructure:**
    - **Zero-Friction Entry:** Join with just a nickname; sessions persisted locally via Identity ID.
    - **Real-Time Gameplay:** Live syncing across all participants via Convex subscriptions.
