@@ -53,3 +53,37 @@ export function generateCSV(topics: ExportTopic[]): string {
 
   return csv.trim();
 }
+
+/**
+ * Generates a Markdown summary of a standup session.
+ */
+export function generateStandupSummary(
+  roomName: string,
+  speakers: { name: string; duration: number }[],
+  parkingLotItems: string[]
+): string {
+  let markdown = `# Standup Summary: ${roomName}\n\n`;
+  
+  markdown += `## 🎙️ Speaker Durations\n\n`;
+  if (speakers.length === 0) {
+    markdown += `No speakers recorded.\n\n`;
+  } else {
+    markdown += `| Speaker | Duration |\n`;
+    markdown += `| :--- | :--- |\n`;
+    for (const s of speakers) {
+      markdown += `| ${s.name} | ${s.duration}s |\n`;
+    }
+    markdown += `\n`;
+  }
+
+  markdown += `## 🚗 Parking Lot Items\n\n`;
+  if (parkingLotItems.length === 0) {
+    markdown += `No items in parking lot.\n\n`;
+  } else {
+    for (const item of parkingLotItems) {
+      markdown += `- ${item}\n`;
+    }
+  }
+
+  return markdown;
+}

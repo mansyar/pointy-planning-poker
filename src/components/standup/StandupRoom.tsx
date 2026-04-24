@@ -191,6 +191,7 @@ export function StandupRoom({ slug }: StandupRoomProps) {
             ) : (
               <StandupView
                 roomId={room._id}
+                roomSlug={slug}
                 identityId={identityId!}
                 isFacilitator={isFacilitator}
                 entries={entries || []}
