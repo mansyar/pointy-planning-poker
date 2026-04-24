@@ -29,12 +29,12 @@
   - [x] Implement component with reordering support
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Core Components & Logic' (Protocol in workflow.md)
 
-## Phase 3: Room Setup & Integration
+## Phase 3: Room Setup & Integration [checkpoint: e5f2d2a]
 
 - [x] Task: Update landing hub for Standup tool fd7daa5
   - [x] Write tests for tool selection and room creation
   - [x] Implement Standup option in `src/components/shared/LandingPage.tsx`
-- [x] Task: Create Standup Room Page structure
+- [x] Task: Create Standup Room Page structure a6a72aa
   - [x] Write tests for room routing and setup state
   - [x] Implement `src/routes/standup.$slug.tsx`
 - [x] Task: Implement Room Configuration (Timer/Order/Auto-advance) a6a72aa
