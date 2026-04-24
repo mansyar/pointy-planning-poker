@@ -4,7 +4,7 @@ import type { Id } from '../../../convex/_generated/dataModel';
 import { Clipboard, ChevronLeft, LayoutDashboard } from 'lucide-react';
 import { toast } from 'sonner';
 import { generateStandupSummary } from '../../utils/exporter';
-import { Doc } from '../../../convex/_generated/dataModel';
+import type { Doc } from '../../../convex/_generated/dataModel';
 
 interface SummaryViewProps {
   roomId: Id<'rooms'>;

@@ -38,7 +38,12 @@ export function StandupTimer({
   const isUrgent = !isOvertime && remaining <= 10 && remaining > 0;
 
   return (
-    <div className="flex items-center gap-2 bg-white px-3 py-1.5 brutal-border brutal-shadow">
+    <div 
+      className="flex items-center gap-2 bg-white px-3 py-1.5 brutal-border brutal-shadow"
+      role="timer"
+      aria-live="polite"
+      aria-atomic="true"
+    >
       <div
         className={`flex items-center gap-2 ${
           isOvertime || isUrgent ? 'animate-pulse text-retro-pink' : 'text-black'
@@ -46,6 +51,9 @@ export function StandupTimer({
       >
         <Timer className="w-4 h-4" />
         <span className="font-black text-lg min-w-[3ch]">
+          <span className="sr-only">
+            {isOvertime ? 'Overtime' : 'Time remaining'}:
+          </span>
           {isOvertime ? `+${elapsed - timeLimit}S` : `${remaining}S`}
         </span>
       </div>

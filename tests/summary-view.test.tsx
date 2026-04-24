@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { SummaryView } from '../src/components/standup/SummaryView';
 import { useQuery } from 'convex/react';
-import { Id } from '../convex/_generated/dataModel';
+import type { Id } from '../convex/_generated/dataModel';
 
 vi.mock('convex/react', () => ({
   useQuery: vi.fn(),

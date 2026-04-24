@@ -19,7 +19,7 @@ import type { Id } from '../../../convex/_generated/dataModel';
 
 const InviteModal = lazy(() =>
   import('../shared/InviteModal').then((m) => ({ default: m.InviteModal }))
-);
+) as React.FC<{ isOpen: boolean; onClose: () => void; roomUrl: string }>;
 
 interface StandupRoomProps {
   slug: string;
@@ -29,6 +29,7 @@ export function StandupRoom({ slug }: StandupRoomProps) {
   const { identityId, nickname } = useIdentity();
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const room = useQuery(api.rooms.getBySlug, { slug });
   const players = useQuery(api.players.listByRoom, {
@@ -101,7 +102,7 @@ export function StandupRoom({ slug }: StandupRoomProps) {
         }
       });
       toast.success('Standup started!');
-    } catch (e) {
+    } catch {
       toast.error('Failed to start standup');
     }
   };
@@ -121,10 +122,23 @@ export function StandupRoom({ slug }: StandupRoomProps) {
 
       <div className="flex-1 flex w-full min-h-0 relative overflow-hidden">
         {/* Sidebar: Queue */}
-        <aside className="w-80 bg-white brutal-border border-t-0 border-l-0 border-b-0 flex flex-col shrink-0 overflow-y-auto custom-scrollbar p-4 hidden md:flex">
-           <div className="mb-6 flex items-center gap-2">
-             <Users className="w-6 h-6" />
-             <h2 className="text-xl">Speaker Queue</h2>
+        <aside 
+          className={`
+            fixed inset-y-0 left-0 z-40 w-80 bg-white brutal-border border-t-0 border-l-0 border-b-0 flex flex-col shrink-0 overflow-y-auto custom-scrollbar p-4 transition-transform duration-300 md:relative md:translate-x-0
+            ${isSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full md:translate-x-0'}
+          `}
+        >
+           <div className="mb-6 flex items-center justify-between">
+             <div className="flex items-center gap-2">
+               <Users className="w-6 h-6" />
+               <h2 className="text-xl">Speaker Queue</h2>
+             </div>
+             <button 
+               onClick={() => setIsSidebarOpen(false)}
+               className="md:hidden p-2 brutal-border hover:bg-retro-pink"
+             >
+               <Play className="w-4 h-4 rotate-180" />
+             </button>
            </div>
            <SectionErrorBoundary name="Speaker Queue">
              <SpeakerQueue 
@@ -142,6 +156,16 @@ export function StandupRoom({ slug }: StandupRoomProps) {
             facilitatorId={room.facilitatorId}
             identityId={identityId!}
           />
+
+          <div className="absolute top-4 left-4 z-20 md:hidden">
+             <button
+               onClick={() => setIsSidebarOpen(true)}
+               className="p-3 bg-white brutal-border brutal-shadow hover:bg-retro-yellow transition-all"
+               title="Open Queue"
+             >
+               <Users className="w-6 h-6" />
+             </button>
+          </div>
 
           {isFacilitator && (
             <div className="absolute top-4 right-4 z-20">
