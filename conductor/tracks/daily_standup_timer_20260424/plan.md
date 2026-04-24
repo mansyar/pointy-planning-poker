@@ -8,9 +8,9 @@
 - [x] Task: Implement `standup.start` mutation 432710f
   - [x] Write failing tests for starting a standup (queue population)
   - [x] Implement `standup.start` in `convex/standup.ts`
-- [ ] Task: Implement `parkingLot.add` and `parkingLot.listByRoom`
-  - [ ] Write failing tests for parking lot operations
-  - [ ] Implement parking lot logic in `convex/parkingLot.ts`
+- [x] Task: Implement `parkingLot.add` and `parkingLot.listByRoom` b022f36
+  - [x] Write failing tests for parking lot operations
+  - [x] Implement parking lot logic in `convex/parkingLot.ts`
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundation & Backend' (Protocol in workflow.md)
 
 ## Phase 2: Core Components & Logic (Timer & Queue)
