@@ -24,9 +24,9 @@
 - [x] Task: Create `StandupTimer` component 8110a6a
   - [x] Write tests for visual states (Green/Yellow/Red/Overtime)
   - [x] Implement component with Framer Motion circular progress
-- [ ] Task: Create `SpeakerQueue` component
-  - [ ] Write tests for queue rendering and facilitator controls
-  - [ ] Implement component with reordering support
+- [x] Task: Create `SpeakerQueue` component b46d115
+  - [x] Write tests for queue rendering and facilitator controls
+  - [x] Implement component with reordering support
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Core Components & Logic' (Protocol in workflow.md)
 
 ## Phase 3: Room Setup & Integration
