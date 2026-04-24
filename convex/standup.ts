@@ -219,3 +219,27 @@ export const listEntries = query({
     return entries.sort((a, b) => a.order - b.order);
   },
 });
+
+export const updateConfig = mutation({
+  args: {
+    roomId: v.id('rooms'),
+    identityId: v.string(),
+    config: v.object({
+      timeLimit: v.optional(v.number()),
+      autoAdvance: v.optional(v.boolean()),
+    }),
+  },
+  handler: async (ctx, args) => {
+    const room = await ctx.db.get(args.roomId);
+    if (!room) throw new Error('Room not found');
+    if (room.facilitatorId !== args.identityId) {
+      throw new Error('Only the facilitator can update standup settings');
+    }
+
+    await ctx.db.patch(args.roomId, {
+      standupTimeLimit: args.config.timeLimit ?? room.standupTimeLimit,
+      standupAutoAdvance: args.config.autoAdvance ?? room.standupAutoAdvance,
+      updatedAt: Date.now(),
+    });
+  },
+});

@@ -4,14 +4,14 @@ import JuiceToggle from './JuiceToggle';
 
 export default function Header() {
   const location = useLocation();
-  const isRoom =
-    location.pathname.startsWith('/room/') ||
-    location.pathname.startsWith('/poker/');
+  const isPoker = location.pathname.startsWith('/poker/');
+  const isStandup = location.pathname.startsWith('/standup/');
+  const isRoom = isPoker || isStandup || location.pathname.startsWith('/room/');
 
   return (
     <header className="brutal-border border-x-0 border-t-0 bg-white px-4 py-3">
       <nav className="page-wrap flex items-center justify-between">
-        {/* Left: Logo & Poker Badge */}
+        {/* Left: Logo & Mode Badge */}
         <div className="flex items-center gap-4">
           <Link
             to="/"
@@ -21,10 +21,17 @@ export default function Header() {
             Tempo
           </Link>
           
-          {isRoom && (
+          {isPoker && (
             <div className="hidden sm:flex items-center gap-2 bg-retro-green text-black px-3 py-1 brutal-border text-xs font-black uppercase tracking-widest">
               <span>▸</span>
               <span>Poker Mode</span>
+            </div>
+          )}
+
+          {isStandup && (
+            <div className="hidden sm:flex items-center gap-2 bg-retro-pink text-black px-3 py-1 brutal-border text-xs font-black uppercase tracking-widest">
+              <span>▸</span>
+              <span>Standup Mode</span>
             </div>
           )}
         </div>
