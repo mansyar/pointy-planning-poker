@@ -40,7 +40,7 @@ export function StandupSettingsModal({
       });
       toast.success('Settings updated!');
       onClose();
-    } catch (e) {
+    } catch {
       toast.error('Failed to update settings');
     }
   };

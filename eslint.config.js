@@ -1,6 +1,7 @@
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import globals from 'globals';
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -8,6 +9,10 @@ export default tseslint.config(
   eslintConfigPrettier,
   {
     languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.serviceworker,
+      },
       parserOptions: {
         project: true,
         tsconfigRootDir: import.meta.dirname,
@@ -31,6 +36,14 @@ export default tseslint.config(
   },
   {
     files: ['**/*.js', '**/*.mjs'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        self: 'readonly',
+        caches: 'readonly',
+        fetch: 'readonly',
+      },
+    },
     ...tseslint.configs.disableTypeChecked,
   }
 );

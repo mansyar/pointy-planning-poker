@@ -1,4 +1,3 @@
-/* eslint-env serviceworker */
 const CACHE_NAME = 'pointy-cache-v1';
 const ASSETS_TO_CACHE = [
   '/',

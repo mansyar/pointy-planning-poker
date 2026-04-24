@@ -13,7 +13,6 @@ describe('calculateTimerState', () => {
   });
 
   it('should return null if neither startedAt nor duration provided', () => {
-    // @ts-ignore
     const state = calculateTimerState({
       timeLimit: 60,
     });

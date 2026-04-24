@@ -66,6 +66,7 @@
     "convex-test": "^0.0.49",
     "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.5.0",
     "husky": "^9.1.7",
     "jsdom": "^28.1.0",
     "lint-staged": "^16.4.0",

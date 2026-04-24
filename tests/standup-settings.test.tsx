@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { StandupSettingsModal } from '../src/components/standup/StandupSettingsModal';
 import { useMutation } from 'convex/react';
+import type { Id } from '../convex/_generated/dataModel';
 
 vi.mock('convex/react', () => ({
   useMutation: vi.fn(),
@@ -23,7 +24,7 @@ describe('StandupSettingsModal', () => {
       <StandupSettingsModal 
         isOpen={true} 
         onClose={vi.fn()} 
-        roomId={"room1" as any}
+        roomId={"room1" as Id<'rooms'>}
         identityId="user1"
         initialTimeLimit={60}
         initialAutoAdvance={true}
@@ -40,7 +41,7 @@ describe('StandupSettingsModal', () => {
       <StandupSettingsModal 
         isOpen={true} 
         onClose={vi.fn()} 
-        roomId={"room1" as any}
+        roomId={"room1" as Id<'rooms'>}
         identityId="user1"
         initialTimeLimit={60}
         initialAutoAdvance={true}

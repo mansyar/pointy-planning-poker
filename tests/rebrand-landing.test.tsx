@@ -67,9 +67,9 @@ describe('Landing Page Rebranding', () => {
     });
   });
 
-  it('shows Standup tool as Soon', () => {
+  it('shows Standup tool as available', () => {
     renderWithJuice(<LandingPage />);
     expect(screen.getByText(/Daily Standup/i)).toBeTruthy();
-    expect(screen.getByText(/Soon/i)).toBeTruthy();
+    expect(screen.getByText(/Start Standup/i)).toBeTruthy();
   });
 });

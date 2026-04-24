@@ -52,7 +52,7 @@ describe('RoomPage Invite Flow', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(useQuery).mockImplementation((...args) => {
-      const a = args[1] as any;
+      const a = args[1];
       if (a?.slug === 'test-room') {
         return {
           _id: 'room-1',

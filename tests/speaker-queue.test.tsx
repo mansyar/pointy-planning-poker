@@ -14,9 +14,9 @@ describe('SpeakerQueue Component', () => {
   const myIdentityId = 'user1';
 
   const mockEntries = [
-    { _id: 'e1' as any, identityId: 'user1', order: 0, status: 'completed', duration: 30 },
-    { _id: 'e2' as any, identityId: 'user2', order: 1, status: 'speaking', startedAt: Date.now() },
-    { _id: 'e3' as any, identityId: 'user3', order: 2, status: 'pending' },
+    { _id: 'e1' as Id<'standup_entries'>, identityId: 'user1', order: 0, status: 'completed', duration: 30 },
+    { _id: 'e2' as Id<'standup_entries'>, identityId: 'user2', order: 1, status: 'speaking', startedAt: Date.now() },
+    { _id: 'e3' as Id<'standup_entries'>, identityId: 'user3', order: 2, status: 'pending' },
   ];
 
   const mockPlayers = [

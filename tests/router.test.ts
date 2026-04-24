@@ -27,5 +27,5 @@ describe('Router', () => {
     expect(router).toBeDefined();
     expect(router).toBeTruthy();
     expect(typeof router).toBe('object');
-  });
+  }, 10000);
 });

@@ -2,14 +2,14 @@ import { ActiveSpeakerCard } from './ActiveSpeakerCard';
 import { ParkingLot } from './ParkingLot';
 import { SummaryView } from './SummaryView';
 import { useState } from 'react';
-import type { Id } from '../../../convex/_generated/dataModel';
+import type { Id, Doc } from '../../../convex/_generated/dataModel';
 
 interface StandupViewProps {
   roomId: Id<'rooms'>;
   identityId: string;
   isFacilitator: boolean;
-  entries: any[];
-  players: any[];
+  entries: Doc<'standup_entries'>[];
+  players: Doc<'players'>[];
   timeLimit: number;
   roomSlug: string;
 }

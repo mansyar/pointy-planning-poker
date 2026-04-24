@@ -4,7 +4,9 @@ import JuiceToggle from './JuiceToggle';
 
 export default function Header() {
   const location = useLocation();
-  const isPoker = location.pathname.startsWith('/poker/');
+  const isPoker =
+    location.pathname.startsWith('/poker/') ||
+    location.pathname.startsWith('/room/');
   const isStandup = location.pathname.startsWith('/standup/');
 
   return (

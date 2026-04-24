@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ParkingLot } from '../src/components/standup/ParkingLot';
 import { useQuery, useMutation } from 'convex/react';
+import type { Id } from '../convex/_generated/dataModel';
 
 vi.mock('convex/react', () => ({
   useQuery: vi.fn(),
@@ -21,12 +22,24 @@ describe('ParkingLot Component', () => {
   });
 
   it('renders items', () => {
-    render(<ParkingLot roomId={"room1" as any} identityId="user1" isFacilitator={false} />);
+    render(
+      <ParkingLot 
+        roomId={"room1" as Id<'rooms'>} 
+        identityId="user1" 
+        isFacilitator={false} 
+      />
+    );
     expect(screen.getByText('Item 1')).toBeDefined();
   });
 
   it('shows add input', () => {
-    render(<ParkingLot roomId={"room1" as any} identityId="user1" isFacilitator={false} />);
+    render(
+      <ParkingLot 
+        roomId={"room1" as Id<'rooms'>} 
+        identityId="user1" 
+        isFacilitator={false} 
+      />
+    );
     expect(screen.getByPlaceholderText(/Add to parking lot/i)).toBeDefined();
   });
 
@@ -36,7 +49,13 @@ describe('ParkingLot Component', () => {
       Object.assign(addMock, { withOptimisticUpdate: vi.fn().mockReturnThis() })
     );
 
-    render(<ParkingLot roomId={"room1" as any} identityId="user1" isFacilitator={false} />);
+    render(
+      <ParkingLot 
+        roomId={"room1" as Id<'rooms'>} 
+        identityId="user1" 
+        isFacilitator={false} 
+      />
+    );
     
     const input = screen.getByPlaceholderText(/Add to parking lot/i);
     fireEvent.change(input, { target: { value: 'New Item' } });
