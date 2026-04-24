@@ -11,7 +11,7 @@
 - [x] Task: Implement `parkingLot.add` and `parkingLot.listByRoom` b022f36
   - [x] Write failing tests for parking lot operations
   - [x] Implement parking lot logic in `convex/parkingLot.ts`
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundation & Backend' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Foundation & Backend' (Protocol in workflow.md)
 
 ## Phase 2: Core Components & Logic (Timer & Queue) [checkpoint: b26996e]
 
@@ -27,7 +27,7 @@
 - [x] Task: Create `SpeakerQueue` component b46d115
   - [x] Write tests for queue rendering and facilitator controls
   - [x] Implement component with reordering support
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Core Components & Logic' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Core Components & Logic' (Protocol in workflow.md)
 
 ## Phase 3: Room Setup & Integration [checkpoint: e5f2d2a]
 
@@ -42,7 +42,7 @@
   - [x] Implement settings UI and mutations
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Room Setup & Integration' (Protocol in workflow.md)
 
-## Phase 4: Parking Lot & Summary
+## Phase 4: Parking Lot & Summary [checkpoint: 5c666f3]
 
 - [x] Task: Build Parking Lot UI b7171b2
   - [x] Write tests for adding/removing items in UI
@@ -50,8 +50,8 @@
 - [x] Task: Implement Session Summary view 9483ee5
   - [x] Write tests for summary data calculation and "Copy Markdown"
   - [x] Implement `SummaryView` component
-- [~] Task: Final Polish & Accessibility
-  - [ ] Verify `aria-live` announcements for timer
-  - [ ] Ensure mobile responsiveness for all new views
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Parking Lot & Summary' (Protocol in workflow.md)
-      y' (Protocol in workflow.md)
+- [x] Task: Final Polish & Accessibility 6b5e3e9
+  - [x] Verify `aria-live` announcements for timer
+  - [x] Ensure mobile responsiveness for all new views
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Parking Lot & Summary' (Protocol in workflow.md)
+      .md)
