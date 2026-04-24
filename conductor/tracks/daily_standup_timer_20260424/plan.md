@@ -1,6 +1,6 @@
 # Implementation Plan: Daily Standup Timer
 
-## Phase 1: Foundation & Backend (Convex)
+## Phase 1: Foundation & Backend (Convex) [checkpoint: 031c429]
 
 - [x] Task: Create standup schema definitions for `standup_entries` and `parking_lot` a1ef244
   - [x] Write schema tests in `convex/standup-schema.test.ts`
