@@ -54,4 +54,8 @@
   - [x] Verify `aria-live` announcements for timer
   - [x] Ensure mobile responsiveness for all new views
 - [x] Task: Conductor - User Manual Verification 'Phase 4: Parking Lot & Summary' (Protocol in workflow.md)
+
+## Phase: Review Fixes
+
+- [~] Task: Apply review suggestions
       .md)

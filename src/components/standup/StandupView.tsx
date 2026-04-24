@@ -37,6 +37,7 @@ export function StandupView({
     return (
       <SummaryView
         roomId={roomId}
+        identityId={identityId}
         roomSlug={roomSlug}
         entries={entries}
         players={players}

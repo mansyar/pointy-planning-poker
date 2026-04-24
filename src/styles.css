@@ -103,8 +103,18 @@ body {
   transition: transform 0.1s, box-shadow 0.1s;
 }
 
+.brutal-shadow-lg {
+  box-shadow: 8px 8px 0px 0px #000;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
 .brutal-shadow:active {
   transform: translate(4px, 4px);
+  box-shadow: 2px 2px 0px 0px #000;
+}
+
+.brutal-shadow-lg:active {
+  transform: translate(6px, 6px);
   box-shadow: 2px 2px 0px 0px #000;
 }
 

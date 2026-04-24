@@ -8,6 +8,7 @@ import type { Doc } from '../../../convex/_generated/dataModel';
 
 interface SummaryViewProps {
   roomId: Id<'rooms'>;
+  identityId: string;
   roomSlug: string;
   entries: Doc<'standup_entries'>[];
   players: Doc<'players'>[];
@@ -16,6 +17,7 @@ interface SummaryViewProps {
 
 export function SummaryView({
   roomId,
+  identityId,
   roomSlug,
   entries,
   players,
@@ -45,12 +47,9 @@ export function SummaryView({
 
   const handleEndSession = async () => {
     try {
-      const localIdentity = localStorage.getItem('pointy_identityId');
-      if (!localIdentity) return;
-
       await resetStandup({
         roomId,
-        identityId: localIdentity,
+        identityId,
       });
       toast.success('Session ended');
     } catch {

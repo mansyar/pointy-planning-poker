@@ -227,6 +227,7 @@ export const updateConfig = mutation({
     config: v.object({
       timeLimit: v.optional(v.number()),
       autoAdvance: v.optional(v.boolean()),
+      gracePeriod: v.optional(v.number()),
     }),
   },
   handler: async (ctx, args) => {
@@ -239,6 +240,7 @@ export const updateConfig = mutation({
     await ctx.db.patch(args.roomId, {
       standupTimeLimit: args.config.timeLimit ?? room.standupTimeLimit,
       standupAutoAdvance: args.config.autoAdvance ?? room.standupAutoAdvance,
+      standupGracePeriod: args.config.gracePeriod ?? room.standupGracePeriod,
       updatedAt: Date.now(),
     });
   },

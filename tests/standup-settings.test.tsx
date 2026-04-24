@@ -57,6 +57,7 @@ describe('StandupSettingsModal', () => {
       config: {
         timeLimit: 90,
         autoAdvance: true,
+        gracePeriod: 10,
       }
     });
   });

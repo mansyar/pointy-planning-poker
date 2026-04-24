@@ -249,6 +249,7 @@ export function StandupRoom({ slug }: StandupRoomProps) {
           identityId={identityId!}
           initialTimeLimit={room.standupTimeLimit}
           initialAutoAdvance={room.standupAutoAdvance}
+          initialGracePeriod={room.standupGracePeriod}
         />
       )}
     </div>
