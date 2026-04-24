@@ -70,6 +70,145 @@ export const start = mutation({
   },
 });
 
+export const next = mutation({
+  args: {
+    roomId: v.id('rooms'),
+    identityId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const room = await ctx.db.get(args.roomId);
+    if (!room) throw new Error('Room not found');
+    if (room.facilitatorId !== args.identityId) {
+      throw new Error('Only the facilitator can advance the standup');
+    }
+
+    const entries = await ctx.db
+      .query('standup_entries')
+      .withIndex('by_room', (q) => q.eq('roomId', args.roomId))
+      .collect();
+
+    const currentEntry = entries.find((e) => e.status === 'speaking');
+    if (!currentEntry) return;
+
+    // 1. Mark current as completed
+    const duration = currentEntry.startedAt
+      ? Math.floor((Date.now() - currentEntry.startedAt) / 1000)
+      : 0;
+
+    await ctx.db.patch(currentEntry._id, {
+      status: 'completed',
+      duration: (currentEntry.duration ?? 0) + duration,
+      startedAt: undefined,
+    });
+
+    // 2. Find next pending
+    const nextEntry = entries
+      .filter((e) => e.status === 'pending')
+      .sort((a, b) => a.order - b.order)[0];
+
+    if (nextEntry) {
+      await ctx.db.patch(nextEntry._id, {
+        status: 'speaking',
+        startedAt: Date.now(),
+      });
+    }
+  },
+});
+
+export const previous = mutation({
+  args: {
+    roomId: v.id('rooms'),
+    identityId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const room = await ctx.db.get(args.roomId);
+    if (!room) throw new Error('Room not found');
+    if (room.facilitatorId !== args.identityId) {
+      throw new Error('Only the facilitator can go back in the standup');
+    }
+
+    const entries = await ctx.db
+      .query('standup_entries')
+      .withIndex('by_room', (q) => q.eq('roomId', args.roomId))
+      .collect();
+
+    const currentEntry = entries.find((e) => e.status === 'speaking');
+
+    if (currentEntry) {
+      // 1. Current becomes pending
+      await ctx.db.patch(currentEntry._id, {
+        status: 'pending',
+        startedAt: undefined,
+      });
+
+      // 2. Previous completed becomes speaking
+      const prevEntry = entries
+        .filter((e) => e.status === 'completed' || e.status === 'skipped')
+        .sort((a, b) => b.order - a.order)[0]; // Latest completed
+
+      if (prevEntry) {
+        await ctx.db.patch(prevEntry._id, {
+          status: 'speaking',
+          startedAt: Date.now(),
+        });
+      }
+    } else {
+      // If no one is speaking, maybe we finished?
+      // Find the last completed one.
+      const lastEntry = entries
+        .filter((e) => e.status === 'completed' || e.status === 'skipped')
+        .sort((a, b) => b.order - a.order)[0];
+
+      if (lastEntry) {
+        await ctx.db.patch(lastEntry._id, {
+          status: 'speaking',
+          startedAt: Date.now(),
+        });
+      }
+    }
+  },
+});
+
+export const skip = mutation({
+  args: {
+    roomId: v.id('rooms'),
+    identityId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const room = await ctx.db.get(args.roomId);
+    if (!room) throw new Error('Room not found');
+    if (room.facilitatorId !== args.identityId) {
+      throw new Error('Only the facilitator can skip speakers');
+    }
+
+    const entries = await ctx.db
+      .query('standup_entries')
+      .withIndex('by_room', (q) => q.eq('roomId', args.roomId))
+      .collect();
+
+    const currentEntry = entries.find((e) => e.status === 'speaking');
+    if (!currentEntry) return;
+
+    // 1. Mark current as skipped
+    await ctx.db.patch(currentEntry._id, {
+      status: 'skipped',
+      startedAt: undefined,
+    });
+
+    // 2. Find next pending
+    const nextEntry = entries
+      .filter((e) => e.status === 'pending')
+      .sort((a, b) => a.order - b.order)[0];
+
+    if (nextEntry) {
+      await ctx.db.patch(nextEntry._id, {
+        status: 'speaking',
+        startedAt: Date.now(),
+      });
+    }
+  },
+});
+
 export const listEntries = query({
   args: { roomId: v.id('rooms') },
   handler: async (ctx, args) => {
