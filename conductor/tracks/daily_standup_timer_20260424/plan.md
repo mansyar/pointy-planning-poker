@@ -2,9 +2,9 @@
 
 ## Phase 1: Foundation & Backend (Convex)
 
-- [ ] Task: Create standup schema definitions for `standup_entries` and `parking_lot`
-  - [ ] Write schema tests in `convex/standup-schema.test.ts`
-  - [ ] Update `convex/schema.ts`
+- [x] Task: Create standup schema definitions for `standup_entries` and `parking_lot` a1ef244
+  - [x] Write schema tests in `convex/standup-schema.test.ts`
+  - [x] Update `convex/schema.ts`
 - [ ] Task: Implement `standup.start` mutation
   - [ ] Write failing tests for starting a standup (queue population)
   - [ ] Implement `standup.start` in `convex/standup.ts`
