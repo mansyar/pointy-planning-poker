@@ -1,15 +1,16 @@
 import { useQuery } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import type { Id } from '../../../convex/_generated/dataModel';
-import { Clipboard, CheckCircle2, ChevronLeft, LayoutDashboard } from 'lucide-react';
+import { Clipboard, ChevronLeft, LayoutDashboard } from 'lucide-react';
 import { toast } from 'sonner';
 import { generateStandupSummary } from '../../utils/exporter';
+import { Doc } from '../../../convex/_generated/dataModel';
 
 interface SummaryViewProps {
   roomId: Id<'rooms'>;
   roomSlug: string;
-  entries: any[];
-  players: any[];
+  entries: Doc<'standup_entries'>[];
+  players: Doc<'players'>[];
   onBack: () => void;
 }
 

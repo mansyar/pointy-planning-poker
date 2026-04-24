@@ -64,6 +64,7 @@ function RootComponent() {
   const location = useLocation();
   const isRoomRoute =
     location.pathname.includes('/poker/') ||
+    location.pathname.includes('/standup/') ||
     location.pathname.includes('/room/');
 
   useEffect(() => {
