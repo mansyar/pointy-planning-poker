@@ -13,7 +13,7 @@
   - [x] Implement parking lot logic in `convex/parkingLot.ts`
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Foundation & Backend' (Protocol in workflow.md)
 
-## Phase 2: Core Components & Logic (Timer & Queue)
+## Phase 2: Core Components & Logic (Timer & Queue) [checkpoint: b26996e]
 
 - [x] Task: Build hybrid timer logic ba6b7c0
   - [x] Write unit tests for timer calculation (startedAt + elapsedMs)
