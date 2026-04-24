@@ -11,6 +11,9 @@ export default defineSchema({
     autoReveal: v.optional(v.boolean()), // if true, reveal once everyone has voted
     scaleType: v.optional(v.union(v.literal('fibonacci'), v.literal('tshirt'))),
     toolType: v.optional(v.union(v.literal('poker'), v.literal('standup'))),
+    standupTimeLimit: v.optional(v.number()), // in seconds
+    standupAutoAdvance: v.optional(v.boolean()),
+    standupGracePeriod: v.optional(v.number()), // in seconds
     updatedAt: v.number(),
   })
     .index('by_slug', ['slug'])
@@ -67,4 +70,25 @@ export default defineSchema({
     expiresAt: v.number(),
     isUsed: v.boolean(),
   }).index('by_token', ['token']),
+
+  standup_entries: defineTable({
+    roomId: v.id('rooms'),
+    identityId: v.string(),
+    order: v.number(),
+    status: v.union(
+      v.literal('pending'),
+      v.literal('speaking'),
+      v.literal('completed'),
+      v.literal('skipped')
+    ),
+    duration: v.optional(v.number()), // total seconds spent speaking
+    startedAt: v.optional(v.number()), // timestamp when current turn started
+  }).index('by_room', ['roomId']),
+
+  parking_lot: defineTable({
+    roomId: v.id('rooms'),
+    identityId: v.string(),
+    text: v.string(),
+    createdAt: v.number(),
+  }).index('by_room', ['roomId']),
 });
