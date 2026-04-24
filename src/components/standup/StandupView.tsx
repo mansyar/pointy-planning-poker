@@ -1,4 +1,5 @@
 import { ActiveSpeakerCard } from './ActiveSpeakerCard';
+import { ParkingLot } from './ParkingLot';
 import { CheckCircle, ClipboardList, LayoutDashboard } from 'lucide-react';
 import type { Id } from '../../../convex/_generated/dataModel';
 
@@ -84,14 +85,13 @@ export function StandupView({
         }}
       />
       
-      {/* Parking Lot Summary (Sneak Peak for Phase 4) */}
-      <div className="mt-12 w-full max-w-4xl opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all cursor-not-allowed">
-         <div className="bg-black text-white p-2 brutal-border text-xs font-black uppercase inline-block -mb-1 ml-4 relative z-10">
-           Parking Lot (Soon)
-         </div>
-         <div className="bg-white brutal-border p-4 h-24 flex items-center justify-center text-sm font-bold uppercase">
-           Off-topic items will appear here
-         </div>
+      {/* Parking Lot Summary */}
+      <div className="mt-12 w-full max-w-4xl h-64 shrink-0">
+         <ParkingLot 
+           roomId={roomId}
+           identityId={identityId}
+           isFacilitator={isFacilitator}
+         />
       </div>
     </div>
   );
