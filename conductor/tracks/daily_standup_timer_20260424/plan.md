@@ -15,9 +15,9 @@
 
 ## Phase 2: Core Components & Logic (Timer & Queue)
 
-- [ ] Task: Build hybrid timer logic
-  - [ ] Write unit tests for timer calculation (startedAt + elapsedMs)
-  - [ ] Implement timer calculation hook/utils
+- [x] Task: Build hybrid timer logic ba6b7c0
+  - [x] Write unit tests for timer calculation (startedAt + elapsedMs)
+  - [x] Implement timer calculation hook/utils
 - [ ] Task: Implement `standup.next` and `standup.previous` mutations
   - [ ] Write tests for queue transitions and elapsed time recording
   - [ ] Implement transition logic in `convex/standup.ts`
