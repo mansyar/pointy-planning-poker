@@ -1,4 +1,4 @@
-import { useQuery } from 'convex/react';
+import { useQuery, useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import type { Id } from '../../../convex/_generated/dataModel';
 import { Clipboard, ChevronLeft, LayoutDashboard } from 'lucide-react';
@@ -22,6 +22,7 @@ export function SummaryView({
   onBack,
 }: SummaryViewProps) {
   const parkingLotItems = useQuery(api.parkingLot.listByRoom, { roomId });
+  const resetStandup = useMutation(api.standup.reset);
 
   const speakers = entries
     .filter(e => e.status === 'completed' || e.status === 'skipped')
@@ -40,6 +41,21 @@ export function SummaryView({
     
     navigator.clipboard.writeText(markdown);
     toast.success('Summary copied to clipboard!');
+  };
+
+  const handleEndSession = async () => {
+    try {
+      const localIdentity = localStorage.getItem('pointy_identityId');
+      if (!localIdentity) return;
+
+      await resetStandup({
+        roomId,
+        identityId: localIdentity,
+      });
+      toast.success('Session ended');
+    } catch {
+      toast.error('Failed to end session');
+    }
   };
 
   return (
@@ -108,6 +124,7 @@ export function SummaryView({
         </button>
         
         <button
+          onClick={handleEndSession}
           className="flex-1 py-5 bg-white text-black text-xl font-black uppercase brutal-border brutal-shadow transition-all flex items-center justify-center gap-3 hover:bg-gray-100"
         >
           <LayoutDashboard className="w-6 h-6" />

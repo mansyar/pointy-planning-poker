@@ -5,6 +5,7 @@ import schema from './schema';
 import * as rooms from './rooms';
 import * as players from './players';
 import * as standup from './standup';
+import * as parkingLot from './parkingLot';
 import * as apiModule from './_generated/api';
 import * as serverModule from './_generated/server';
 
@@ -274,6 +275,35 @@ test('standup mutations are facilitator-only', async () => {
   await expect(t.mutation(api.standup.next, { roomId, identityId: 'user-2' })).rejects.toThrow();
   await expect(t.mutation(api.standup.previous, { roomId, identityId: 'user-2' })).rejects.toThrow();
   await expect(t.mutation(api.standup.skip, { roomId, identityId: 'user-2' })).rejects.toThrow();
+});
+
+test('standup.reset clears all entries and parking lot', async () => {
+  const t = convexTest(schema, {
+    rooms: async () => rooms,
+    players: async () => players,
+    standup: async () => standup,
+    parkingLot: async () => parkingLot,
+    '_generated/api': async () => apiModule,
+    '_generated/server': async () => serverModule,
+  });
+
+  const { roomId } = await t.mutation(api.rooms.create, {
+    slug: 'reset-test',
+    facilitatorId: 'fac-1',
+  });
+
+  await t.mutation(api.players.join, { roomId, identityId: 'fac-1', name: 'Facilitator' });
+  await t.mutation(api.standup.start, { roomId, identityId: 'fac-1' });
+  await t.mutation(api.parkingLot.add, { roomId, identityId: 'fac-1', text: 'Off-topic' });
+
+  // Reset
+  await t.mutation(api.standup.reset, { roomId, identityId: 'fac-1' });
+
+  const entries = await t.query(api.standup.listEntries, { roomId });
+  const items = await t.query(api.parkingLot.listByRoom, { roomId });
+
+  expect(entries.length).toBe(0);
+  expect(items.length).toBe(0);
 });
 
 test('standup.start requires facilitator', async () => {

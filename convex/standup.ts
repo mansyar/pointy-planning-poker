@@ -243,3 +243,37 @@ export const updateConfig = mutation({
     });
   },
 });
+
+export const reset = mutation({
+  args: {
+    roomId: v.id('rooms'),
+    identityId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const room = await ctx.db.get(args.roomId);
+    if (!room) throw new Error('Room not found');
+    if (room.facilitatorId !== args.identityId) {
+      throw new Error('Only the facilitator can reset the standup');
+    }
+
+    // 1. Clear entries
+    const entries = await ctx.db
+      .query('standup_entries')
+      .withIndex('by_room', (q) => q.eq('roomId', args.roomId))
+      .collect();
+
+    for (const entry of entries) {
+      await ctx.db.delete(entry._id);
+    }
+
+    // 2. Clear parking lot
+    const parkingLot = await ctx.db
+      .query('parking_lot')
+      .withIndex('by_room', (q) => q.eq('roomId', args.roomId))
+      .collect();
+
+    for (const item of parkingLot) {
+      await ctx.db.delete(item._id);
+    }
+  },
+});
