@@ -40,17 +40,18 @@
 - [x] Task: Implement Room Configuration (Timer/Order/Auto-advance) a6a72aa
   - [x] Write tests for updating room config
   - [x] Implement settings UI and mutations
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Room Setup & Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Room Setup & Integration' (Protocol in workflow.md)
 
 ## Phase 4: Parking Lot & Summary
 
-- [ ] Task: Build Parking Lot UI
-  - [ ] Write tests for adding/removing items in UI
-  - [ ] Implement Parking Lot panel
-- [ ] Task: Implement Session Summary view
-  - [ ] Write tests for summary data calculation and "Copy Markdown"
-  - [ ] Implement `SummaryView` component
-- [ ] Task: Final Polish & Accessibility
+- [x] Task: Build Parking Lot UI b7171b2
+  - [x] Write tests for adding/removing items in UI
+  - [x] Implement Parking Lot panel
+- [x] Task: Implement Session Summary view 9483ee5
+  - [x] Write tests for summary data calculation and "Copy Markdown"
+  - [x] Implement `SummaryView` component
+- [~] Task: Final Polish & Accessibility
   - [ ] Verify `aria-live` announcements for timer
   - [ ] Ensure mobile responsiveness for all new views
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Parking Lot & Summary' (Protocol in workflow.md)
+      y' (Protocol in workflow.md)
