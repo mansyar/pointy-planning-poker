@@ -34,12 +34,12 @@
 - [x] Task: Update landing hub for Standup tool fd7daa5
   - [x] Write tests for tool selection and room creation
   - [x] Implement Standup option in `src/components/shared/LandingPage.tsx`
-- [ ] Task: Create Standup Room Page structure
-  - [ ] Write tests for room routing and setup state
-  - [ ] Implement `src/routes/standup.$slug.tsx`
-- [ ] Task: Implement Room Configuration (Timer/Order/Auto-advance)
-  - [ ] Write tests for updating room config
-  - [ ] Implement settings UI and mutations
+- [x] Task: Create Standup Room Page structure
+  - [x] Write tests for room routing and setup state
+  - [x] Implement `src/routes/standup.$slug.tsx`
+- [x] Task: Implement Room Configuration (Timer/Order/Auto-advance) a6a72aa
+  - [x] Write tests for updating room config
+  - [x] Implement settings UI and mutations
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Room Setup & Integration' (Protocol in workflow.md)
 
 ## Phase 4: Parking Lot & Summary
