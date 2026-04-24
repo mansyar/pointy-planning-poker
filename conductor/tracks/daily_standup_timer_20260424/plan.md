@@ -5,9 +5,9 @@
 - [x] Task: Create standup schema definitions for `standup_entries` and `parking_lot` a1ef244
   - [x] Write schema tests in `convex/standup-schema.test.ts`
   - [x] Update `convex/schema.ts`
-- [ ] Task: Implement `standup.start` mutation
-  - [ ] Write failing tests for starting a standup (queue population)
-  - [ ] Implement `standup.start` in `convex/standup.ts`
+- [x] Task: Implement `standup.start` mutation 432710f
+  - [x] Write failing tests for starting a standup (queue population)
+  - [x] Implement `standup.start` in `convex/standup.ts`
 - [ ] Task: Implement `parkingLot.add` and `parkingLot.listByRoom`
   - [ ] Write failing tests for parking lot operations
   - [ ] Implement parking lot logic in `convex/parkingLot.ts`
