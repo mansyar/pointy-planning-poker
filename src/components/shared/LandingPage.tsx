@@ -61,9 +61,24 @@ export function LandingPage() {
         facilitatorId: identityId!,
         toolType: 'poker',
       });
-      navigate({ to: '/poker/$slug', params: { slug } as any });
+      navigate({ to: '/poker/$slug', params: { slug } });
     } catch (error) {
       console.error('Failed to create poker room:', error);
+    }
+  };
+
+  const handleCreateStandupRoom = async () => {
+    if (!nickname.trim()) return;
+
+    try {
+      const { slug } = await createRoom({
+        facilitatorId: identityId!,
+        toolType: 'standup',
+      });
+      // @ts-expect-error - Route might not be generated yet
+      navigate({ to: '/standup/$slug', params: { slug } });
+    } catch (error) {
+      console.error('Failed to create standup room:', error);
     }
   };
 
@@ -72,13 +87,22 @@ export function LandingPage() {
 
     // Extract slug from URL if pasted
     let slug = joinSlug.trim();
-    const roomPath = slug.includes('/poker/') ? '/poker/' : '/room/';
+    const roomPath = slug.includes('/poker/')
+      ? '/poker/'
+      : slug.includes('/standup/')
+        ? '/standup/'
+        : '/room/';
     if (slug.includes(roomPath)) {
       const parts = slug.split(roomPath);
       slug = parts[parts.length - 1].split('/')[0];
     }
 
-    navigate({ to: '/poker/$slug', params: { slug } as any });
+    if (roomPath === '/standup/') {
+      // @ts-expect-error - Route might not be generated yet
+      navigate({ to: '/standup/$slug', params: { slug } });
+    } else {
+      navigate({ to: '/poker/$slug', params: { slug } });
+    }
   };
 
   return (
@@ -138,12 +162,13 @@ export function LandingPage() {
             </div>
           </button>
 
-          {/* Tool: Daily Standup (Coming Soon) */}
-          <div className="group relative flex flex-col items-center gap-6 brutal-border bg-retro-pink p-8 opacity-40 grayscale">
-            <div className="absolute -top-4 -right-4 bg-black text-white px-3 py-1 text-xs font-black uppercase rotate-12 brutal-border">
-              Soon
-            </div>
-            <div className="bg-white p-5 brutal-border">
+          {/* Tool: Daily Standup */}
+          <button
+            onClick={handleCreateStandupRoom}
+            disabled={!nickname.trim()}
+            className="group relative flex flex-col items-center gap-6 brutal-border bg-retro-pink p-8 transition-all brutal-shadow disabled:opacity-50 disabled:grayscale disabled:cursor-not-allowed"
+          >
+            <div className="bg-white p-5 brutal-border brutal-shadow transition-all">
               <Users className="w-10 h-10" />
             </div>
             <div className="text-center">
@@ -154,10 +179,10 @@ export function LandingPage() {
                 Sync ceremonies
               </p>
             </div>
-            <div className="w-full bg-retro-tertiary py-4 text-base font-black text-black uppercase border-t-4 border-black">
-              Locked
+            <div className="w-full bg-black py-4 text-base font-black text-white uppercase group-hover:bg-retro-yellow group-hover:text-black transition-colors">
+              🚀 Start Standup
             </div>
-          </div>
+          </button>
         </div>
 
         <div className="mt-32 bg-white brutal-border p-8 brutal-shadow relative w-full max-w-2xl mx-auto">
