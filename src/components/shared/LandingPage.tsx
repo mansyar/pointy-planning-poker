@@ -75,7 +75,6 @@ export function LandingPage() {
         facilitatorId: identityId!,
         toolType: 'standup',
       });
-      // @ts-expect-error - Route might not be generated yet
       navigate({ to: '/standup/$slug', params: { slug } });
     } catch (error) {
       console.error('Failed to create standup room:', error);
@@ -98,7 +97,6 @@ export function LandingPage() {
     }
 
     if (roomPath === '/standup/') {
-      // @ts-expect-error - Route might not be generated yet
       navigate({ to: '/standup/$slug', params: { slug } });
     } else {
       navigate({ to: '/poker/$slug', params: { slug } });

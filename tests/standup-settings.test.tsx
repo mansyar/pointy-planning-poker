@@ -11,7 +11,11 @@ describe('StandupSettingsModal', () => {
   const mockUpdateConfig = vi.fn();
 
   beforeEach(() => {
-    vi.mocked(useMutation).mockReturnValue(mockUpdateConfig);
+    vi.mocked(useMutation).mockReturnValue(
+      Object.assign(mockUpdateConfig, {
+        withOptimisticUpdate: vi.fn().mockReturnThis(),
+      })
+    );
   });
 
   it('renders with initial values', () => {
@@ -19,7 +23,7 @@ describe('StandupSettingsModal', () => {
       <StandupSettingsModal 
         isOpen={true} 
         onClose={vi.fn()} 
-        roomId="room1" as any
+        roomId={"room1" as any}
         identityId="user1"
         initialTimeLimit={60}
         initialAutoAdvance={true}
@@ -36,7 +40,7 @@ describe('StandupSettingsModal', () => {
       <StandupSettingsModal 
         isOpen={true} 
         onClose={vi.fn()} 
-        roomId="room1" as any
+        roomId={"room1" as any}
         identityId="user1"
         initialTimeLimit={60}
         initialAutoAdvance={true}

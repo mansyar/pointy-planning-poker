@@ -2,7 +2,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { SpeakerQueue } from '../src/components/shared/SpeakerQueue';
 import { useQuery, useMutation } from 'convex/react';
-import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
 
 vi.mock('convex/react', () => ({
@@ -42,10 +41,18 @@ describe('SpeakerQueue Component', () => {
     let mutationCallCount = 0;
     vi.mocked(useMutation).mockImplementation(() => {
       mutationCallCount++;
-      if (mutationCallCount === 1) return mockNext;
-      if (mutationCallCount === 2) return mockPrev;
-      if (mutationCallCount === 3) return mockSkip;
-      return vi.fn();
+      const mockFunc =
+        mutationCallCount === 1
+          ? mockNext
+          : mutationCallCount === 2
+            ? mockPrev
+            : mutationCallCount === 3
+              ? mockSkip
+              : vi.fn();
+
+      return Object.assign(mockFunc, {
+        withOptimisticUpdate: vi.fn().mockReturnThis(),
+      });
     });
   });
 

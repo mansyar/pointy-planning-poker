@@ -53,7 +53,7 @@ describe('StandupTimer Component', () => {
 
   it('should show urgency state when < 10S left', () => {
     const startTime = Date.now() - 51000; // 9s left
-    const { container } = render(
+    render(
       <StandupTimer
         startedAt={startTime}
         timeLimit={60}

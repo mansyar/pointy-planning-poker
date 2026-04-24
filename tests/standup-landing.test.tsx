@@ -26,7 +26,11 @@ describe('Landing Page Standup Tool', () => {
 
   beforeEach(() => {
     vi.mocked(useNavigate).mockReturnValue(mockNavigate);
-    vi.mocked(useMutation).mockReturnValue(mockCreateRoom);
+    vi.mocked(useMutation).mockReturnValue(
+      Object.assign(mockCreateRoom, {
+        withOptimisticUpdate: vi.fn().mockReturnThis(),
+      })
+    );
     mockCreateRoom.mockResolvedValue({ slug: 'test-slug' });
   });
 

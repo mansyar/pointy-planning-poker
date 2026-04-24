@@ -2,7 +2,6 @@ import { useQuery, useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
 import { useIdentity } from '../../hooks/useIdentity';
 import { JoinModal } from '../shared/JoinModal';
-import { PresenceSidebar } from '../shared/PresenceSidebar';
 import SectionErrorBoundary from '../shared/SectionErrorBoundary';
 import { ClaimBanner } from '../shared/ClaimBanner';
 import { EmojiActionBar } from '../shared/EmojiActionBar';

@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StandupSlugRouteImport } from './routes/standup.$slug'
 import { Route as RoomSlugRouteImport } from './routes/room.$slug'
 import { Route as PokerSlugRouteImport } from './routes/poker.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StandupSlugRoute = StandupSlugRouteImport.update({
+  id: '/standup/$slug',
+  path: '/standup/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RoomSlugRoute = RoomSlugRouteImport.update({
@@ -33,30 +39,34 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/poker/$slug': typeof PokerSlugRoute
   '/room/$slug': typeof RoomSlugRoute
+  '/standup/$slug': typeof StandupSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/poker/$slug': typeof PokerSlugRoute
   '/room/$slug': typeof RoomSlugRoute
+  '/standup/$slug': typeof StandupSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/poker/$slug': typeof PokerSlugRoute
   '/room/$slug': typeof RoomSlugRoute
+  '/standup/$slug': typeof StandupSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/poker/$slug' | '/room/$slug'
+  fullPaths: '/' | '/poker/$slug' | '/room/$slug' | '/standup/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/poker/$slug' | '/room/$slug'
-  id: '__root__' | '/' | '/poker/$slug' | '/room/$slug'
+  to: '/' | '/poker/$slug' | '/room/$slug' | '/standup/$slug'
+  id: '__root__' | '/' | '/poker/$slug' | '/room/$slug' | '/standup/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PokerSlugRoute: typeof PokerSlugRoute
   RoomSlugRoute: typeof RoomSlugRoute
+  StandupSlugRoute: typeof StandupSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/standup/$slug': {
+      id: '/standup/$slug'
+      path: '/standup/$slug'
+      fullPath: '/standup/$slug'
+      preLoaderRoute: typeof StandupSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/room/$slug': {
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PokerSlugRoute: PokerSlugRoute,
   RoomSlugRoute: RoomSlugRoute,
+  StandupSlugRoute: StandupSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -49,7 +49,11 @@ describe('StandupRoom Component', () => {
       // Third call is api.standup.listEntries
       return [];
     });
-    vi.mocked(useMutation).mockReturnValue(vi.fn().mockResolvedValue({}));
+    vi.mocked(useMutation).mockReturnValue(
+      Object.assign(vi.fn().mockResolvedValue({}), {
+        withOptimisticUpdate: vi.fn().mockReturnThis(),
+      })
+    );
   });
 
   it('renders the standup room waiting state', () => {

@@ -11,9 +11,11 @@
 import type * as cleanup from "../cleanup.js";
 import type * as crons from "../crons.js";
 import type * as migrations from "../migrations.js";
+import type * as parkingLot from "../parkingLot.js";
 import type * as players from "../players.js";
 import type * as reactions from "../reactions.js";
 import type * as rooms from "../rooms.js";
+import type * as standup from "../standup.js";
 import type * as sync from "../sync.js";
 import type * as topics from "../topics.js";
 import type * as votes from "../votes.js";
@@ -28,9 +30,11 @@ declare const fullApi: ApiFromModules<{
   cleanup: typeof cleanup;
   crons: typeof crons;
   migrations: typeof migrations;
+  parkingLot: typeof parkingLot;
   players: typeof players;
   reactions: typeof reactions;
   rooms: typeof rooms;
+  standup: typeof standup;
   sync: typeof sync;
   topics: typeof topics;
   votes: typeof votes;

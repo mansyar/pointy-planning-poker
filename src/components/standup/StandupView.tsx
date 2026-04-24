@@ -1,5 +1,4 @@
 import { ActiveSpeakerCard } from './ActiveSpeakerCard';
-import { StandupTimer } from '../shared/StandupTimer';
 import { CheckCircle, ClipboardList, LayoutDashboard } from 'lucide-react';
 import type { Id } from '../../../convex/_generated/dataModel';
 

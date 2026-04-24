@@ -6,7 +6,6 @@ export default function Header() {
   const location = useLocation();
   const isPoker = location.pathname.startsWith('/poker/');
   const isStandup = location.pathname.startsWith('/standup/');
-  const isRoom = isPoker || isStandup || location.pathname.startsWith('/room/');
 
   return (
     <header className="brutal-border border-x-0 border-t-0 bg-white px-4 py-3">
