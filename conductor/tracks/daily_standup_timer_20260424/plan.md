@@ -31,9 +31,9 @@
 
 ## Phase 3: Room Setup & Integration
 
-- [ ] Task: Update landing hub for Standup tool
-  - [ ] Write tests for tool selection and room creation
-  - [ ] Implement Standup option in `src/components/shared/LandingPage.tsx`
+- [x] Task: Update landing hub for Standup tool fd7daa5
+  - [x] Write tests for tool selection and room creation
+  - [x] Implement Standup option in `src/components/shared/LandingPage.tsx`
 - [ ] Task: Create Standup Room Page structure
   - [ ] Write tests for room routing and setup state
   - [ ] Implement `src/routes/standup.$slug.tsx`
